@@ -1,0 +1,21 @@
+<!-- <button type="button" mat-button (click)="showWide = !showWide">
+    Toggle sidenav
+</button> -->
+<div class="w-100 h-100">
+    <mat-toolbar color="grey" class="d-flex">
+        <mat-icon mat-button (click)="showWide = !showWide">menu</mat-icon>
+        <div class="user-items">
+
+            <mat-icon matBadge="15" matBadgeSize="medium" matBadgeColor="warn" color="black" class="notification-icon">
+                notifications_none</mat-icon>
+
+            <img class="user-img" src="assets/img/profile1.png" onerror="this.src='assets/img/profile.png'" mat-button [matMenuTriggerFor]="menu">
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+    <mat-drawer-container class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
+    </mat-drawer-container>
+</div>
