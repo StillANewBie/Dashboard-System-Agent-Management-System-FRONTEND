@@ -7,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   showWide:boolean = false;
-
+  showWideSpan:boolean = false;
   constructor() { }
+
+  showWideEvent() {
+    this.showWide = !this.showWide;
+    if (this.showWide) {
+      setTimeout(() => this.showWideSpan = this.showWide, 200)
+    } else {
+      this.showWideSpan = this.showWide
+    }
+  }
 
   ngOnInit() {
   }
