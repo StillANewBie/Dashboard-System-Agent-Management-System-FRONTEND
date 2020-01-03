@@ -24,7 +24,7 @@
                     home</mat-icon>
                 <span *ngIf="showWideSpan">Home</span>
             </div>
-            <div class="sidenav-item" (click)="openDashboard()">
+            <div class="sidenav-item" (click)="openDashboard()" routerLink="dashboard">
                 <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
                     dashboard</mat-icon>
                 <span *ngIf="showWideSpan">Dashboard</span>

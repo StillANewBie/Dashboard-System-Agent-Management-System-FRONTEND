@@ -77,6 +77,11 @@ mat-toolbar {
   div.sidenav-item {
     display: flex;
     height: $sidenav-item-height;
+    cursor: pointer;
+  }
+  
+  .sidenav-item {
+    cursor: pointer;
   }
 }
 

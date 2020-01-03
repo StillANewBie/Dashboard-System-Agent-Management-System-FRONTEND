@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { MatButtonModule, MatCheckboxModule, MatBadgeModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -31,52 +31,60 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MainComponent } from './components/main/main.component';
 import { AppRoutingModule } from '../app-routing.module';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap.component';
+import { AgentStateComponent } from './components/dashboard/modules/agent-state/agent-state.component';
 
 const routes: Routes = [
-  {
-    path: 'dashboard'
-  }
+	{
+		path: 'main',
+    component: MainComponent,
+    children: [{
+      path: 'dashboard',
+      component: DashboardComponent
+    }]
+	}
 ];
 
 @NgModule({
-  declarations: [MainComponent, DashboardComponent],
-  imports: [
-    AppRoutingModule,
-    CommonModule,
-    MatCheckboxModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatButtonToggleModule,
-    MatChipsModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatBadgeModule
-  ]
+	declarations: [ MainComponent, DashboardComponent, HeatmapComponent, AgentStateComponent ],
+	imports: [
+		RouterModule.forChild(routes),
+		AppRoutingModule,
+		CommonModule,
+		MatCheckboxModule,
+		MatCheckboxModule,
+		MatButtonModule,
+		MatInputModule,
+		MatAutocompleteModule,
+		MatDatepickerModule,
+		MatFormFieldModule,
+		MatRadioModule,
+		MatSelectModule,
+		MatSliderModule,
+		MatSlideToggleModule,
+		MatMenuModule,
+		MatSidenavModule,
+		MatToolbarModule,
+		MatListModule,
+		MatGridListModule,
+		MatCardModule,
+		MatStepperModule,
+		MatTabsModule,
+		MatExpansionModule,
+		MatButtonToggleModule,
+		MatChipsModule,
+		MatIconModule,
+		MatProgressSpinnerModule,
+		MatProgressBarModule,
+		MatDialogModule,
+		MatTooltipModule,
+		MatSnackBarModule,
+		MatTableModule,
+		MatSortModule,
+		MatPaginatorModule,
+		MatBadgeModule
+	]
 })
-export class MainModule { }
+export class MainModule {}
