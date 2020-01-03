@@ -30,13 +30,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MainComponent } from './components/main/main.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
 @NgModule({
-  declarations: [MainComponent, NavbarComponent],
+  declarations: [MainComponent],
   imports: [
+    AppRoutingModule,
     CommonModule,
     MatCheckboxModule,
     MatCheckboxModule,

@@ -1,7 +1,7 @@
 <!-- <button type="button" mat-button (click)="showWide = !showWide">
     Toggle sidenav
 </button> -->
-<div class="w-100 h-100">
+<!-- <div class="h-100 w-100" style="overflow-y: hidden;"> -->
     <mat-toolbar color="grey" class="d-flex">
         <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
         <div class="user-items">
@@ -17,16 +17,21 @@
             </mat-menu>
         </div>
     </mat-toolbar>
-    <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
-        <div>
-            <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
-                home</mat-icon>
-            <span *ngIf="showWideSpan">Home</span>
+    <div class="below-toolbar">
+        <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
+            <div class="sidenav-item">
+                <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
+                    home</mat-icon>
+                <span *ngIf="showWideSpan">Home</span>
+            </div>
+            <div class="sidenav-item">
+                <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
+                    dashboard</mat-icon>
+                <span *ngIf="showWideSpan">Dashboard</span>
+            </div>
         </div>
-        <div>
-            <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
-                home</mat-icon>
-            <span *ngIf="showWideSpan">Home</span>
+        <div class="w-100 h-100 main-content">
+            <router-outlet></router-outlet>
         </div>
     </div>
-</div>
+<!-- </div> -->

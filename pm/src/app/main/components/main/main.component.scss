@@ -1,9 +1,14 @@
 $sidenav-item-color: rgb(255, 248, 224);
+$sidenav-item-height: 2.7rem;
+$sidenav-item-font-size: 0.9rem;
+$toolbar-height: 64px;
 
 mat-toolbar {
+  position: fixed;
   border-bottom: 1px solid grey;
   box-shadow: 3px 1px 2px #0000008c;
   justify-content: space-between;
+  height: $toolbar-height !important;
 }
 
 [mat-button] {
@@ -31,7 +36,7 @@ mat-toolbar {
 .sidenav-container {
   //   border: 1px solid rgba(0, 0, 0, 0.5);
   background-color: #001933;
-  position: fixed;
+  // position: fixed;
   height: 100%;
   width: 50px;
   transition: width 0.5s;
@@ -40,10 +45,36 @@ mat-toolbar {
   flex-direction: column;
   align-items: center;
   justify-content: baseline;
-  padding-top: 0.8rem;
+  padding-top: calc(#{$toolbar-height} + 0.8rem);
 
   span {
     color: $sidenav-item-color;
+  }
+
+  .sidenav {
+    width: 0px;
+  }
+  
+  .expand-btn {
+    width: 10rem;
+  }
+  
+  mat-icon.mat-icon-sidenav {
+    color: $sidenav-item-color;
+    font-size: 2rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+
+  .sidenav-item > span {
+    font-size: $sidenav-item-font-size;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  div.sidenav-item {
+    display: flex;
+    height: $sidenav-item-height;
   }
 }
 
@@ -52,34 +83,22 @@ mat-toolbar {
   transition: width 0.5s;
   display: flex;
   align-items: flex-start;
-  padding-left: 3rem;
-}
-
-.sidenav-container > div {
-  display: flex;
-  height: 2.5rem;
-}
-
-.sidenav-container > div > span {
-  margin-left: 0.5rem;
-  margin-top: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .sidenav-wide-item {
   font-size: 1.5rem;
 }
 
-.sidenav {
-  width: 0px;
-}
+.below-toolbar {
+  display: flex;
+  width: 100%;
+  // height: calc(100vh - $toolbar-height);
+  height: 100%;
+  flex-direction: row;
 
-.expand-btn {
-  width: 10rem;
-}
-
-mat-icon.mat-icon-sidenav {
-  color: $sidenav-item-color;
-  font-size: 2rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
+  .main-content {
+    background: grey;
+  }
 }
