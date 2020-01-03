@@ -44,8 +44,8 @@ export class DashboardModuleService {
 		const newContainerId = UUID.UUID();
 
 		this.layout.push({
-			cols: 1,
-			rows: 1,
+			cols: 2,
+			rows: 2,
 			id: newContainerId,
 			x: 0,
 			y: 0

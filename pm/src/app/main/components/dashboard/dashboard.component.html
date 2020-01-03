@@ -1,10 +1,8 @@
 
 <gridster [options]="options">
     <gridster-item *ngFor="let item of layout" [item]="item" (dragover)="dmService.setDropId(item.id)" class="d-flex flex-column">
-        <div class="w-100 bg-light" style="height: 20px;">
-            <div style="float: right;" class="pr-3 btn" (click)="dmService.deleteItem(item.id)">
-                X
-            </div>
+        <div class="w-100 bg-light module-header d-flex align-items-center justify-content-end pr-1">
+            <mat-icon (click)="dmService.deleteItem(item.id)">close</mat-icon>
         </div>
         <div class="w-100 h-100">
         <ng-container class="h-100 w-100" dashboardModule [componentRef]="dmService.getComponentRef(item.id)"></ng-container>

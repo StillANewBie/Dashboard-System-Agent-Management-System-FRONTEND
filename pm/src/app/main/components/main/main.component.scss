@@ -77,6 +77,14 @@ mat-toolbar {
     margin-top: 0.5rem;
   }
 
+  .sidenav-item {
+    border-bottom: 1px white solid;
+  }
+
+  .sidenav-item ~ .sidenav-item {
+    border-bottom: none;
+  }
+
   div.sidenav-item {
     display: flex;
     height: $sidenav-item-height;
@@ -86,6 +94,11 @@ mat-toolbar {
   .sidenav-item {
     cursor: pointer;
   }
+}
+
+hr {
+  border: 2px solid white;
+  border-radius: 1px;
 }
 
 .sidenav-wide {

@@ -1,0 +1,21 @@
+$module-header-height: 2.1rem;
+
+gridster {
+    background: rgb(233, 229, 220);
+
+    gridster-item {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #EEE;
+        box-shadow: 1px 1px 1px grey;
+
+        .module-header {
+            height: $module-header-height;
+            border-bottom: 1px grey solid;
+        }
+    }
+}
+
+mat-icon {
+    cursor: pointer;
+}

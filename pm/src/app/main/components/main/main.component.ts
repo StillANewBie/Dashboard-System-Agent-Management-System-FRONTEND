@@ -15,9 +15,10 @@ export class MainComponent implements OnInit {
   showWideEvent() {
     this.showWide = !this.showWide;
     if (this.showWide) {
-      setTimeout(() => this.showWideSpan = this.showWide, 300)
+      setTimeout(() => this.showWideSpan = this.showWide, 300);
     } else {
       this.showWideSpan = this.showWide
+      this.dashboardMode = false;
     }
   }
 

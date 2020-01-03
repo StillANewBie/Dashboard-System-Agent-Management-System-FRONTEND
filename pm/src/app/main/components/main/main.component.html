@@ -24,10 +24,9 @@
                 home</mat-icon>
             <span *ngIf="showWideSpan">Home</span>
         </div>
-        <mat-divider ></mat-divider>
 
         <ng-container *ngIf="!dashboardMode">
-            <div class="sidenav-item" (click)="openDashboard()" routerLink="dashboard">
+            <div class="sidenav-item mt-3" (click)="openDashboard()" routerLink="dashboard">
                 <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
                     dashboard</mat-icon>
                 <span *ngIf="showWideSpan">Dashboard</span>
@@ -35,7 +34,7 @@
         </ng-container>
 
         <ng-container *ngIf="dashboardMode && showWideSpan">
-            <div class="draggable mt-2" draggable="true" (dragend)="dmService.dropItem('heatmap')">
+            <div class="draggable mt-3" draggable="true" (dragend)="dmService.dropItem('heatmap')">
                 Heat Map
             </div>
             <div class="draggable" draggable="true" (dragend)="dmService.dropItem('agentState')">
