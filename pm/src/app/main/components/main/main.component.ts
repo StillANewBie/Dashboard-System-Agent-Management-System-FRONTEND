@@ -19,6 +19,11 @@ export class MainComponent implements OnInit {
     }
   }
 
+  openDashboard() {
+    this.showWide = true;
+    setTimeout(() => this.showWideSpan = this.showWide, 200);
+  }
+
   ngOnInit() {
   }
 

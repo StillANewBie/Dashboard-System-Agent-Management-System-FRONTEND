@@ -31,8 +31,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MainComponent } from './components/main/main.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  {
+    path: 'dashboard'
+  }
+];
 
 @NgModule({
   declarations: [MainComponent],

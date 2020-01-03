@@ -9,6 +9,7 @@ mat-toolbar {
   box-shadow: 3px 1px 2px #0000008c;
   justify-content: space-between;
   height: $toolbar-height !important;
+  z-index: 2;
 }
 
 [mat-button] {
@@ -46,6 +47,7 @@ mat-toolbar {
   align-items: center;
   justify-content: baseline;
   padding-top: calc(#{$toolbar-height} + 0.8rem);
+  z-index: 1;
 
   span {
     color: $sidenav-item-color;
@@ -99,6 +101,7 @@ mat-toolbar {
   flex-direction: row;
 
   .main-content {
-    background: grey;
+    background: rgb(240, 240, 233);
+    z-index: 0;
   }
 }
