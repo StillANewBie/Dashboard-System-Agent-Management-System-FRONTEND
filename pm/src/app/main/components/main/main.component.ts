@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardModuleService } from '../../services/dashboard-module.service';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   showWide:boolean = false;
   showWideSpan:boolean = false;
-  constructor() { }
+  dashboardMode: boolean = false;
+  constructor(private dmService: DashboardModuleService ) { }
 
   showWideEvent() {
     this.showWide = !this.showWide;
@@ -22,6 +24,7 @@ export class MainComponent implements OnInit {
   openDashboard() {
     this.showWide = true;
     setTimeout(() => this.showWideSpan = this.showWide, 200);
+    this.dashboardMode = true;
   }
 
   ngOnInit() {

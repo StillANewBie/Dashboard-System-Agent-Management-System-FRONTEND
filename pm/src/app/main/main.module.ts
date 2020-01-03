@@ -35,24 +35,31 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap.component';
 import { AgentStateComponent } from './components/dashboard/modules/agent-state/agent-state.component';
+import { DashboardModuleDirective } from './directives/dashboard-module.directive';
+import { GridsterModule } from 'angular-gridster2';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
 	{
 		path: 'main',
-    component: MainComponent,
-    children: [{
-      path: 'dashboard',
-      component: DashboardComponent
-    }]
+		component: MainComponent,
+		children: [
+			{
+				path: 'dashboard',
+				component: DashboardComponent
+			}
+		]
 	}
 ];
 
 @NgModule({
-	declarations: [ MainComponent, DashboardComponent, HeatmapComponent, AgentStateComponent ],
+	declarations: [ MainComponent, DashboardComponent, HeatmapComponent, AgentStateComponent, DashboardModuleDirective ],
 	imports: [
 		RouterModule.forChild(routes),
 		AppRoutingModule,
 		CommonModule,
+		HttpClientModule,
+		GridsterModule,
 		MatCheckboxModule,
 		MatCheckboxModule,
 		MatButtonModule,

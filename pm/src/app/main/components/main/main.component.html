@@ -2,36 +2,49 @@
     Toggle sidenav
 </button> -->
 <!-- <div class="h-100 w-100" style="overflow-y: hidden;"> -->
-    <mat-toolbar color="grey" class="d-flex">
-        <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
-        <div class="user-items">
+<mat-toolbar color="grey" class="d-flex">
+    <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
+    <div class="user-items">
 
-            <mat-icon matBadge="15" matBadgeSize="medium" matBadgeColor="warn" color="black" class="notification-icon">
-                notifications_none</mat-icon>
+        <mat-icon matBadge="15" matBadgeSize="medium" matBadgeColor="warn" color="black" class="notification-icon">
+            notifications_none</mat-icon>
 
-            <img class="user-img" src="assets/img/profile1.png" onerror="this.src='assets/img/profile.png'" mat-button
-                [matMenuTriggerFor]="menu">
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
-            </mat-menu>
+        <img class="user-img" src="assets/img/profile1.png" onerror="this.src='assets/img/profile.png'" mat-button
+            [matMenuTriggerFor]="menu">
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
+<div class="below-toolbar">
+    <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
+        <div class="sidenav-item">
+            <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
+                home</mat-icon>
+            <span *ngIf="showWideSpan">Home</span>
         </div>
-    </mat-toolbar>
-    <div class="below-toolbar">
-        <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
-            <div class="sidenav-item">
-                <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
-                    home</mat-icon>
-                <span *ngIf="showWideSpan">Home</span>
-            </div>
+        <mat-divider></mat-divider>
+
+        <ng-container *ngIf="!dashboardMode">
             <div class="sidenav-item" (click)="openDashboard()" routerLink="dashboard">
                 <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
                     dashboard</mat-icon>
                 <span *ngIf="showWideSpan">Dashboard</span>
             </div>
-        </div>
-        <div class="w-100 h-100 main-content">
-            <router-outlet></router-outlet>
-        </div>
+        </ng-container>
+
+        <ng-container *ngIf="dashboardMode">
+            <div class="draggable" draggable="true" (dragend)="dmService.dropItem('heatmap')">
+                Heat Map
+            </div>
+            <div class="draggable" draggable="true" (dragend)="dmService.dropItem('agentState')">
+                Current Agent State
+            </div>
+        </ng-container>
     </div>
+    <div class="w-100 h-100 main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
 <!-- </div> -->
