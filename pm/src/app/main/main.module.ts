@@ -32,6 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MainComponent } from './components/main/main.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { Routes } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MainComponent],
+  declarations: [MainComponent, DashboardComponent],
   imports: [
     AppRoutingModule,
     CommonModule,
