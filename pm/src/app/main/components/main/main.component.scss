@@ -1,6 +1,8 @@
 $sidenav-item-color: rgb(255, 248, 224);
 $sidenav-item-height: 2.7rem;
 $sidenav-item-font-size: 0.9rem;
+$sidenav-wide-width: 200px;
+$sidenav-narrow-width: 50px;
 $toolbar-height: 64px;
 
 mat-toolbar {
@@ -39,14 +41,15 @@ mat-toolbar {
   background-color: #001933;
   // position: fixed;
   height: 100%;
-  width: 50px;
+  width: $sidenav-narrow-width;
   transition: width 0.5s;
   box-shadow: 3px 1px 2px #0000008c;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: baseline;
-  padding-top: calc(#{$toolbar-height} + 0.8rem);
+  // padding-top: calc(#{$toolbar-height} + 0.8rem);
+  padding-top: 0.8rem;
   z-index: 1;
 
   span {
@@ -86,7 +89,7 @@ mat-toolbar {
 }
 
 .sidenav-wide {
-  width: 180px !important;
+  width: $sidenav-wide-width !important;
   transition: width 0.5s;
   display: flex;
   align-items: flex-start;
@@ -104,9 +107,19 @@ mat-toolbar {
   // height: calc(100vh - $toolbar-height);
   height: 100%;
   flex-direction: row;
+  padding-top: $toolbar-height;
 
   .main-content {
     background: rgb(240, 240, 233);
     z-index: 0;
   }
+
+  .draggable {
+    color: $sidenav-item-color;
+    height: calc(#{$sidenav-item-height} - 0.5rem);
+  }
+
+  // .dashboard-container {
+  //   margin-top: $toolbar-height;
+  // }
 }

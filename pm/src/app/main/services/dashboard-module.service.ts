@@ -66,11 +66,22 @@ export class DashboardModuleService {
 			// this.postDashboardInfo();
 		}, 100);
     }
+    
+    deleteItem(id: string) : void {
+        const item = this.layout.find((d) => d.id === id);
+        this.layout.splice(this.layout.indexOf(item), 1);
+        const comp = this.components.find((c) => c.id === id);
+        this.components.splice(this.components.indexOf(comp), 1);
+    }
+
+	setDropId(dropId: string): void {
+		this.dropId = dropId;
+	}
 
 	getComponentRef(id: string): string {
 		const comp = this.components.find((c) => c.id === id);
 		return comp ? comp.componentRef : null;
-	}
+    }
     
     postDashboardInfo() {
         // TODO

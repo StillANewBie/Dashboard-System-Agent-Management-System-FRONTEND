@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
   showWideEvent() {
     this.showWide = !this.showWide;
     if (this.showWide) {
-      setTimeout(() => this.showWideSpan = this.showWide, 200)
+      setTimeout(() => this.showWideSpan = this.showWide, 300)
     } else {
       this.showWideSpan = this.showWide
     }
@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
 
   openDashboard() {
     this.showWide = true;
-    setTimeout(() => this.showWideSpan = this.showWide, 200);
+    setTimeout(() => this.showWideSpan = this.showWide, 300);
     this.dashboardMode = true;
   }
 

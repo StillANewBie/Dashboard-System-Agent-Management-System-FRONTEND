@@ -2,7 +2,7 @@
 <gridster [options]="options">
     <gridster-item *ngFor="let item of layout" [item]="item" (dragover)="dmService.setDropId(item.id)" class="d-flex flex-column">
         <div class="w-100 bg-light" style="height: 20px;">
-            <div style="float: right;" class="pr-3" (click)="dmService.deleteItem(item.id)">
+            <div style="float: right;" class="pr-3 btn" (click)="dmService.deleteItem(item.id)">
                 X
             </div>
         </div>

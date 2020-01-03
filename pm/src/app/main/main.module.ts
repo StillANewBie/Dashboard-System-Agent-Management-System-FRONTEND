@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Component } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatBadgeModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatBadgeModule, MatDividerModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
@@ -91,7 +91,9 @@ const routes: Routes = [
 		MatTableModule,
 		MatSortModule,
 		MatPaginatorModule,
-		MatBadgeModule
-	]
+		MatBadgeModule,
+		MatDividerModule
+	],
+	entryComponents: [ HeatmapComponent, AgentStateComponent]
 })
 export class MainModule {}
