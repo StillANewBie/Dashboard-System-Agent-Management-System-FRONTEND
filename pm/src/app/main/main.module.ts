@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, Component } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatBadgeModule, MatDividerModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { MatBadgeModule, MatButtonModule, MatCheckboxModule, MatDividerModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
@@ -29,15 +30,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MainComponent } from './components/main/main.component';
-import { AppRoutingModule } from '../app-routing.module';
-import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap.component';
-import { AgentStateComponent } from './components/dashboard/modules/agent-state/agent-state.component';
-import { DashboardModuleDirective } from './directives/dashboard-module.directive';
+import { RouterModule, Routes } from '@angular/router';
+import { AgGridModule } from 'ag-grid-angular';
 import { GridsterModule } from 'angular-gridster2';
-import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from '../app-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AgentStateComponent } from './components/dashboard/modules/agent-state/agent-state.component';
+import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap.component';
+import { MainComponent } from './components/main/main.component';
+import { ProfileImageRendererComponent } from './components/shared-components/profile-image-renderer.component';
+import { DashboardModuleDirective } from './directives/dashboard-module.directive';
 
 const routes: Routes = [
 	{
@@ -58,10 +60,12 @@ const routes: Routes = [
 		DashboardComponent,
 		HeatmapComponent,
 		AgentStateComponent,
-		DashboardModuleDirective
+		DashboardModuleDirective,
+		ProfileImageRendererComponent
 	],
 	imports: [
 		RouterModule.forChild(routes),
+		AgGridModule.withComponents([]),
 		AppRoutingModule,
 		CommonModule,
 		HttpClientModule,
