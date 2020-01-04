@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { GridsterConfig, GridType, DisplayGrid, GridsterItem } from 'angular-gridster2';
 import { HttpClient } from '@angular/common/http';
 import { UUID } from 'angular2-uuid'
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ModuleConfigComponent } from '../components/dashboard/modules/module-config/module-config.component';
 
 export interface IComponent {
     id: string,
@@ -16,7 +18,7 @@ export class DashboardModuleService {
     options: GridsterConfig = {
         draggable: {
             enabled: true,
-            ignoreContentClass: 'dashboard-module'
+			ignoreContentClass: 'ag-table'
         },
         pushItems: true,
         resizable: {
@@ -37,15 +39,32 @@ export class DashboardModuleService {
     dropId: string;
     dashboardFromDb: any = null;
 
-    constructor(private http: HttpClient) {}
+    moduleConfig: any = {};
+
+    constructor(private http: HttpClient, private dialog: MatDialog) {}
 
 
 	dropItem(dragId: string): void {
+
+        // open dialog
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '400px';
+        dialogConfig.height = "300px";
+        dialogConfig.data = {title: 'injected data'};
+
+        const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(result => {
+            this.moduleConfig = result;
+        })
+
 		const newContainerId = UUID.UUID();
 
 		this.layout.push({
-			cols: 2,
-			rows: 2,
+			cols: 4,
+			rows: 3,
 			id: newContainerId,
 			x: 0,
 			y: 0
@@ -64,7 +83,7 @@ export class DashboardModuleService {
 		this.components = Object.assign([], components, { [updateIdx]: componentItem });
 		setTimeout(() => {
 			// this.postDashboardInfo();
-		}, 100);
+        }, 100);
     }
     
     deleteItem(id: string) : void {

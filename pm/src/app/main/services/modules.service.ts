@@ -32,4 +32,5 @@ export interface CurrentAgentStateDTO {
 	lastName: string;
 	profileImage: string;
 	groupName: string;
+	agentId?: number;
 }

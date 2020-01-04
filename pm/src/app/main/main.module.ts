@@ -40,6 +40,7 @@ import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap
 import { MainComponent } from './components/main/main.component';
 import { ProfileImageRendererComponent } from './components/shared-components/profile-image-renderer.component';
 import { DashboardModuleDirective } from './directives/dashboard-module.directive';
+import { ModuleConfigComponent } from './components/dashboard/modules/module-config/module-config.component';
 
 const routes: Routes = [
 	{
@@ -61,7 +62,8 @@ const routes: Routes = [
 		HeatmapComponent,
 		AgentStateComponent,
 		DashboardModuleDirective,
-		ProfileImageRendererComponent
+		ProfileImageRendererComponent,
+		ModuleConfigComponent
 	],
 	imports: [
 		RouterModule.forChild(routes),
@@ -104,6 +106,6 @@ const routes: Routes = [
 		MatBadgeModule,
 		MatDividerModule
 	],
-	entryComponents: [ HeatmapComponent, AgentStateComponent ]
+	entryComponents: [ HeatmapComponent, AgentStateComponent, ModuleConfigComponent ]
 })
 export class MainModule {}

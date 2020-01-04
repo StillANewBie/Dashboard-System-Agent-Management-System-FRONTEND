@@ -1,5 +1,5 @@
 <div style="min-width: 400px; min-height: 300px;" class="w-100 h-100 ag-table" (resize)="onResize()">
-    <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="data"
-        [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
+    <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="data"  class="ag-theme-balham"
+        [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" [headerHeight]="headerHeight">
     </ag-grid-angular>
 </div>
