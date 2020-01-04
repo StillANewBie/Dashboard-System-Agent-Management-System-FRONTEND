@@ -1,0 +1,36 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { log } from 'util';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ModulesService {
+
+
+    constructor(private http: HttpClient){}
+
+    getCurrentAgentState(gid: number) {
+        return this.http.get(`${environment.API_URL}dashboard/` + gid, {withCredentials: true});
+    }
+}
+
+export interface CurrentAgentStateDTO {
+
+	callId: string;
+	phoneNumber: string;
+	priority: number;
+	cur_date: Date;
+	queueStart: string;
+	queueExit: string;
+	queueTime: number;
+	serviceStart: string;
+	serviceExit: string;
+	serviceTime: number;
+	outcome: string;
+	firstName: string;
+	lastName: string;
+	profileImage: string;
+	groupName: string;
+}

@@ -53,7 +53,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	declarations: [ MainComponent, DashboardComponent, HeatmapComponent, AgentStateComponent, DashboardModuleDirective ],
+	declarations: [
+		MainComponent,
+		DashboardComponent,
+		HeatmapComponent,
+		AgentStateComponent,
+		DashboardModuleDirective
+	],
 	imports: [
 		RouterModule.forChild(routes),
 		AppRoutingModule,
@@ -94,6 +100,6 @@ const routes: Routes = [
 		MatBadgeModule,
 		MatDividerModule
 	],
-	entryComponents: [ HeatmapComponent, AgentStateComponent]
+	entryComponents: [ HeatmapComponent, AgentStateComponent ]
 })
 export class MainModule {}
