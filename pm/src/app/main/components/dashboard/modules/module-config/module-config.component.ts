@@ -12,7 +12,8 @@ export class ModuleConfigComponent implements OnInit {
 	selectedGroupLevel2: GroupDTO = { childGroups: [] };
 	selectedGroupLevel3: GroupDTO = null;
 	selectedGroupLevel: number = 1;
-	selectedGroup: GroupDTO;
+  selectedGroup: GroupDTO;
+  result: ModuleConfigDTO;
 
 	constructor(
 		private ms: ModulesService,
@@ -66,9 +67,8 @@ export class ModuleConfigComponent implements OnInit {
 				break;
 		}
 
-		alert(this.selectedGroup.groupName);
-		alert(this.data);
-		this.dialogRef.close();
+    this.result = {group: this.selectedGroup, uuid: this.data};
+    this.ms.moduleConfigs.push(this.result);
 	}
 
 	ngOnInit() {}
@@ -79,4 +79,10 @@ export interface GroupDTO {
 	groupName?: string;
 	groupLevel?: number;
 	childGroups?: GroupDTO[];
+}
+
+export interface ModuleConfigDTO {
+  group: GroupDTO;
+  uuid: string;
+  type?: any;
 }

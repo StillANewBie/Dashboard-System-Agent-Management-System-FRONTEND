@@ -3,6 +3,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
 import { CurrentAgentStateDTO, ModulesService } from '../../../../services/modules.service';
 import * as $ from 'jquery';
+import { GroupDTO } from '../module-config/module-config.component';
 
 @Component({
 	selector: 'app-agent-state',
@@ -13,6 +14,7 @@ export class AgentStateComponent implements OnInit {
 	gid: number = 1;
 	data: CurrentAgentStateDTO[] = [];
 	headerHeight: number;
+	selectedGroup: GroupDTO;
 
 	@ViewChild('agGrid', null)
 	agGrid: AgGridAngular;
@@ -84,7 +86,7 @@ export class AgentStateComponent implements OnInit {
 	}
 
 	updateData() {
-		this.ms.getCurrentAgentState(this.gid).subscribe(
+		this.ms.getCurrentAgentState(this.selectedGroup.groupId || this.gid).subscribe(
 			(res: CurrentAgentStateDTO[]) => {
 				this.data = res.map((el) => {
 					return { ...el, name: el.firstName + ' ' + el.lastName };

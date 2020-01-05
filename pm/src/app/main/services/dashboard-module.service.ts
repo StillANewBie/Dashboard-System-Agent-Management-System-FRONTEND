@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UUID } from 'angular2-uuid'
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ModuleConfigComponent } from '../components/dashboard/modules/module-config/module-config.component';
+import { ModulesService } from './modules.service';
 
 export interface IComponent {
     id: string,
@@ -41,7 +42,7 @@ export class DashboardModuleService {
 
     moduleConfig: any = {};
 
-    constructor(private http: HttpClient, private dialog: MatDialog) {}
+    constructor(private http: HttpClient, private dialog: MatDialog, private ms: ModulesService) {}
 
 
 	dropItem(dragId: string): void {
@@ -58,32 +59,32 @@ export class DashboardModuleService {
 
         const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            this.moduleConfig = result;
+            // TODO add cancel function
+
+            this.layout.push({
+                cols: 4,
+                rows: 3,
+                id: newContainerId,
+                x: 0,
+                y: 0
+            });
+
+            const { components } = this;
+
+            const comp: IComponent = components.find((c) => c.id === newContainerId);
+            const updateIdx: number = comp ? components.indexOf(comp) : components.length;
+
+            const componentItem: IComponent = {
+                id: newContainerId,
+                componentRef: dragId,
+                option: result
+            };
+
+            this.components = Object.assign([], components, { [updateIdx]: componentItem });
+            setTimeout(() => {
+                // this.postDashboardInfo();
+            }, 100);
         })
-
-
-		this.layout.push({
-			cols: 4,
-			rows: 3,
-			id: newContainerId,
-			x: 0,
-			y: 0
-		});
-
-		const { components } = this;
-
-		const comp: IComponent = components.find((c) => c.id === newContainerId);
-		const updateIdx: number = comp ? components.indexOf(comp) : components.length;
-
-		const componentItem: IComponent = {
-			id: newContainerId,
-			componentRef: dragId
-		};
-
-		this.components = Object.assign([], components, { [updateIdx]: componentItem });
-		setTimeout(() => {
-			// this.postDashboardInfo();
-        }, 100);
     }
     
     deleteItem(id: string) : void {

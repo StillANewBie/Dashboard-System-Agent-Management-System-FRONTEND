@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
+import { ModuleConfigDTO } from '../components/dashboard/modules/module-config/module-config.component';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ModulesService {
-
+	moduleConfigs: ModuleConfigDTO[] = [];
 
     constructor(private http: HttpClient){}
 
