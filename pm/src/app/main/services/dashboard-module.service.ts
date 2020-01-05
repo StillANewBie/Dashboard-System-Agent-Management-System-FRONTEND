@@ -45,6 +45,7 @@ export class DashboardModuleService {
 
 
 	dropItem(dragId: string): void {
+		const newContainerId = UUID.UUID();
 
         // open dialog
         const dialogConfig = new MatDialogConfig();
@@ -53,14 +54,13 @@ export class DashboardModuleService {
         dialogConfig.autoFocus = true;
         dialogConfig.width = '400px';
         dialogConfig.height = "300px";
-        dialogConfig.data = {title: 'injected data'};
+        dialogConfig.data = newContainerId;
 
         const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
             this.moduleConfig = result;
         })
 
-		const newContainerId = UUID.UUID();
 
 		this.layout.push({
 			cols: 4,

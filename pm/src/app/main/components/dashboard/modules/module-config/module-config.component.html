@@ -1,34 +1,29 @@
-<label id="select-filter-label">Select Filter Level</label>
-<mat-radio-group aria-labelledby="select-filter-label" class="example-radio-group d-flex flex-column"
-    [(ngModel)]="selectedGroupLevel">
-    <div>
-        <mat-radio-button class="example-radio-button" (change)="radioOnChange($event)" [value]="1" selected>
-            Director Level
+<div class="form-group">
+    <mat-radio-group aria-label="Select an option">
+
+        <mat-radio-button name="selectLevel" id="level1" value="1" (change)="radioOnChange($event)" checked>
+            Director
         </mat-radio-button>
-        <mat-form-field>
-            <mat-label>Select an option</mat-label>
-            <mat-select [(value)]="selectedGroupLevel1">
-                <mat-option value="selectedGroupLevel1">{{selectedGroupLevel1 && selectedGroupLevel1.groupName}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div>
-        <mat-radio-button class="example-radio-button" (change)="radioOnChange($event)" [value]="2">
-            Manager Level
+        <mat-select [(ngModel)]="selectedGroupLevel1">
+            <mat-option [value]="selectedGroupLevel1" (onSelectionChange)="optionOnChange($event)">
+                {{selectedGroupLevel1.groupName}}
+            </mat-option>
+        </mat-select>
+        <mat-radio-button name="selectLevel" id="level2" value="2" (change)="radioOnChange($event)">
+            Manager
         </mat-radio-button>
-        <mat-form-field>
-            <mat-label>Select an option</mat-label>
-            <mat-select [(value)]="selectedGroupLevel2">
-                <ng-container *ngIf="selectedGroupLevel1">
-                    <mat-option *ngFor = "let el of selectedGroupLevel1.childGroup" value="el">{{el.groupName}}</mat-option>
-                </ng-container>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div>
-        <mat-radio-button class="example-radio-button" (change)="radioOnChange($event)" [value]="3">
-            Agent Level
+        <mat-select [(value)]="selectedGroupLevel2">
+            <mat-option [value]="el" *ngFor="let el of selectedGroupLevel1.childGroups" (onSelectionChange)="optionOnChange($event)">
+                {{el.groupName}}</mat-option>
+        </mat-select>
+        <mat-radio-button name="selectLevel" id="level3" value="3" (change)="radioOnChange($event)">
+            Agent
         </mat-radio-button>
-    </div>
-</mat-radio-group>
-<div>Group Selected {{selectedGroup && selectedGroup.groupName}}</div>
+        <mat-select [(value)]="selectedGroupLevel3">
+            <mat-option [value]="el"  *ngFor="let el of selectedGroupLevel2.childGroups" (onSelectionChange)="optionOnChange($event)">
+                {{el.groupName}}
+            </mat-option>
+        </mat-select>
+    </mat-radio-group>
+</div>
+<button type="button" (click)="submit($event)">Confirm</button>
