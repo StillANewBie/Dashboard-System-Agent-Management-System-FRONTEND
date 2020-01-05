@@ -41,6 +41,7 @@ import { MainComponent } from './components/main/main.component';
 import { ProfileImageRendererComponent } from './components/shared-components/profile-image-renderer.component';
 import { DashboardModuleDirective } from './directives/dashboard-module.directive';
 import { ModuleConfigComponent } from './components/dashboard/modules/module-config/module-config.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
 	{
@@ -66,6 +67,7 @@ const routes: Routes = [
 		ModuleConfigComponent
 	],
 	imports: [
+		FormsModule,
 		RouterModule.forChild(routes),
 		AgGridModule.withComponents([]),
 		AppRoutingModule,

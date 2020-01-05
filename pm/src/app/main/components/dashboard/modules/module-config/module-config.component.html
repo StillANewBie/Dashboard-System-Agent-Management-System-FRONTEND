@@ -1,1 +1,34 @@
-<p>module-config works!</p>
+<label id="select-filter-label">Select Filter Level</label>
+<mat-radio-group aria-labelledby="select-filter-label" class="example-radio-group d-flex flex-column"
+    [(ngModel)]="selectedGroupLevel">
+    <div>
+        <mat-radio-button class="example-radio-button" (change)="radioOnChange($event)" [value]="1" selected>
+            Director Level
+        </mat-radio-button>
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selectedGroupLevel1">
+                <mat-option value="selectedGroupLevel1">{{selectedGroupLevel1 && selectedGroupLevel1.groupName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-radio-button class="example-radio-button" (change)="radioOnChange($event)" [value]="2">
+            Manager Level
+        </mat-radio-button>
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selectedGroupLevel2">
+                <ng-container *ngIf="selectedGroupLevel1">
+                    <mat-option *ngFor = "let el of selectedGroupLevel1.childGroup" value="el">{{el.groupName}}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-radio-button class="example-radio-button" (change)="radioOnChange($event)" [value]="3">
+            Agent Level
+        </mat-radio-button>
+    </div>
+</mat-radio-group>
+<div>Group Selected {{selectedGroup && selectedGroup.groupName}}</div>

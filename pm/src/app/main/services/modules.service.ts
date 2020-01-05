@@ -12,7 +12,11 @@ export class ModulesService {
 
     getCurrentAgentState(gid: number) {
         return this.http.get(`${environment.API_URL}dashboard/currentagentstate/` + gid, {withCredentials: true});
-    }
+	}
+	
+	getGroups() {
+		return this.http.get(`${environment.API_URL}dashboard/group`, {withCredentials: true});
+	}
 }
 
 export interface CurrentAgentStateDTO {
