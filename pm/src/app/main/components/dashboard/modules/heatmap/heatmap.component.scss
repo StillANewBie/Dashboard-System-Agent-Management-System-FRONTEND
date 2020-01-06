@@ -1,0 +1,22 @@
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  padding-top: 30px;
+  border-radius: 8px;
+}
+
+.map-frame {
+  // border: 2px solid black;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px grey;
+  border: 1px white solid;
+}
+
+.map {
+    border-radius: 8px;
+}

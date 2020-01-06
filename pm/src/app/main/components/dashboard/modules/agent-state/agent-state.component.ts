@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
 import { CurrentAgentStateDTO, ModulesService } from '../../../../services/modules.service';
@@ -10,7 +10,7 @@ import { GroupDTO } from '../module-config/module-config.component';
 	templateUrl: './agent-state.component.html',
 	styleUrls: [ './agent-state.component.scss' ]
 })
-export class AgentStateComponent implements OnInit {
+export class AgentStateComponent implements OnInit, OnDestroy {
 	gid: number = 1;
 	data: CurrentAgentStateDTO[] = [];
 	headerHeight: number;
@@ -59,9 +59,9 @@ export class AgentStateComponent implements OnInit {
 				sortable: true,
 				filter: 'agNumberColumnFilter',
 				cellStyle: (params) => {
-					if (params.value > 90) {
+					if (params.value > 60) {
 						return { color: 'white', background: 'red' };
-					} else if (params.value > 60) {
+					} else if (params.value > 30) {
 						return { color: 'black', background: 'yellow' };
 					} else {
 						return { color: 'white', background: 'green' };
@@ -112,5 +112,10 @@ export class AgentStateComponent implements OnInit {
 			this.agApi && this.resizeTable(null);
 			// this.updateHeaderStyle();
 		}, 1000);
+	}
+
+	ngOnDestroy() {
+		this.agApi = null;
+		this.agGrid = null;
 	}
 }

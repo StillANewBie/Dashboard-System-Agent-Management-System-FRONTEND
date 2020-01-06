@@ -15,9 +15,14 @@ export class ModulesService {
         return this.http.get(`${environment.API_URL}/dashboard/currentagentstate/` + gid, {withCredentials: true});
 	}
 	
+	getHeatmapData(gid: number) {
+		return this.http.get(`${environment.API_URL}/dashboard/heatmap/` + gid, {withCredentials: true});
+	}
+
 	getGroups() {
 		return this.http.get(`${environment.API_URL}/dashboard/group`, {withCredentials: true});
 	}
+
 }
 
 export interface CurrentAgentStateDTO {

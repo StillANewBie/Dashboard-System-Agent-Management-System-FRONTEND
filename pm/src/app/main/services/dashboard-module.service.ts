@@ -24,7 +24,10 @@ export class DashboardModuleService {
 	options: GridsterConfig = {
 		draggable: {
 			enabled: true,
-			ignoreContentClass: 'ag-table'
+			ignoreContentClass: 'ag-table',
+            ignoreContent: true, // if true drag will start only from elements from `dragHandleClass`
+            dragHandleClass: 'drag-handler', // drag event only from this class. If `ignoreContent` is true.
+            
 		},
 		pushItems: true,
 		resizable: {
@@ -33,10 +36,7 @@ export class DashboardModuleService {
 		gridType: GridType.Fixed,
 		fixedColWidth: 200,
 		fixedRowHeight: 120,
-		displayGrid: DisplayGrid.None,
-		itemResizeCallback: (e1, e2) => {
-			console.log(e1);
-            console.log(e2);
+		displayGrid: DisplayGrid.None,itemResizeCallback: (e1, e2) => {
             
             this.layout.map(el => {
                 if (el.id == e1.id) {
@@ -89,7 +89,6 @@ export class DashboardModuleService {
 			});
 
 			const { components } = this;
-			console.log(components);
 			// const comp: IComponent = components.find((c) => c.id === newContainerId);
 			// const updateIdx: number = comp ? components.indexOf(comp) : components.length;
 
@@ -125,7 +124,6 @@ export class DashboardModuleService {
 	}
 
 	postDashboardInfo() {
-        console.log(this.layout);
 
 		const httpOptions = {
 			headers: new HttpHeaders({
@@ -140,7 +138,7 @@ export class DashboardModuleService {
 				httpOptions
 				// {withCredentials: true}
 			)
-			.subscribe((res) => console.log(res), (err) => console.log(err));
+			.subscribe((res) => {}, (err) => console.log(err));
 	}
 
 	getDashboardInfo(): Observable<any> {
@@ -151,7 +149,6 @@ export class DashboardModuleService {
 		this.getDashboardInfo().subscribe(
 			(res) => {
 				this.dashboardFromDb = res;
-				console.log(res);
 				if (this.dashboardFromDb) {
 					this.dashboardFromDb.layout && this.dashboardFromDb.layout.forEach((el) => this.layout.push(el));
 					this.components = this.dashboardFromDb.components;
