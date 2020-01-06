@@ -2,6 +2,7 @@ import { HeatmapComponent } from '../components/dashboard/modules/heatmap/heatma
 import { AgentStateComponent } from '../components/dashboard/modules/agent-state/agent-state.component';
 import { Directive, OnChanges, Input, ComponentRef, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ModulesService } from '../services/modules.service';
+import { IComponent } from '../services/dashboard-module.service';
 
 export const moduleComponents = {
 	heatmap: HeatmapComponent,
@@ -12,22 +13,28 @@ export const moduleComponents = {
 	selector: '[dashboardModule]'
 })
 export class DashboardModuleDirective implements OnChanges {
-	@Input() componentRef: string;
+	@Input() componentInfo: IComponent;
 
 	component: ComponentRef<any>;
 
-    constructor(private container: ViewContainerRef, private resolver: ComponentFactoryResolver, private ms: ModulesService) {}
-    
-    ngOnChanges(e): void {
-        const component = moduleComponents[this.componentRef];
-        if (component) {
-            const factory = this.resolver.resolveComponentFactory<any>(component);
+	constructor(
+		private container: ViewContainerRef,
+		private resolver: ComponentFactoryResolver,
+		private ms: ModulesService
+	) {}
+
+	ngOnChanges(e): void {
+        const component = moduleComponents[this.componentInfo.componentRef];
+        
+		if (component) {
+			const factory = this.resolver.resolveComponentFactory<any>(component);
             this.component = this.container.createComponent(factory);
-            const moduleConfig = this.ms.moduleConfigs[this.ms.moduleConfigs.length - 1]; 
-            this.component.instance.selectedGroup = moduleConfig.group;
-            this.component.instance.uuid = moduleConfig.uuid;
-            this.component.instance.type = moduleConfig.type;
-            // TODO config injection
-        }
-    }
+            if (this.componentInfo.option) {
+                this.component.instance.selectedGroup = this.componentInfo.option.group;
+                this.component.instance.uuid = this.componentInfo.option.uuid;
+                this.component.instance.type = this.componentInfo.option.type;
+            }
+			// TODO config injection
+		}
+	}
 }

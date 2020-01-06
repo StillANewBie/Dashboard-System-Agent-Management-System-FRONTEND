@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ModulesService } from '../../../../services/modules.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DashboardModuleService, IComponent } from '../../../../services/dashboard-module.service';
 
 @Component({
 	selector: 'app-module-config',
@@ -12,13 +13,14 @@ export class ModuleConfigComponent implements OnInit {
 	selectedGroupLevel2: GroupDTO = { childGroups: [] };
 	selectedGroupLevel3: GroupDTO = null;
 	selectedGroupLevel: number = 1;
-  selectedGroup: GroupDTO;
-  result: ModuleConfigDTO;
+	selectedGroup: GroupDTO;
+	result: ModuleConfigDTO;
 
 	constructor(
 		private ms: ModulesService,
+		private ds: DashboardModuleService,
 		private dialogRef: MatDialogRef<ModuleConfigComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: string,
+		@Inject(MAT_DIALOG_DATA) public data: IComponent,
 		private cdr: ChangeDetectorRef
 	) {
 		this.ms.getGroups().subscribe((res: GroupDTO) => {
@@ -31,8 +33,6 @@ export class ModuleConfigComponent implements OnInit {
 
 	optionOnChange(e) {
 		if (e.isUserInput) {
-			console.log(e);
-
 			if (e.source.value.groupLevel == 3) {
 				this.selectedGroupLevel3 = e.source.value;
 			}
@@ -40,7 +40,6 @@ export class ModuleConfigComponent implements OnInit {
 	}
 
 	radioOnChange(e) {
-		console.log(e);
 		switch (e.value) {
 			case '1':
 				this.selectedGroupLevel = 1;
@@ -67,8 +66,12 @@ export class ModuleConfigComponent implements OnInit {
 				break;
 		}
 
-    this.result = {group: this.selectedGroup, uuid: this.data};
-    this.ms.moduleConfigs.push(this.result);
+		// this.result = { group: this.selectedGroup, uuid: this.data.id };
+		this.data.option = { group: this.selectedGroup, uuid: this.data.id };
+		if (!Array.isArray(this.ds.components)) {
+      this.ds.components = [];
+    }
+    this.ds.components.push(this.data);
 	}
 
 	ngOnInit() {}
@@ -82,7 +85,7 @@ export interface GroupDTO {
 }
 
 export interface ModuleConfigDTO {
-  group: GroupDTO;
-  uuid: string;
-  type?: any;
+	group: GroupDTO;
+	uuid: string;
+	type?: any;
 }

@@ -7,16 +7,16 @@ import { ModuleConfigDTO } from '../components/dashboard/modules/module-config/m
     providedIn: 'root'
 })
 export class ModulesService {
-	moduleConfigs: ModuleConfigDTO[] = [];
+	// moduleConfigs: ModuleConfigDTO[] = [];
 
     constructor(private http: HttpClient){}
 
     getCurrentAgentState(gid: number) {
-        return this.http.get(`${environment.API_URL}dashboard/currentagentstate/` + gid, {withCredentials: true});
+        return this.http.get(`${environment.API_URL}/dashboard/currentagentstate/` + gid, {withCredentials: true});
 	}
 	
 	getGroups() {
-		return this.http.get(`${environment.API_URL}dashboard/group`, {withCredentials: true});
+		return this.http.get(`${environment.API_URL}/dashboard/group`, {withCredentials: true});
 	}
 }
 
