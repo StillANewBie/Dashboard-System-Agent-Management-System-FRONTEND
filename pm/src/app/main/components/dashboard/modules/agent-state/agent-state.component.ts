@@ -35,10 +35,6 @@ export class AgentStateComponent implements OnInit {
 		}
 	}
 
-	onResize(e) {
-		this.resizeTable(e);
-	}
-
 	constructor(private ms: ModulesService, public injector: Injector) {
 		this.columnDefs = [
 			{ headerName: 'Call Id', field: 'callId', sortable: true, filter: 'agNumberColumnFilter' },

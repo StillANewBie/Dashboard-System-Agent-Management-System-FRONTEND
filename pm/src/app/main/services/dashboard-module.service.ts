@@ -3,7 +3,10 @@ import { GridsterConfig, GridType, DisplayGrid, GridsterItem } from 'angular-gri
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UUID } from 'angular2-uuid';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ModuleConfigComponent, ModuleConfigDTO } from '../components/dashboard/modules/module-config/module-config.component';
+import {
+	ModuleConfigComponent,
+	ModuleConfigDTO
+} from '../components/dashboard/modules/module-config/module-config.component';
 import { ModulesService } from './modules.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -11,7 +14,7 @@ import { Observable } from 'rxjs';
 export interface IComponent {
 	id: string;
 	componentRef: string;
-    option?: ModuleConfigDTO;
+	option?: ModuleConfigDTO;
 }
 
 @Injectable({
@@ -31,7 +34,20 @@ export class DashboardModuleService {
 		fixedColWidth: 200,
 		fixedRowHeight: 120,
 		displayGrid: DisplayGrid.None,
-		itemResizeCallback: (e1, e2) => {}
+		itemResizeCallback: (e1, e2) => {
+			console.log(e1);
+            console.log(e2);
+            
+            this.layout.map(el => {
+                if (el.id == e1.id) {
+                    el = e1;
+                }
+                return el;
+            })
+            setTimeout( () => {
+                this.postDashboardInfo()
+            }, 500)
+		}
 	};
 
 	layout: GridsterItem[] = [];
@@ -42,14 +58,14 @@ export class DashboardModuleService {
 
 	moduleConfig: any = {};
 
-	constructor(private http: HttpClient, private dialog: MatDialog, private ms: ModulesService) {}
+    constructor(private http: HttpClient, private dialog: MatDialog) {}
 
 	dropItem(dragId: string): void {
-        const newContainerId = UUID.UUID();
-        const newContainerRef = {
-            id: newContainerId,
-            componentRef: dragId
-        }
+		const newContainerId = UUID.UUID();
+		const newContainerRef = {
+			id: newContainerId,
+			componentRef: dragId
+		};
 
 		// open dialog
 		const dialogConfig = new MatDialogConfig();
@@ -73,7 +89,7 @@ export class DashboardModuleService {
 			});
 
 			const { components } = this;
-            console.log(components)
+			console.log(components);
 			// const comp: IComponent = components.find((c) => c.id === newContainerId);
 			// const updateIdx: number = comp ? components.indexOf(comp) : components.length;
 
@@ -103,44 +119,44 @@ export class DashboardModuleService {
 	}
 
 	getComponentRef(id: string): IComponent {
-        const comp = this.components.find((c) => c.id === id);
-        
+		const comp = this.components.find((c) => c.id === id);
+
 		return comp;
 	}
 
 	postDashboardInfo() {
-        console.log(this.components);
-        
+        console.log(this.layout);
+
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-type': 'text/plain'
-            }),
-            withCredentials: true
+			}),
+			withCredentials: true
 		};
 		this.http
 			.post(
 				`${environment.API_URL}/dashboard/state`,
 				{ layout: this.layout, components: this.components },
-                httpOptions
-                // {withCredentials: true}
+				httpOptions
+				// {withCredentials: true}
 			)
-			.subscribe((res) => console.log(res), err => console.log(err));
+			.subscribe((res) => console.log(res), (err) => console.log(err));
 	}
 
 	getDashboardInfo(): Observable<any> {
-		return this.http.get(`${environment.API_URL}/dashboard/state`, {withCredentials: true});
+		return this.http.get(`${environment.API_URL}/dashboard/state`, { withCredentials: true });
 	}
 
 	initModules() {
 		this.getDashboardInfo().subscribe(
 			(res) => {
-                this.dashboardFromDb = res;
-                console.log(res)
+				this.dashboardFromDb = res;
+				console.log(res);
 				if (this.dashboardFromDb) {
 					this.dashboardFromDb.layout && this.dashboardFromDb.layout.forEach((el) => this.layout.push(el));
-                    this.components = this.dashboardFromDb.components;
+					this.components = this.dashboardFromDb.components;
 				}
-            },
+			},
 			(err) => {}
 		);
 	}
