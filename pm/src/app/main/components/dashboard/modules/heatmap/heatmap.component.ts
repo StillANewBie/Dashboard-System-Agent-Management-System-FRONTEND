@@ -15,7 +15,8 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
 	mapId: string;
 	data: any;
 	selectedGroup: GroupDTO;
-	layerGroup;
+  layerGroup;
+  phoneIcon;
 
 	constructor(private ms: ModulesService) {}
 
@@ -53,13 +54,21 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
       Object.keys(this.data).forEach(k => {
         const lat = this.data[k][0].latitude;
         const lng = this.data[k][0].longitude;
-        LF.marker([lat, lng]).addTo(this.layerGroup).bindPopup(`<b>Density: ${this.data[k].length}</b> <br>
+        LF.marker([lat, lng], {icon: this.phoneIcon}).addTo(this.layerGroup).bindPopup(`<b>Density: ${this.data[k].length}</b> <br>
                                                                 <b>Area Code: ${k}</b>`);
       })
     });
   }
 
 	ngOnInit() {
+    this.phoneIcon = LF.icon({
+      iconUrl: 'https://mercury-pm-images.s3.amazonaws.com/icons/phone_red.png',
+  
+      iconSize:     [35, 35], // size of the icon
+      iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+      popupAnchor:  [0, -5]
+    })
+
     this.mapId = 'map' + this.uuid;
     this.updateMarkers();
     setInterval(()=> {
