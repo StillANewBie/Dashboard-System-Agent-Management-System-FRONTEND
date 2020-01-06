@@ -1,10 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as LF from 'leaflet';
-import HeatmapOverlay from 'leaflet-heatmap/leaflet-heatmap.js';
-import * as LFT from 'leaflet-timedimension';
 import { ModulesService } from '../../../../services/modules.service';
 import { GroupDTO } from '../module-config/module-config.component';
-import { Time } from '@angular/common';
 
 @Component({
 	selector: 'app-heatmap',
@@ -12,33 +9,17 @@ import { Time } from '@angular/common';
 	styleUrls: [ './heatmap.component.scss' ]
 })
 export class HeatmapComponent implements OnInit, AfterViewInit {
-  private map;
-  // heatmapLayer;
+	private map;
+	// heatmapLayer;
 	uuid: string;
 	mapId: string;
 	data: any;
 	selectedGroup: GroupDTO;
+	layerGroup;
 
 	constructor(private ms: ModulesService) {}
 
-	private initMap(): void {    
-    const cfg = {
-      "radius": 2,
-      "maxOpacity": .8,
-      "scaleRadius": true,
-      "useLocalExtrema": true,
-      "latField": 'lat',
-      "lngField": 'lng',
-      "valueField": 'value'
-    }
-
-    var testData = {
-      max: 8,
-      data: [{lat: 40, lng:-100, count: 3},{lat: 41, lng:-100, count: 1}]
-    };
-
-    let heatmapLayer = new HeatmapOverlay(cfg);
-
+	private initMap(): void {
 		const tiles = LF.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 9,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -56,22 +37,35 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
 			maxBounds: [ [ -90, -160 ], [ 90, 200 ] ],
 			zoomDelta: 0.5,
 			zoomSnap: 0.5,
-      dragging: true,
-      layers: [tiles, heatmapLayer]
-    });
-    
-    heatmapLayer.setData(testData);
+			dragging: true,
+			layers: [ tiles ]
+		});
 
-		// tiles.addTo(this.map);
-	}
+		tiles.addTo(this.map);
+  }
+  
+  updateMarkers() {
+    this.ms.getHeatmapData(this.selectedGroup.groupId).subscribe((res) => {
+      this.data = res;
+      console.log(res);
+      // this.map._panes.markerPane.remove();
+      this.layerGroup = LF.layerGroup().addTo(this.map);
+      Object.keys(this.data).forEach(k => {
+        const lat = this.data[k][0].latitude;
+        const lng = this.data[k][0].longitude;
+        LF.marker([lat, lng]).addTo(this.layerGroup).bindPopup(`<b>Density: ${this.data[k].length}</b> <br>
+                                                                <b>Area Code: ${k}</b>`);
+      })
+    });
+  }
 
 	ngOnInit() {
-		this.mapId = 'map' + this.uuid;
-
-		this.ms.getHeatmapData(this.selectedGroup.groupId).subscribe((res) => {
-			this.data = res;
-			console.log(res);
-		});
+    this.mapId = 'map' + this.uuid;
+    this.updateMarkers();
+    setInterval(()=> {
+      this.layerGroup.clearLayers();
+      this.updateMarkers();
+    }, 5000);
 	}
 
 	ngAfterViewInit() {

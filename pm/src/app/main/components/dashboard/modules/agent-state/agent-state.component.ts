@@ -47,7 +47,7 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 					if (params.value > 1) {
 						return { color: 'red' };
 					} else if (params.value === 1) {
-						return { color: 'yellow' };
+						return { color: 'orange' };
 					} else {
 						return { color: 'green' };
 					}
