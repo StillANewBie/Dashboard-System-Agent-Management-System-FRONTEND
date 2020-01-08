@@ -33,6 +33,10 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 							<div class="ml-3"> ${e.data.name} </div>
 						</div>
 					`;
+				},
+				cellClicked: (e) => {
+					console.log(e);
+					
 				}
 			},
 			{
@@ -71,6 +75,8 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	updateTableStyle() {
 		$('.ag-theme-material .ag-cell').css({ display: 'flex', 'align-items': 'center' });
 		$('.ag-header-cell').css({ 'font-size': '1.3rem', background: '#222', color: '#EEE' });
+		$('.ag-theme-material .ag-icon').css({'color':'#AAA'});
+		$('.ag-header-cell-text').css({width: '10rem', 'text-shadow': '2px 2px 1px grey'});
 	}
 
 	resizeTable(e = null) {
