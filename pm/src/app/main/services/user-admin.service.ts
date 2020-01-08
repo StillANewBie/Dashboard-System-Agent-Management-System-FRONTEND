@@ -23,8 +23,8 @@ export class UserAdminService {
 
 		dialogConfig.disableClose = false;
 		dialogConfig.autoFocus = true;
-		dialogConfig.width = '80vw';
-        dialogConfig.height = '80vh';
+		dialogConfig.width = '100vw';
+        dialogConfig.height = '90vh';
         dialogConfig.data = param;
         
         const dialogRef = this.dialog.open(UserDetailsDialogComponent, dialogConfig);

@@ -1,1 +1,98 @@
-<p>user-details-dialog works!</p>
+<div class="d-flex flex-column w-100 h-100">
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <span class="dialog_title">User Details</span>
+        <mat-icon (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="d-flex w-100 h-100">
+        <div class="profile_part">
+            <img class="profile_image" matTooltip="Click to change profile image"
+                aria-label="Click to change profile image" matTooltipClass="tooltips" matTooltipPosition="above"
+                [matTooltipHideDelay]="hideDelay.value" src="{{data.userInfo.profileImage}}">
+            <div class="profile_name">
+                {{data.userInfo.firstName + " " + data.userInfo.lastName}}
+            </div>
+            <div class="desc_area">
+                <div>
+                    Description:
+                </div>
+                <div class="mt-5 description_div">
+                    {{data.userInfo.description}}
+                </div>
+            </div>
+        </div>
+        <mat-tab-group class="content_part">
+            <mat-tab label="Profile">
+                <div class="w-100 h-100 p-2">
+                    <div class="content_profile_container">
+                        <div class="profile_display_div">
+                            <div>
+                                First Name:
+                            </div>
+                            <div>
+                                {{data.userInfo.firstName}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Last Name:
+                            </div>
+                            <div>
+                                {{data.userInfo.lastName}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Username:
+                            </div>
+                            <div>
+                                {{data.username}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Email:
+                            </div>
+                            <div>
+                                {{data.email}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Role:
+                            </div>
+                            <div>
+                                {{data.roles[0].roleName}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Group:
+                            </div>
+                            <div>
+                                {{data.group.groupName}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Group Level:
+                            </div>
+                            <div>
+                                {{data.group.groupLevelInfo.groupLevel}}
+                            </div>
+                        </div>
+                        <div class="profile_display_div">
+                            <div>
+                                Group Level Name:
+                            </div>
+                            <div>
+                                {{data.group.groupLevelInfo.groupLevelName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Performance"> Content 2 </mat-tab>
+            <mat-tab label="Call History"> Content 2 </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+:host {
+    font-size: 20px;
+}
+
+.dialog_title {
+    color: #555;
+    margin-left: 2rem;
+    font-weight: 900;
+    text-shadow: 1px 1px 1px #AAA;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+.profile_part {
+    flex: 1 1 0;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    img.profile_image {
+        border-radius: 50%;
+        border: 1px grey solid;
+        box-shadow: 2px 2px 2px grey;
+        width: 45%;
+        flex: 1 1 0;
+        cursor: pointer;
+    }
+
+    .profile_name {
+        font-size: 2rem;
+        flex: 1 1 0;
+    }
+
+    .desc_area {
+        flex: 2 2 0;
+    }
+
+    .description_div {
+        border: 1px #DDD solid;
+        box-shadow: 2px 2px 2px grey;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}
+
+::ng-deep .mat-tab-label-content {
+    font-size: 1.2rem;
+}
+
+::ng-deep .mat-tooltip {
+    font-size: 1rem;
+}
+
+.content_part {
+    flex: 2 2 0;
+    padding: 1rem;
+    
+    .content_profile_container {
+        padding: 2rem;
+        margin-top: 2rem;
+        margin-right: 3rem;
+        border: 1px #DDD solid;
+        box-shadow: 2px 2px 2px grey;
+        border-radius: 0.5rem;
+
+        .profile_display_div {
+            display: flex;
+            height: 3.5rem;
+            min-width: 80%;
+            flex-direction: row;
+            padding: 0.5rem;
+    
+            div:first-child {
+                flex: 2 2 0;
+                min-width: 8rem;
+            }
+    
+            div:nth-child(2) {
+                flex: 3 3 0;
+                min-width: 10rem;
+            }
+        }
+    }
+}
+
