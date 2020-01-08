@@ -20,7 +20,7 @@ export class ModulesService {
 	}
 
 	getGroups() {
-		return this.http.get(`${environment.API_URL}/dashboard/group`, {withCredentials: true});
+		return this.http.get(`${environment.API_URL}/user-admin/group`, {withCredentials: true});
 	}
 
 }

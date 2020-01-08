@@ -19,12 +19,19 @@
 </mat-toolbar>
 <div class="below-toolbar">
     <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
-        <div class="sidenav-item">
+        <div class="sidenav-item"  *ngIf="!dashboardMode">
             <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
                 home</mat-icon>
-            <span *ngIf="showWideSpan">Home</span>
+            <span *ngIf="showWideSpan" class="sidebar_home">Home</span>
+        </div>
+        <div class="sidenav-item"  *ngIf="dashboardMode">
+            <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}"
+                (click)="dashboardMode = false">
+                arrow_back</mat-icon>
+            <span *ngIf="showWideSpan" class="sidebar_home">Back</span>
         </div>
 
+        <!-- side bar items -->
         <ng-container *ngIf="!dashboardMode">
             <div class="sidenav-item mt-3" (click)="openDashboard()" routerLink="dashboard">
                 <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
@@ -33,6 +40,15 @@
             </div>
         </ng-container>
 
+        <ng-container *ngIf="!dashboardMode">
+            <div class="sidenav-item mt-3" routerLink="user-admin">
+                <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
+                    supervised_user_circle</mat-icon>
+                <span *ngIf="showWideSpan">User Admin</span>
+            </div>
+        </ng-container>
+
+        <!-- dashboard items -->
         <ng-container *ngIf="dashboardMode && showWideSpan">
             <div class="draggable mt-3" draggable="true" (dragend)="dmService.dropItem('heatmap')">
                 Heat Map

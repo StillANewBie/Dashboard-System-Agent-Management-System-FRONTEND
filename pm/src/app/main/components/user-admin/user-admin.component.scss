@@ -1,0 +1,17 @@
+.ag-table {
+    border: 1px grey solid;
+    box-shadow: 2px 2px 2px grey;
+    border-radius: 1rem;
+}
+
+.ag-root {
+    border-radius: 1rem;
+}
+
+ag-grid-angular {
+    border-radius: 1rem;
+}
+
+.ag-root .ag-unselectable .ag-layout-normal {
+    border-radius: 1rem;
+}

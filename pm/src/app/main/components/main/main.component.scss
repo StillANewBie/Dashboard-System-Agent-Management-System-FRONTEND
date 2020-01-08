@@ -93,6 +93,11 @@ mat-toolbar {
   
   .sidenav-item {
     cursor: pointer;
+    
+    .sidebar_home {
+      font-size: 1.2rem;
+      margin-top: 0.3rem;
+    }
   }
 }
 

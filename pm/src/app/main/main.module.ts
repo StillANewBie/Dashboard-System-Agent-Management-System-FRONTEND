@@ -42,6 +42,7 @@ import { ProfileImageRendererComponent } from './components/shared-components/pr
 import { DashboardModuleDirective } from './directives/dashboard-module.directive';
 import { ModuleConfigComponent } from './components/dashboard/modules/module-config/module-config.component';
 import { FormsModule } from '@angular/forms';
+import { UserAdminComponent } from './components/user-admin/user-admin.component';
 
 const routes: Routes = [
 	{
@@ -51,6 +52,10 @@ const routes: Routes = [
 			{
 				path: 'dashboard',
 				component: DashboardComponent
+			},
+			{
+				path: 'user-admin',
+				component: UserAdminComponent
 			}
 		]
 	}
@@ -64,7 +69,8 @@ const routes: Routes = [
 		AgentStateComponent,
 		DashboardModuleDirective,
 		ProfileImageRendererComponent,
-		ModuleConfigComponent
+		ModuleConfigComponent,
+		UserAdminComponent
 	],
 	imports: [
 		FormsModule,
@@ -108,6 +114,6 @@ const routes: Routes = [
 		MatBadgeModule,
 		MatDividerModule
 	],
-	entryComponents: [ HeatmapComponent, AgentStateComponent, ModuleConfigComponent ]
+	entryComponents: [ HeatmapComponent, AgentStateComponent, ModuleConfigComponent, UserAdminComponent ]
 })
 export class MainModule {}

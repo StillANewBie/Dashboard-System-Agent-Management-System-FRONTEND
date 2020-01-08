@@ -1,0 +1,10 @@
+<div class="w-100 h-100 p-2">
+    <div class="w-100 h-100 ag-table" >
+        <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="data"  class="ag-theme-material"
+            [columnDefs]="columnDefs"
+            (gridReady)="onGridReady($event)" 
+            [rowData]="userList"
+            [animateRows]="true">
+        </ag-grid-angular>
+    </div>
+</div>
