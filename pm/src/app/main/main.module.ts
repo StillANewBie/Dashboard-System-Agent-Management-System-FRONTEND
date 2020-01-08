@@ -70,7 +70,7 @@ const routes: Routes = [
 		DashboardModuleDirective,
 		ModuleConfigComponent,
 		UserAdminComponent,
-		UserDetailsDialogComponent,
+		UserDetailsDialogComponent
 	],
 	imports: [
 		FormsModule,
@@ -114,6 +114,8 @@ const routes: Routes = [
 		MatBadgeModule,
 		MatDividerModule
 	],
-	entryComponents: [ HeatmapComponent, AgentStateComponent, ModuleConfigComponent, UserAdminComponent ]
+	entryComponents: [ HeatmapComponent, 
+		AgentStateComponent, ModuleConfigComponent, 
+		UserAdminComponent, UserDetailsDialogComponent ]
 })
 export class MainModule {}

@@ -1,15 +1,11 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { GridsterConfig, GridType, DisplayGrid, GridsterItem } from 'angular-gridster2';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UUID } from 'angular2-uuid';
+import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import {
-	ModuleConfigComponent,
-	ModuleConfigDTO
-} from '../components/dashboard/modules/module-config/module-config.component';
-import { ModulesService } from './modules.service';
-import { environment } from 'src/environments/environment';
+import { DisplayGrid, GridsterConfig, GridsterItem, GridType } from 'angular-gridster2';
+import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { ModuleConfigComponent, ModuleConfigDTO } from '../components/dashboard/modules/module-config/module-config.component';
 
 export interface IComponent {
 	id: string;

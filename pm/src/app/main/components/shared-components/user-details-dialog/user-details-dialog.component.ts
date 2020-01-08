@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UserAdminDTO } from '../../user-admin/user-admin.component';
 
 @Component({
-  selector: 'app-user-details-dialog',
-  templateUrl: './user-details-dialog.component.html',
-  styleUrls: ['./user-details-dialog.component.scss']
+	selector: 'app-user-details-dialog',
+	templateUrl: './user-details-dialog.component.html',
+	styleUrls: [ './user-details-dialog.component.scss' ]
 })
-export class UserDetailsDialogComponent implements OnInit {
+export class UserDetailsDialogComponent implements OnInit, OnDestroy {
+	constructor(
+		public dialogRef: MatDialogRef<UserDetailsDialogComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: UserAdminDTO
+	) {}
 
-  constructor() { }
+	onNoClick(): void {
+		this.dialogRef.close();
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {}
 
+	ngOnDestroy() {}
 }
