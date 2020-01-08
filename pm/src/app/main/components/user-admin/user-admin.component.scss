@@ -1,10 +1,26 @@
 .ag-table {
-  border: 3px white solid;
+  border: 3px #EEE solid;
   box-shadow: 3px 3px 2px grey;
   // border-radius: 1rem;
 }
+
 :host ::ng-deep .ag-root {
   // padding-top:20px
+
+  .profile_image {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: 1px solid #DDD;
+    box-shadow: 1px 1px 1px grey;
+  }
+
+  .ag-theme-material .ag-cell {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
 
   ::-webkit-scrollbar {
     width: 5px;
@@ -24,6 +40,7 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #000;
   }
+
 }
 // .ag-root {
 //     border-radius: 1rem;

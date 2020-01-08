@@ -23,7 +23,17 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 				headerName: 'Name',
 				field: 'name',
 				sortable: true,
-				filter: 'agTextColumnFilter'
+				filter: 'agTextColumnFilter',
+				cellRenderer: (e) => {
+					return `
+						<div class="d-flex align-items-center">
+							<img src="${e.data.profileImage}" 
+								class="profile_image" 
+								onerror="this.src='https://mercury-pm-images.s3.amazonaws.com/images/profile.png'"/>
+							<div class="ml-3"> ${e.data.name} </div>
+						</div>
+					`;
+				}
 			},
 			{
 				headerName: 'Role',
@@ -47,16 +57,26 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 		this.headerHeight = 40;
 	}
 
+	getRowHeight(e) {
+		return 60;
+	}
+
 	onGridReady(params) {
-    this.agApi = params.api;
-    this.updateUserList();
+		this.agApi = params.api;
+		this.updateUserList();
 		this.agApi.sizeColumnsToFit();
 		// this.updateHeaderStyle();
+	}
+
+	updateTableStyle() {
+		$('.ag-theme-material .ag-cell').css({ display: 'flex', 'align-items': 'center' });
+		$('.ag-header-cell').css({ 'font-size': '1.3rem', background: '#222', color: '#EEE' });
 	}
 
 	resizeTable(e = null) {
 		if (this.agApi) {
 			this.agApi.sizeColumnsToFit();
+			this.updateTableStyle();
 		}
 	}
 
@@ -71,28 +91,28 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 						email: el.userInfo && el.userInfo.email,
 						role: el.roles && el.roles[0].roleName,
 						groupName: el.group && el.group.groupName,
-						groupLevelName: el.group && el.group.groupLevelInfo.groupLevelName
+						groupLevelName: el.group && el.group.groupLevelInfo.groupLevelName,
+						rowHeight: 100
 					};
 				});
 				if (this.agApi) {
 					this.agApi.setRowData(this.userList);
 					this.agApi.redrawRows();
-					console.log(this.agApi);
 				}
+				this.updateTableStyle();
 			},
 			(err) => {
 				console.log(err);
 			}
 		);
+		this.updateTableStyle();
 	}
+
 	ngOnInit() {
-
-
 		setInterval(() => {
 			this.agApi && this.resizeTable(null);
-			// this.updateHeaderStyle();
 		}, 1000);
-  }
+	}
 
 	ngOnDestroy() {
 		this.agApi = null;

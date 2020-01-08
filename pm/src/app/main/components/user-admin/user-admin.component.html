@@ -4,6 +4,7 @@
             [columnDefs]="columnDefs"
             (gridReady)="onGridReady($event)" 
             [rowData]="userList"
+            [getRowHeight]="getRowHeight"
             [animateRows]="true">
         </ag-grid-angular>
     </div>
