@@ -43,6 +43,7 @@ import { DashboardModuleDirective } from './directives/dashboard-module.directiv
 import { ModuleConfigComponent } from './components/dashboard/modules/module-config/module-config.component';
 import { FormsModule } from '@angular/forms';
 import { UserAdminComponent } from './components/user-admin/user-admin.component';
+import { UserDetailsDirective } from './directives/user-details.directive';
 
 const routes: Routes = [
 	{
@@ -70,7 +71,8 @@ const routes: Routes = [
 		DashboardModuleDirective,
 		ProfileImageRendererComponent,
 		ModuleConfigComponent,
-		UserAdminComponent
+		UserAdminComponent,
+		UserDetailsDirective
 	],
 	imports: [
 		FormsModule,

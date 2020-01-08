@@ -3,6 +3,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
 import { UserAdminService } from '../../services/user-admin.service';
 import { GroupDTO } from '../dashboard/modules/module-config/module-config.component';
+import * as $ from 'jquery';
 
 @Component({
 	selector: 'app-user-admin',
@@ -33,10 +34,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 							<div class="ml-3"> ${e.data.name} </div>
 						</div>
 					`;
-				},
-				cellClicked: (e) => {
-					console.log(e);
-					
 				}
 			},
 			{
@@ -70,6 +67,11 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 		this.updateUserList();
 		this.agApi.sizeColumnsToFit();
 		// this.updateHeaderStyle();
+	}
+	
+	onCellClicked(e) {
+		console.log(e);
+		
 	}
 
 	updateTableStyle() {
@@ -140,6 +142,7 @@ export interface UserInfoDTO {
 	lastName: string;
 	email: string;
 	profileImage: string;
+	description: string;
 }
 
 export interface role {

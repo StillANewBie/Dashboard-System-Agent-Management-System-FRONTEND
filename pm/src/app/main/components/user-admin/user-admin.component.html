@@ -5,6 +5,7 @@
             (gridReady)="onGridReady($event)" 
             [rowData]="userList"
             [getRowHeight]="getRowHeight"
+            (cellClicked)='onCellClicked($event)'
             [animateRows]="true">
         </ag-grid-angular>
     </div>
