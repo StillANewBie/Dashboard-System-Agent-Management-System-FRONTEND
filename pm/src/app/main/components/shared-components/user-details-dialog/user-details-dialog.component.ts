@@ -21,6 +21,10 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 		this.dialogRef.close();
   }
 
+  replaceImage(e) {
+    
+  }
+
 	ngOnInit() {
     console.log(this.data);
     

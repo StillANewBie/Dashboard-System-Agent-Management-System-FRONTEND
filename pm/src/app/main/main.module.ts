@@ -43,6 +43,7 @@ import { ModuleConfigComponent } from './components/dashboard/modules/module-con
 import { FormsModule } from '@angular/forms';
 import { UserAdminComponent } from './components/user-admin/user-admin.component';
 import { UserDetailsDialogComponent } from './components/shared-components/user-details-dialog/user-details-dialog.component';
+import { ImageCropComponent } from './components/shared-components/image-crop/image-crop.component';
 
 const routes: Routes = [
 	{
@@ -70,7 +71,8 @@ const routes: Routes = [
 		DashboardModuleDirective,
 		ModuleConfigComponent,
 		UserAdminComponent,
-		UserDetailsDialogComponent
+		UserDetailsDialogComponent,
+		ImageCropComponent
 	],
 	imports: [
 		FormsModule,
