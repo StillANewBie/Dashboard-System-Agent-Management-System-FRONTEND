@@ -85,7 +85,14 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 			}
 		);
 	}
-	ngOnInit() {}
+	ngOnInit() {
+
+
+		setInterval(() => {
+			this.agApi && this.resizeTable(null);
+			// this.updateHeaderStyle();
+		}, 1000);
+  }
 
 	ngOnDestroy() {
 		this.agApi = null;

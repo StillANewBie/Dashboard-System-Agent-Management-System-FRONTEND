@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { GridsterConfig, GridType, DisplayGrid, GridsterItem } from 'angular-gridster2';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UUID } from 'angular2-uuid';
@@ -52,11 +52,10 @@ export class DashboardModuleService {
 
 	layout: GridsterItem[] = [];
 	components: IComponent[] = [];
-
 	dropId: string;
 	dashboardFromDb: any = null;
-
 	moduleConfig: any = {};
+	dashboardLoaded: boolean = false;
 
     constructor(private http: HttpClient, private dialog: MatDialog) {}
 
@@ -89,16 +88,6 @@ export class DashboardModuleService {
 			});
 
 			const { components } = this;
-			// const comp: IComponent = components.find((c) => c.id === newContainerId);
-			// const updateIdx: number = comp ? components.indexOf(comp) : components.length;
-
-			// const componentItem: IComponent = {
-			// 	id: newContainerId,
-			// 	componentRef: dragId,
-			// 	option: result
-			// };
-
-			// this.components = Object.assign([], components, { [updateIdx]: componentItem });
 			setTimeout(() => {
 				this.postDashboardInfo();
 			}, 100);
@@ -153,6 +142,7 @@ export class DashboardModuleService {
 					this.dashboardFromDb.layout && this.dashboardFromDb.layout.forEach((el) => this.layout.push(el));
 					this.components = this.dashboardFromDb.components;
 				}
+				this.dashboardLoaded = true;
 			},
 			(err) => {}
 		);

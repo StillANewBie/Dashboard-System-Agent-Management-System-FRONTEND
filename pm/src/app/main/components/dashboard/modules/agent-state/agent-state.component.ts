@@ -2,7 +2,6 @@ import { Component, Injector, OnInit, ViewChild, OnDestroy } from '@angular/core
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
 import { CurrentAgentStateDTO, ModulesService } from '../../../../services/modules.service';
-import * as $ from 'jquery';
 import { GroupDTO } from '../module-config/module-config.component';
 
 @Component({
@@ -26,7 +25,6 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 	onGridReady = (params) => {
 		this.agApi = params.api;
 		this.agApi.sizeColumnsToFit();
-		this.updateHeaderStyle();
 	};
 
 	resizeTable(e = null) {
@@ -98,10 +96,6 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	updateHeaderStyle() {
-		$('.ag-header-cell').css({ color: '#CCC', 'font-size': '0.8rem', background: '#345' });
-	}
-
 	ngOnInit() {
 		this.updateData();
 		setInterval(() => {
@@ -110,7 +104,6 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 
 		setInterval(() => {
 			this.agApi && this.resizeTable(null);
-			// this.updateHeaderStyle();
 		}, 1000);
 	}
 

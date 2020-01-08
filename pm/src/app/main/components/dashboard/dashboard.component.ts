@@ -27,7 +27,9 @@ export class DashboardComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.dmService.initModules();
+		if (!this.dmService.dashboardLoaded) {
+			this.dmService.initModules();
+		}
 	}
 
 }
