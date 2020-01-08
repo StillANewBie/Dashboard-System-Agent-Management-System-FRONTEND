@@ -38,12 +38,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AgentStateComponent } from './components/dashboard/modules/agent-state/agent-state.component';
 import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap.component';
 import { MainComponent } from './components/main/main.component';
-import { ProfileImageRendererComponent } from './components/shared-components/profile-image-renderer.component';
 import { DashboardModuleDirective } from './directives/dashboard-module.directive';
 import { ModuleConfigComponent } from './components/dashboard/modules/module-config/module-config.component';
 import { FormsModule } from '@angular/forms';
 import { UserAdminComponent } from './components/user-admin/user-admin.component';
-import { UserDetailsDirective } from './directives/user-details.directive';
+import { UserDetailsDialogComponent } from './components/shared-components/user-details-dialog/user-details-dialog.component';
 
 const routes: Routes = [
 	{
@@ -69,10 +68,9 @@ const routes: Routes = [
 		HeatmapComponent,
 		AgentStateComponent,
 		DashboardModuleDirective,
-		ProfileImageRendererComponent,
 		ModuleConfigComponent,
 		UserAdminComponent,
-		UserDetailsDirective
+		UserDetailsDialogComponent,
 	],
 	imports: [
 		FormsModule,

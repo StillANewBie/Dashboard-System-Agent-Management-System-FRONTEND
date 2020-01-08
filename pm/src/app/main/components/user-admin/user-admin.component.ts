@@ -70,8 +70,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	}
 	
 	onCellClicked(e) {
-		console.log(e);
-		
+		this.uas.openUserAdminDialog(e.data);
 	}
 
 	updateTableStyle() {
