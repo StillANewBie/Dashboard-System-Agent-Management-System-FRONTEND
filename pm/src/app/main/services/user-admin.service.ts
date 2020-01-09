@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -44,5 +44,35 @@ export class UserAdminService {
 
         const dialogRef = this.dialog.open(ImageCropComponent, dialogConfig);
         return dialogRef.afterClosed()
+    }
+    b64toBlob(dataURI) {
+
+        var byteString = atob(dataURI.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+    
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: 'image/jpeg' });
+    }
+    uploadImage(data) {
+        const config = {
+            reportProgress: true, 
+            withCredential: true,
+            headers: {'Content-Type' : 'undefined',
+                        'Access-Control-Allow-Credentials' : true},
+        };
+
+        let formData: FormData = new FormData();
+        formData.append("data", this.b64toBlob(data) , "asdf.jpg");
+        const options = {
+            headers: new HttpHeaders().append('application/json', 'Accept')
+                                    .append('Content-Type', 'undefined')
+                                    .append('Access-Control-Allow-Credentials', 'true')
+        }
+
+        this.http.post(`${environment.API_URL}/user-admin/upload-image`, formData).subscribe(res=> console.log(res), err => console.log(err));
+
     }
 }
