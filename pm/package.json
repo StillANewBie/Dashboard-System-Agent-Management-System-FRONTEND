@@ -36,7 +36,9 @@
     "leaflet": "^1.6.0",
     "leaflet-heatmap": "^1.0.0",
     "leaflet-timedimension": "^1.1.1",
+    "ngx-dropzone": "^2.2.2",
     "ngx-image-cropper": "^2.0.2",
+    "ngx-img-cropper": "^9.0.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -1,0 +1,24 @@
+
+:host {
+    font-size: 18px;
+}
+
+.dialog_title {
+    color: #555;
+    margin-left: 2rem;
+    font-weight: 900;
+    text-shadow: 1px 1px 1px #AAA;
+}
+
+ngx-dropzone {
+    font-size: 1.5rem !important;
+}
+
+button {
+    background-color: #DDD;
+    margin-top: 1rem;
+    box-shadow: 2px 2px 2px grey;
+    max-width: 8rem;
+    min-width: 6rem;
+    flex: 1 1 0;
+}

@@ -44,6 +44,8 @@ import { FormsModule } from '@angular/forms';
 import { UserAdminComponent } from './components/user-admin/user-admin.component';
 import { UserDetailsDialogComponent } from './components/shared-components/user-details-dialog/user-details-dialog.component';
 import { ImageCropComponent } from './components/shared-components/image-crop/image-crop.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ImageCropperComponent } from 'ngx-img-cropper';
 
 const routes: Routes = [
 	{
@@ -72,7 +74,8 @@ const routes: Routes = [
 		ModuleConfigComponent,
 		UserAdminComponent,
 		UserDetailsDialogComponent,
-		ImageCropComponent
+		ImageCropComponent,
+		ImageCropperComponent
 	],
 	imports: [
 		FormsModule,
@@ -114,10 +117,12 @@ const routes: Routes = [
 		MatSortModule,
 		MatPaginatorModule,
 		MatBadgeModule,
-		MatDividerModule
+		MatDividerModule,
+		NgxDropzoneModule
 	],
 	entryComponents: [ HeatmapComponent, 
 		AgentStateComponent, ModuleConfigComponent, 
-		UserAdminComponent, UserDetailsDialogComponent ]
+		UserAdminComponent, UserDetailsDialogComponent,
+		ImageCropComponent ]
 })
 export class MainModule {}
