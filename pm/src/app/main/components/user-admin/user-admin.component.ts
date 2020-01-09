@@ -27,7 +27,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 				filter: 'agTextColumnFilter',
 				cellRenderer: (e) => {
 					return `
-						<div class="d-flex align-items-center">
+						<div style="cursor: pointer;" class="d-flex align-items-center">
 							<img src="${e.data.profileImage}" 
 								class="profile_image" 
 								onerror="this.src='https://mercury-pm-images.s3.amazonaws.com/images/profile.png'"/>
@@ -70,7 +70,9 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	}
 	
 	onCellClicked(e) {
-		this.uas.openUserAdminDialog(e.data);
+		if (e.column && e.column.colDef && e.column.colDef.field === "name") {
+			this.uas.openUserAdminDialog(e.data);
+		}
 	}
 
 	updateTableStyle() {

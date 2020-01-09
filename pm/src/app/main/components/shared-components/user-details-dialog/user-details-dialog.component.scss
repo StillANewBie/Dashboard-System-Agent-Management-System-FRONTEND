@@ -68,6 +68,7 @@ mat-icon {
         border: 1px #DDD solid;
         box-shadow: 2px 2px 2px grey;
         border-radius: 0.5rem;
+        position: relative;
 
         .profile_display_div {
             display: flex;
@@ -86,6 +87,12 @@ mat-icon {
                 flex: 3 3 0;
                 min-width: 10rem;
             }
+        }
+
+        .edit_btn {
+            position: absolute;
+            right: 2rem;
+            box-shadow: 2px 2px 2px grey;
         }
     }
 }
