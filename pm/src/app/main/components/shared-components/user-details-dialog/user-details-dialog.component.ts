@@ -28,7 +28,7 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 			(res) => {
         this.imgSrc = res;
         console.log(res);
-        this.uas.uploadImage(res);
+        this.uas.uploadImage(res, this.data.userId);
 			},
 			(err) => {
 				console.log(err);

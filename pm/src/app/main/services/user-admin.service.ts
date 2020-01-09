@@ -56,7 +56,7 @@ export class UserAdminService {
         }
         return new Blob([ab], { type: 'image/jpeg' });
     }
-    uploadImage(data) {
+    uploadImage(data, userId) {
         const config = {
             reportProgress: true, 
             withCredential: true,
@@ -66,13 +66,13 @@ export class UserAdminService {
 
         let formData: FormData = new FormData();
         formData.append("data", this.b64toBlob(data) , "asdf.jpg");
+        
+        formData.append("userId", userId);
         const options = {
-            headers: new HttpHeaders().append('application/json', 'Accept')
-                                    .append('Content-Type', 'undefined')
-                                    .append('Access-Control-Allow-Credentials', 'true')
+            headers: new HttpHeaders().append('Access-Control-Allow-Credentials', 'true')
         }
 
-        this.http.post(`${environment.API_URL}/user-admin/upload-image`, formData).subscribe(res=> console.log(res), err => console.log(err));
+        this.http.post(`${environment.API_URL}/user-admin/upload-image`, formData, {withCredentials: true}).subscribe(res=> console.log(res), err => console.log(err));
 
     }
 }
