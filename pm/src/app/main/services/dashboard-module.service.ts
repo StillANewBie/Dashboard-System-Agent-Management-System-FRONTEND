@@ -32,7 +32,7 @@ export class DashboardModuleService {
 		gridType: GridType.Fixed,
 		fixedColWidth: 200,
 		fixedRowHeight: 120,
-		displayGrid: DisplayGrid.None,itemResizeCallback: (e1, e2) => {
+		displayGrid: DisplayGrid.None,itemChangeCallback: (e1, e2) => {
             
             this.layout.map(el => {
                 if (el.id == e1.id) {

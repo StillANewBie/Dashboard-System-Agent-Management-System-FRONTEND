@@ -12,6 +12,14 @@ mat-toolbar {
   justify-content: space-between;
   height: $toolbar-height !important;
   z-index: 2;
+
+  .user-img {
+    box-shadow: 2px 2px 2px grey;
+  }
+
+  .user-img:hover {
+    box-shadow: 2px 2px 3px black;
+  }
 }
 
 mat-toolbar {
