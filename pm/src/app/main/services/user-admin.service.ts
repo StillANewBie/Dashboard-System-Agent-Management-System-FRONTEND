@@ -86,4 +86,8 @@ export class UserAdminService {
     getGroupLevels(): Observable<any> {
         return this.http.get(`${environment.API_URL}/user-admin/group-level`);
     }
+
+    getGroups(): Observable<any> {
+        return this.http.get(`${environment.API_URL}/user-admin/groups`);
+    }
 }

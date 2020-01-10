@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { ModulesService } from '../../../../services/modules.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DashboardModuleService, IComponent } from '../../../../services/dashboard-module.service';
+import { GroupLevelDTO } from '../../../user-admin/user-admin.component';
 
 @Component({
 	selector: 'app-module-config',
@@ -82,6 +83,7 @@ export interface GroupDTO {
 	groupName?: string;
 	groupLevel?: number;
 	childGroups?: GroupDTO[];
+	groupLevelInfo?: GroupLevelDTO;
 }
 
 export interface ModuleConfigDTO {

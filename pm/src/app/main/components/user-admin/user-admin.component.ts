@@ -135,7 +135,7 @@ export interface UserAdminDTO {
 	name?: string;
 	group: GroupDTO;
 	userInfo: UserInfoDTO;
-	roles: Role[]
+	roles: RoleDTO[]
 }
 
 export interface UserInfoDTO {
@@ -147,8 +147,13 @@ export interface UserInfoDTO {
 	description: string;
 }
 
-export interface Role {
+export interface RoleDTO {
 	id: number;
 	roleName: string;
 	authority: string;
+}
+
+export interface GroupLevelDTO {
+	groupLevel: number;
+	groupLevelName: string;
 }

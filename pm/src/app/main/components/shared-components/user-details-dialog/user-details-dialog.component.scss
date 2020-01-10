@@ -63,6 +63,70 @@ mat-icon {
     font-size: 1rem;
 }
 
+::ng-deep snack-bar-container  {
+    color: red;
+    background: rgba(0, 0, 0, 0.712) !important;
+    box-shadow: 2px 2px 3px red;
+    max-width: 20rem !important;
+    margin: 0 !important;
+    margin-bottom: 8rem !important;
+
+    simple-snack-bar > span {
+        max-width: 20rem !important;
+        color : red;
+        font-size: 1.3rem;
+    }
+}
+
+::ng-deep snack-bar-container:hover {
+    background: rgba(0, 0, 0) !important;
+    box-shadow: 3px 3px 4px rgba(189, 0, 0, 0.788);
+}
+
+::ng-deep div {
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #000;
+  }
+}
+
+::ng-deep span {
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #000;
+  }
+}
+
 ::ng-deep mat-tab-body {
     height: 70vh;
 }
