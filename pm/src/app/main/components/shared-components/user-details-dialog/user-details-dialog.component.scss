@@ -41,6 +41,7 @@ mat-icon {
 
     .desc_area {
         flex: 2 2 0;
+        width: 100%;
     }
 
     .description_div {
@@ -49,9 +50,19 @@ mat-icon {
         border-radius: 0.5rem;
         font-size: 1rem;
         padding: 1rem;
+        resize: none;
+        width: 100%;
+        min-height: 11rem;
     }
     .description_div:hover {
         box-shadow: 3px 3px 3px black;
+    }
+    textarea.description_div {
+        height: 13rem;
+        box-shadow: -2px -2px 2px grey;
+    }
+    textarea.description_div:hover {
+        box-shadow: -2px -2px 3px black;
     }
 }
 
