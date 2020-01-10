@@ -25,21 +25,27 @@
             <mat-tab label="Profile">
                 <div class="w-100 h-100 p-2">
                     <div class="content_profile_container">
-                        <button class="edit_btn" mat-fab color="primary">Edit</button>
+                        <button class="edit_btn" (click)="editProfile($event)" mat-fab color="primary">Edit</button>
                         <div class="profile_display_div">
                             <div>
                                 First Name:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.userInfo.firstName}}
+                            </div>
+                            <div *ngIf="profileEditing">                            
+                                <input type="text" [(ngModel)]="profileForEdit && profileForEdit.userInfo.firstName" class="form-control"/>
                             </div>
                         </div>
                         <div class="profile_display_div">
                             <div>
                                 Last Name:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.userInfo.lastName}}
+                            </div>
+                            <div *ngIf="profileEditing">                            
+                                <input type="text" [(ngModel)]="profileForEdit && profileForEdit.userInfo.lastName" class="form-control"/>
                             </div>
                         </div>
                         <div class="profile_display_div">
@@ -54,15 +60,18 @@
                             <div>
                                 Email:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.email}}
+                            </div>
+                            <div *ngIf="profileEditing">                            
+                                <input type="email" [(ngModel)]="profileForEdit && profileForEdit.userInfo.email" class="form-control"/>
                             </div>
                         </div>
                         <div class="profile_display_div">
                             <div>
                                 Role:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.roles[0].roleName}}
                             </div>
                         </div>
@@ -70,7 +79,7 @@
                             <div>
                                 Group:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.group.groupName}}
                             </div>
                         </div>
@@ -78,7 +87,7 @@
                             <div>
                                 Group Level:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.group.groupLevelInfo.groupLevel}}
                             </div>
                         </div>
@@ -86,7 +95,7 @@
                             <div>
                                 Group Level Name:
                             </div>
-                            <div>
+                            <div *ngIf="!profileEditing">
                                 {{data.group.groupLevelInfo.groupLevelName}}
                             </div>
                         </div>

@@ -30,6 +30,10 @@ mat-icon {
         cursor: pointer;
     }
 
+    img.profile_image:hover {
+        box-shadow: 3px 3px 3px black;
+    }
+
     .profile_name {
         font-size: 2rem;
         flex: 1 1 0;
@@ -45,6 +49,9 @@ mat-icon {
         border-radius: 0.5rem;
         font-size: 1rem;
         padding: 1rem;
+    }
+    .description_div:hover {
+        box-shadow: 3px 3px 3px black;
     }
 }
 
@@ -92,8 +99,25 @@ mat-icon {
         .edit_btn {
             position: absolute;
             right: 2rem;
+            top: -1.5rem;
             box-shadow: 2px 2px 2px grey;
         }
+
+        .edit_btn:hover {
+            background: rgb(12, 0, 182);
+            box-shadow: 3px 3px 3px black;
+        }
+    }
+
+    .content_profile_container:hover {
+        box-shadow: 3px 3px 3px black;
     }
 }
 
+.form-control {
+    box-shadow: -2px -2px 2px grey;
+}
+
+.form-control:hover, .form-control:focus {
+    box-shadow: -3px -3px 3px black;
+}

@@ -27,7 +27,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 				filter: 'agTextColumnFilter',
 				cellRenderer: (e) => {
 					return `
-						<div style="cursor: pointer;" class="d-flex align-items-center">
+						<div style="cursor: pointer;" class="d-flex align-items-center name_cell">
 							<img src="${e.data.profileImage}" 
 								class="profile_image" 
 								onerror="this.src='https://mercury-pm-images.s3.amazonaws.com/images/profile.png'"/>

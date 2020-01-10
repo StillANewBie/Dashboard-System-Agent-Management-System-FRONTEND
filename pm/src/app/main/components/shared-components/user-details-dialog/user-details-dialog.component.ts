@@ -11,7 +11,9 @@ import { UserAdminService } from '../../../services/user-admin.service';
 })
 export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	hideDelay = new FormControl(1000);
-	imgSrc: string = '';
+  imgSrc: string = '';
+  profileForEdit: UserAdminDTO;
+  profileEditing: boolean = false;
 
 	constructor(
 		private uas: UserAdminService,
@@ -21,7 +23,12 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 
 	closeDialog(): void {
 		this.dialogRef.close();
-	}
+  }
+  
+  editProfile() {
+    this.profileForEdit = JSON.parse(JSON.stringify(this.data));
+    this.profileEditing = true;
+  }
 
 	replaceImage(e) {
 		this.uas.openImageCropDialog(this.data).subscribe(
