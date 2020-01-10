@@ -63,6 +63,18 @@ mat-icon {
     font-size: 1rem;
 }
 
+::ng-deep mat-tab-body {
+    height: 70vh;
+}
+
+::ng-deep mat-select {
+    width: 50% !important;
+    padding-left:0.5rem;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    box-shadow: -2px -2px 2px grey;
+}
+
 .content_part {
     flex: 2 2 0;
     padding: 1rem;
@@ -96,14 +108,29 @@ mat-icon {
             }
         }
 
-        .edit_btn {
+        button {
             position: absolute;
-            right: 2rem;
-            top: -1.5rem;
             box-shadow: 2px 2px 2px grey;
+            height: 3.5rem;
+            width: 5rem;
         }
 
-        .edit_btn:hover {
+        button.edit_btn {
+            right: 2rem;
+            top: -1.5rem;
+        }
+
+        button.cancel_btn {
+            bottom: -1.5rem;
+            right: 8rem;
+        }
+
+        button.submit_btn {
+            bottom: -1.5rem;
+            right: 15rem;
+        }
+
+        button:hover {
             background: rgb(12, 0, 182);
             box-shadow: 3px 3px 3px black;
         }

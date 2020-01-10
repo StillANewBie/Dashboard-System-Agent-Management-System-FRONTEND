@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { UserAdminDTO } from '../../user-admin/user-admin.component';
+import { UserAdminDTO, Role } from '../../user-admin/user-admin.component';
 import { UserAdminService } from '../../../services/user-admin.service';
 
 @Component({
@@ -14,12 +14,15 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
   imgSrc: string = '';
   profileForEdit: UserAdminDTO;
   profileEditing: boolean = false;
+  roleList: Role[];
 
 	constructor(
 		private uas: UserAdminService,
 		public dialogRef: MatDialogRef<UserDetailsDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: UserAdminDTO
-	) {}
+	) {
+    this.uas.getRoles().subscribe(res => this.roleList = res, err => console.log(err));
+  }
 
 	closeDialog(): void {
 		this.dialogRef.close();
@@ -28,6 +31,19 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
   editProfile() {
     this.profileForEdit = JSON.parse(JSON.stringify(this.data));
     this.profileEditing = true;
+    console.log(this.roleList);
+    
+  }
+
+  cancelEditing() {
+    this.profileEditing = null;
+    this.profileEditing = false;
+  }
+
+  submitEditing() {
+    console.log(this.profileForEdit);
+    this.profileEditing = false;
+    this.profileEditing = null; 
   }
 
 	replaceImage(e) {

@@ -1,109 +1,123 @@
 <div class="d-flex flex-column w-100 h-100">
-    <div class="w-100 d-flex align-items-center justify-content-between">
-        <span class="dialog_title">User Details</span>
-        <mat-icon (click)="closeDialog()">close</mat-icon>
-    </div>
-    <div class="d-flex w-100 h-100">
-        <div class="profile_part">
-            <img class="profile_image" matTooltip="Click to change profile image"
-                aria-label="Click to change profile image" matTooltipClass="tooltips" matTooltipPosition="above"
-                [matTooltipHideDelay]="hideDelay.value" src="{{imgSrc || data.userInfo.profileImage}}"
-                (click)="replaceImage($event)">
-            <div class="profile_name">
-                {{data.userInfo.firstName + " " + data.userInfo.lastName}}
-            </div>
-            <div class="desc_area">
-                <div>
-                    <b>Description:</b>
-                </div>
-                <div class="mt-3 description_div">
-                    {{data.userInfo.description}}
-                </div>
-            </div>
+  <div class="w-100 d-flex align-items-center justify-content-between">
+    <span class="dialog_title">User Details</span>
+    <mat-icon (click)="closeDialog()">close</mat-icon>
+  </div>
+  <div class="d-flex w-100 h-100">
+    <div class="profile_part">
+      <img class="profile_image" matTooltip="Click to change profile image" aria-label="Click to change profile image"
+        matTooltipClass="tooltips" matTooltipPosition="above" [matTooltipHideDelay]="hideDelay.value"
+        src="{{imgSrc || data.userInfo.profileImage}}" (click)="replaceImage($event)">
+      <div class="profile_name">
+        {{data.userInfo.firstName + " " + data.userInfo.lastName}}
+      </div>
+      <div class="desc_area">
+        <div>
+          <b>Description:</b>
         </div>
-        <mat-tab-group class="content_part">
-            <mat-tab label="Profile">
-                <div class="w-100 h-100 p-2">
-                    <div class="content_profile_container">
-                        <button class="edit_btn" (click)="editProfile($event)" mat-fab color="primary">Edit</button>
-                        <div class="profile_display_div">
-                            <div>
-                                First Name:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.userInfo.firstName}}
-                            </div>
-                            <div *ngIf="profileEditing">                            
-                                <input type="text" [(ngModel)]="profileForEdit && profileForEdit.userInfo.firstName" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Last Name:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.userInfo.lastName}}
-                            </div>
-                            <div *ngIf="profileEditing">                            
-                                <input type="text" [(ngModel)]="profileForEdit && profileForEdit.userInfo.lastName" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Username:
-                            </div>
-                            <div>
-                                {{data.username}}
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Email:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.email}}
-                            </div>
-                            <div *ngIf="profileEditing">                            
-                                <input type="email" [(ngModel)]="profileForEdit && profileForEdit.userInfo.email" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Role:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.roles[0].roleName}}
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Group:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.group.groupName}}
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Group Level:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.group.groupLevelInfo.groupLevel}}
-                            </div>
-                        </div>
-                        <div class="profile_display_div">
-                            <div>
-                                Group Level Name:
-                            </div>
-                            <div *ngIf="!profileEditing">
-                                {{data.group.groupLevelInfo.groupLevelName}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </mat-tab>
-            <mat-tab label="Performance"> Content 2 </mat-tab>
-            <mat-tab label="Call History"> Content 2 </mat-tab>
-        </mat-tab-group>
+        <div class="mt-3 description_div">
+          {{data.userInfo.description}}
+        </div>
+      </div>
     </div>
+    <mat-tab-group class="content_part">
+      <mat-tab label="Profile">
+        <div class="w-100 h-100 p-2">
+          <div class="content_profile_container">
+            <button *ngIf="!profileEditing" class="edit_btn" (click)="editProfile($event)" mat-fab
+              color="primary">Edit</button>
+            <div class="profile_display_div">
+              <div>
+                First Name:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.userInfo.firstName}}
+              </div>
+              <div *ngIf="profileEditing">
+                <input type="text" [(ngModel)]="profileForEdit && profileForEdit.userInfo.firstName"
+                  class="form-control" />
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Last Name:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.userInfo.lastName}}
+              </div>
+              <div *ngIf="profileEditing">
+                <input type="text" [(ngModel)]="profileForEdit && profileForEdit.userInfo.lastName"
+                  class="form-control" />
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Username:
+              </div>
+              <div>
+                {{data.username}}
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Email:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.email}}
+              </div>
+              <div *ngIf="profileEditing">
+                <input type="email" [(ngModel)]="profileForEdit && profileForEdit.userInfo.email"
+                  class="form-control" />
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Role:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.roles[0].roleName}}
+              </div>
+              <div>
+                <mat-select matNativeControl *ngIf="profileEditing" class="form-control"
+                  [(ngModel)]="profileForEdit.roles[0]" [placeholder]="profileForEdit.roles[0].roleName" required>
+                  <mat-option *ngFor="let el of roleList" 
+                              value="el">{{el.roleName}}</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Group:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.group.groupName}}
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Group Level:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.group.groupLevelInfo.groupLevel}}
+              </div>
+            </div>
+            <div class="profile_display_div">
+              <div>
+                Group Level Name:
+              </div>
+              <div *ngIf="!profileEditing">
+                {{data.group.groupLevelInfo.groupLevelName}}
+              </div>
+              <button *ngIf="profileEditing" class="cancel_btn" (click)="cancelEditing($event)" mat-fab
+                color="primary">Cancel</button>
+                <button *ngIf="profileEditing" class="submit_btn" (click)="submitEditing($event)" mat-fab
+                  color="primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Performance"> Content 2 </mat-tab>
+      <mat-tab label="Call History"> Content 2 </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>
