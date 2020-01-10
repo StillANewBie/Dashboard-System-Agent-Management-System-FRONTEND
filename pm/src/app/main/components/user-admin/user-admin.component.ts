@@ -34,7 +34,8 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 							<div class="ml-3"> ${e.data.name} </div>
 						</div>
 					`;
-				}
+				},
+				sort: 'asc'
 			},
 			{
 				headerName: 'Role',
@@ -71,7 +72,10 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	
 	onCellClicked(e) {
 		if (e.column && e.column.colDef && e.column.colDef.field === "name") {
-			this.uas.openUserAdminDialog(e.data);
+			this.uas.openUserAdminDialog(e.data).afterClosed().subscribe(result => {
+				console.log(result);
+				this.updateUserList();
+			});
 		}
 	}
 
@@ -104,6 +108,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 						rowHeight: 100
 					};
 				});
+				
 				if (this.agApi) {
 					this.agApi.setRowData(this.userList);
 					this.agApi.redrawRows();

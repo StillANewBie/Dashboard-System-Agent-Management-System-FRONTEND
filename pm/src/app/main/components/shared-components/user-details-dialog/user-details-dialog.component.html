@@ -15,9 +15,11 @@
         <div>
           <b>Description:</b>
         </div>
-        <div class="mt-3 description_div">
+        <div class="mt-3 description_div" *ngIf="!profileEditing">
           {{data.userInfo.description}}
         </div>
+        <textarea class="mt-3 description_div" *ngIf="profileEditing" [(ngModel)]="profileForEdit.userInfo.description">
+        </textarea>
       </div>
     </div>
     <mat-tab-group class="content_part">
@@ -61,7 +63,7 @@
                 Email:
               </div>
               <div *ngIf="!profileEditing">
-                {{data.email}}
+                {{data.userInfo.email}}
               </div>
               <div *ngIf="profileEditing">
                 <input type="email" [(ngModel)]="profileForEdit.userInfo.email" class="form-control" />
