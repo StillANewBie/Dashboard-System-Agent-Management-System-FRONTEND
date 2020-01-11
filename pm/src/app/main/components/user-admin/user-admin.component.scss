@@ -4,6 +4,22 @@
   // border-radius: 1rem;
 }
 
+button.add_user_btn {
+  position: fixed;
+  top: 18%;
+  right: 5%;
+  width: 4rem;
+  height: 4rem;
+  box-shadow: 2px 2px 2px grey;
+  z-index: 10;
+  background-color: #008eeca9;
+}
+
+button.add_user_btn:hover {
+  background-color: #0067acad;
+  box-shadow: 3px 3px 3px black;
+}
+
 :host ::ng-deep .ag-root {
   // padding-top:20px
 

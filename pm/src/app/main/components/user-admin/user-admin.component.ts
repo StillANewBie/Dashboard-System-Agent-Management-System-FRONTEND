@@ -73,8 +73,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	onCellClicked(e) {
 		if (e.column && e.column.colDef && e.column.colDef.field === "name") {
 			this.uas.openUserAdminDialog(e.data).afterClosed().subscribe(result => {
-				console.log(result);
-				this.updateUserList();
+				if (result)	this.updateUserList();
 			});
 		}
 	}
@@ -120,6 +119,14 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 			}
 		);
 		this.updateTableStyle();
+	}
+
+	addUserDialog(e) {
+		this.uas.openAddUserDialog().afterClosed().subscribe(
+			res => {
+				if (res) this.updateUserList();
+			}
+		)
 	}
 
 	ngOnInit() {

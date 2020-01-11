@@ -31,6 +31,20 @@ export class UserAdminService {
         return dialogRef;
     }
 
+	openAddUserDialog() {
+		// open dialog
+		const dialogConfig = new MatDialogConfig();
+
+		dialogConfig.disableClose = true;
+		dialogConfig.autoFocus = true;
+		dialogConfig.width = '60vw';
+		dialogConfig.height = '70vh';
+		dialogConfig.data = {} as UserAdminDTO;
+
+		const dialogRef = this.dialog.open(UserDetailsDialogComponent, dialogConfig);
+        return dialogRef;
+    }
+
 	openImageCropDialog(param: UserAdminDTO): Observable<any> {
 		const dialogConfig = new MatDialogConfig();
 
