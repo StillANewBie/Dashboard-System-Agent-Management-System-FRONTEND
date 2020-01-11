@@ -54,6 +54,22 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 				field: 'groupLevelName',
 				sortable: true,
 				filter: 'agTextColumnFilter'
+			},
+			{
+				headerName: 'Active',
+				filed: 'active',
+				sortable: true,
+				filter: 'agTextColumnFilter',
+				valueGetter: (params) => {
+					return params.data.active? '✓': '⨯';
+				},
+				cellStyle: (params) => {
+					if (params.data.active) {
+						return {'font-size': '2rem', color: 'green'};
+					} else {
+						return {'font-size': '2rem', color: 'red'};
+					}
+				}
 			}
 		];
 		this.headerHeight = 40;
@@ -147,7 +163,8 @@ export interface UserAdminDTO {
 	name?: string;
 	group: GroupDTO;
 	userInfo: UserInfoDTO;
-	roles: RoleDTO[]
+	roles: RoleDTO[];
+	active: boolean;
 }
 
 export interface UserInfoDTO {
