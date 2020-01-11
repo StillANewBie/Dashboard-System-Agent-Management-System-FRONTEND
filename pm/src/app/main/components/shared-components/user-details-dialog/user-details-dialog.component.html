@@ -9,7 +9,18 @@
         matTooltipClass="tooltips" matTooltipPosition="above" [matTooltipHideDelay]="hideDelay.value"
         src="{{imgSrc || data.userInfo.profileImage}}" (click)="replaceImage($event)">
       <div class="profile_name">
-        {{data.userInfo.firstName + " " + data.userInfo.lastName}}
+        <div>
+          {{data.userInfo.firstName + " " + data.userInfo.lastName}}
+        </div>
+
+          <mat-slide-toggle
+          class="example-margin"
+          [color]="'primary'"
+          [(checked)]="this.data.active"
+          [disabled]="disabled"
+          (change)="activeOnChange($event)">
+          Active
+      </mat-slide-toggle>
       </div>
       <div class="desc_area">
         <div>

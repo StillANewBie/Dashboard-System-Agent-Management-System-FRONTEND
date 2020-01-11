@@ -128,5 +128,12 @@ export class UserAdminService {
         formData.append("roleId", roleId.toString());
 
         return this.http.post(`${environment.API_URL}/user-admin/user-role`, formData, {withCredentials: true})
-    }
+	}
+	
+	setUserActiveStatus(userId:number, active: boolean) {
+        let formData: FormData = new FormData();
+        formData.append("userId", userId.toString());
+		formData.append("active", active? 'true': 'false');
+		return this.http.post(`${environment.API_URL}/user-admin/active`, formData, {withCredentials: true})
+	}
 }
