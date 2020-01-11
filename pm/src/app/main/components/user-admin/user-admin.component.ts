@@ -17,6 +17,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	columnDefs;
 	headerHeight: number;
 	userList: UserAdminDTO[];
+	res: any[];
 
 	constructor(private uas: UserAdminService) {
 		this.columnDefs = [
@@ -59,7 +60,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 				headerName: 'Active',
 				filed: 'active',
 				sortable: true,
-				filter: 'agTextColumnFilter',
+				filter: false,
 				valueGetter: (params) => {
 					return params.data.active? '✓': '⨯';
 				},
@@ -111,6 +112,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	updateUserList() {
 		this.uas.getAllUsers().subscribe(
 			(res) => {
+				this.res = res;
 				this.userList = res.map((el) => {
 					return {
 						...el,
@@ -143,6 +145,45 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 				if (res) this.updateUserList();
 			}
 		)
+	}
+
+	onActiveFilterChange(e) {
+		console.log(e);
+		
+		if (e.checked) {
+			this.userList = this.res.filter(el => el.active).map((el) => {
+				return {
+					...el,
+					name: el.userInfo && el.userInfo.firstName + ' ' + el.userInfo.lastName,
+					profileImage: el.userInfo && el.userInfo.profileImage,
+					email: el.userInfo && el.userInfo.email,
+					role: el.roles && el.roles[0].roleName,
+					groupName: el.group && el.group.groupName,
+					groupLevelName: el.group && el.group.groupLevelInfo.groupLevelName,
+					rowHeight: 100
+				};
+			});
+		} else {
+			this.userList = this.res.map((el) => {
+				return {
+					...el,
+					name: el.userInfo && el.userInfo.firstName + ' ' + el.userInfo.lastName,
+					profileImage: el.userInfo && el.userInfo.profileImage,
+					email: el.userInfo && el.userInfo.email,
+					role: el.roles && el.roles[0].roleName,
+					groupName: el.group && el.group.groupName,
+					groupLevelName: el.group && el.group.groupLevelInfo.groupLevelName,
+					rowHeight: 100
+				};
+			});
+		}
+				
+		if (this.agApi) {
+			this.agApi.setRowData(this.userList);
+			this.agApi.redrawRows();
+		}
+		this.updateTableStyle();
+
 	}
 
 	ngOnInit() {

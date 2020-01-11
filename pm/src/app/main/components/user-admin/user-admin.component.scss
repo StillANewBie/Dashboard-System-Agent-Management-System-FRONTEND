@@ -4,6 +4,27 @@
   // border-radius: 1rem;
 }
 
+.active_filter_container {
+  position: fixed;
+  top: 28%;
+  right: 3%;
+  z-index: 10;
+  width: 10rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border-radius: 0.5rem;
+  // border: 1px grey solid;
+  // box-shadow: 2px 2px 2px grey;
+  // color: white
+}
+
+.active_filter_container:hover {
+  // box-shadow: 3px 3px 3px black;
+  text-shadow: 1px 1px 1px grey;
+}
+
 button.add_user_btn {
   position: fixed;
   top: 18%;
