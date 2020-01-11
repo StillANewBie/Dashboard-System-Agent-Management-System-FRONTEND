@@ -113,7 +113,8 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 		this.uas.getAllUsers().subscribe(
 			(res) => {
 				this.res = res;
-				this.userList = res.map((el) => {
+
+				this.userList = this.res.filter(el => el.active).map((el) => {
 					return {
 						...el,
 						name: el.userInfo && el.userInfo.firstName + ' ' + el.userInfo.lastName,
@@ -150,7 +151,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	onActiveFilterChange(e) {
 		console.log(e);
 		
-		if (e.checked) {
+		if (!e.checked) {
 			this.userList = this.res.filter(el => el.active).map((el) => {
 				return {
 					...el,

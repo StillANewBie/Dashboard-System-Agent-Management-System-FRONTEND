@@ -1,0 +1,129 @@
+<div class="w-100 h-100 d-flex flex-column">
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <span class="dialog_title">Add User</span>
+        <mat-icon class="exit_icon" (click)="closeDialog()">close</mat-icon>
+    </div>
+    <mat-horizontal-stepper class="w-100 h-100" linear="true" #stepper>
+        <mat-step [stepControl]="userForm" class="d-flex flex-column w-100 h-100">
+            <form [formGroup]="userForm" class="d-flex flex-column w-100 h-100">
+                <ng-template matStepLabel>User Info</ng-template>
+                <div class="profile_display_div">
+                    <div>
+                        Username:
+                    </div>
+                    <div>
+                        <input formControlName="username" type="text" class="form-control" required/>
+                    </div>
+                </div>
+                <div class="profile_display_div">
+                    <div>
+                        Password:
+                    </div>
+                    <div>
+                        <input formControlName="p1" type="text" class="form-control" required/>
+                    </div>
+                </div>
+                <div class="profile_display_div">
+                    <div>
+                        Password:
+                    </div>
+                    <div>
+                        <input formControlName="p2" type="text" class="form-control" required/>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <button class="reset_btn" (click)="resetUser($event)" mat-button color="primary">Reset</button>
+                    <button class="submit_btn" type="submit" [disabled]="userForm.invalid" mat-raised-button
+                        color="primary">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="userInfoForm" class="d-flex flex-column w-100 h-100">
+            <ng-template matStepLabel>User Details</ng-template>
+            <form [formGroup]="userInfoForm" class="d-flex flex-column w-100 h-100">
+                <div class="profile_display_div">
+                    <div>
+                        First Name:
+                    </div>
+                    <div>
+                        <input formControlName="firstName" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="profile_display_div">
+                    <div>
+                        Last Name:
+                    </div>
+                    <div>
+                        <input formControlName="lastName" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="profile_display_div">
+                    <div>
+                        Email:
+                    </div>
+                    <div>
+                        <input formControlName="email" type="email" class="form-control" />
+                    </div>
+                </div>
+                <div class="profile_display_div h-auto" >
+                    <div>
+                        <b>Description:</b>
+                    </div>
+                    <div>
+                        <textarea formControlName="desc" class="description_div"></textarea>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <button class="reset_btn" (click)="userInfoForm($event)" mat-button color="primary">Reset</button>
+                    <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
+                        color="primary">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="groupRoleForm" class="d-flex flex-column w-100 h-100">
+            <form [formGroup]="groupRoleForm" class="d-flex flex-column w-100 h-100">
+                <ng-template matStepLabel>Role & Group</ng-template>
+                <div class="profile_display_div">
+                    <div>
+                        Role:
+                    </div>
+                    <div>
+                        <mat-select matNativeControl class="form-control" formControlName="role"
+                            [placeholder]="profileForEdit" required>
+                            <mat-option *ngFor="let el of roleList" [value]="el">{{el.roleName}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+                <div class="profile_display_div">
+                    <div>
+                        Group Level:
+                    </div>
+                    <div>
+                        <mat-select matNativeControl class="form-control" formControlName="groupLevel"
+                            [placeholder]="profileForEdit" required>
+                            <mat-option *ngFor="let el of groupLevelList" [value]="el">{{el.groupLevel}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+                <div class="profile_display_div">
+                    <div>
+                        Group:
+                    </div>
+                    <div>
+                        <mat-select matNativeControl class="form-control" formControlName="group" [placeholder]=""
+                            required>
+                            <ng-container *ngFor="let el of groupList">
+                                <mat-option *ngIf=" " [value]="el">{{el.groupName}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <button class="reset_btn" (click)="groupRoleForm($event)" mat-button color="primary">Reset</button>
+                    <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
+                        color="primary">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

@@ -6,6 +6,7 @@ import { UserAdminDTO, UserInfoDTO } from '../components/user-admin/user-admin.c
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { UserDetailsDialogComponent } from '../components/shared-components/user-details-dialog/user-details-dialog.component';
 import { ImageCropComponent } from '../components/shared-components/image-crop/image-crop.component';
+import { AddUserComponent } from '../components/user-admin/add-user/add-user.component';
 
 @Injectable({
 	providedIn: 'root'
@@ -35,13 +36,13 @@ export class UserAdminService {
 		// open dialog
 		const dialogConfig = new MatDialogConfig();
 
-		dialogConfig.disableClose = true;
+		dialogConfig.disableClose = false;
 		dialogConfig.autoFocus = true;
-		dialogConfig.width = '60vw';
-		dialogConfig.height = '70vh';
+		dialogConfig.width = '40vw';
+		dialogConfig.height = '65vh';
 		dialogConfig.data = {} as UserAdminDTO;
 
-		const dialogRef = this.dialog.open(UserDetailsDialogComponent, dialogConfig);
+		const dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
         return dialogRef;
     }
 

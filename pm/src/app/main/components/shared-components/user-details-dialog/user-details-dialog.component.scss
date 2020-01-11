@@ -37,6 +37,19 @@ mat-icon {
     .profile_name {
         font-size: 2rem;
         flex: 1 1 0;
+
+        .name_tag {
+            margin-top: 0.5rem;
+        }
+
+        .name_tag:hover {
+            text-shadow: 1px 1px 1px grey;
+        }
+
+        mat-slide-toggle {
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+        }
     }
 
     .desc_area {

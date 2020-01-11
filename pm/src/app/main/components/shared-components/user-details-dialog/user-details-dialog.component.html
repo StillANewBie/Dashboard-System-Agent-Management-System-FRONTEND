@@ -1,7 +1,7 @@
 <div class="d-flex flex-column w-100 h-100">
   <div class="w-100 d-flex align-items-center justify-content-between">
     <span class="dialog_title">User Details</span>
-    <mat-icon (click)="closeDialog()">close</mat-icon>
+    <mat-icon class="exit_icon" (click)="closeDialog(false)">close</mat-icon>
   </div>
   <div class="d-flex w-100 h-100">
     <div class="profile_part">
@@ -9,18 +9,13 @@
         matTooltipClass="tooltips" matTooltipPosition="above" [matTooltipHideDelay]="hideDelay.value"
         src="{{imgSrc || data.userInfo.profileImage}}" (click)="replaceImage($event)">
       <div class="profile_name">
-        <div>
+        <div class="name_tag">
           {{data.userInfo.firstName + " " + data.userInfo.lastName}}
         </div>
-
-          <mat-slide-toggle
-          class="example-margin"
-          [color]="'primary'"
-          [(checked)]="this.data.active"
-          [disabled]="disabled"
-          (change)="activeOnChange($event)">
+        <mat-slide-toggle [color]="'primary'" [(checked)]="this.data.active"
+          [disabled]="disabled" (change)="activeOnChange($event)">
           Active
-      </mat-slide-toggle>
+        </mat-slide-toggle>
       </div>
       <div class="desc_area">
         <div>
@@ -105,8 +100,8 @@
                 <mat-select matNativeControl *ngIf="profileEditing" class="form-control"
                   [(ngModel)]="profileForEdit.group" [placeholder]="profileForEdit.group.groupName" required>
                   <ng-container *ngFor="let el of groupList">
-                    <mat-option *ngIf="el.groupLevelInfo.groupLevel === profileForEdit.group.groupLevelInfo.groupLevel" 
-                              [value]="el">{{el.groupName}}</mat-option>
+                    <mat-option *ngIf="el.groupLevelInfo.groupLevel === profileForEdit.group.groupLevelInfo.groupLevel"
+                      [value]="el">{{el.groupName}}</mat-option>
                   </ng-container>
                 </mat-select>
               </div>

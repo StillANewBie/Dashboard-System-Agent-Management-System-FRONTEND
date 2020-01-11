@@ -1,7 +1,9 @@
 <div class="w-100 h-100 p-3">
-    <button mat-fab color="primary" class="add_user_btn" (click)="addUserDialog($event)"><mat-icon>add</mat-icon></button>
+    <button class="add_user_btn" (click)="addUserDialog($event)">
+        <img class="w-75" src="https://mercury-pm-images.s3.amazonaws.com/icons/add-user-256x256.png"/>
+    </button>
     <div class="active_filter_container">
-        <mat-checkbox color="primary" (change)="onActiveFilterChange($event)">Only Active</mat-checkbox>
+        <mat-checkbox color="primary" (change)="onActiveFilterChange($event)">Include Inactive</mat-checkbox>
     </div>
     <div class="w-100 h-100 ag-table" >
         <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="data"  class="ag-theme-material"

@@ -40,12 +40,13 @@ import { HeatmapComponent } from './components/dashboard/modules/heatmap/heatmap
 import { MainComponent } from './components/main/main.component';
 import { DashboardModuleDirective } from './directives/dashboard-module.directive';
 import { ModuleConfigComponent } from './components/dashboard/modules/module-config/module-config.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserAdminComponent } from './components/user-admin/user-admin.component';
 import { UserDetailsDialogComponent } from './components/shared-components/user-details-dialog/user-details-dialog.component';
 import { ImageCropComponent } from './components/shared-components/image-crop/image-crop.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ImageCropperComponent } from 'ngx-img-cropper';
+import { AddUserComponent } from './components/user-admin/add-user/add-user.component';
 
 const routes: Routes = [
 	{
@@ -75,10 +76,12 @@ const routes: Routes = [
 		UserAdminComponent,
 		UserDetailsDialogComponent,
 		ImageCropComponent,
-		ImageCropperComponent
+		ImageCropperComponent,
+		AddUserComponent
 	],
 	imports: [
 		FormsModule,
+		ReactiveFormsModule,
 		RouterModule.forChild(routes),
 		AgGridModule.withComponents([]),
 		AppRoutingModule,
@@ -123,6 +126,6 @@ const routes: Routes = [
 	entryComponents: [ HeatmapComponent, 
 		AgentStateComponent, ModuleConfigComponent, 
 		UserAdminComponent, UserDetailsDialogComponent,
-		ImageCropComponent ]
+		ImageCropComponent, AddUserComponent ]
 })
 export class MainModule {}
