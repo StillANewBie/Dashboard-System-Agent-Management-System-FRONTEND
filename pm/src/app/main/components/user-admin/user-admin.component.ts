@@ -120,7 +120,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 						name: el.userInfo && el.userInfo.firstName + ' ' + el.userInfo.lastName,
 						profileImage: el.userInfo && el.userInfo.profileImage,
 						email: el.userInfo && el.userInfo.email,
-						role: el.roles && el.roles[0].roleName,
+						role: el.roles && el.roles[0] && el.roles[0].roleName,
 						groupName: el.group && el.group.groupName,
 						groupLevelName: el.group && el.group.groupLevelInfo.groupLevelName,
 						rowHeight: 100
@@ -200,22 +200,23 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 }
 
 export interface UserAdminDTO {
-	userId: number;
-	username: string;
+	userId?: number;
+	username?: string;
 	name?: string;
-	group: GroupDTO;
-	userInfo: UserInfoDTO;
-	roles: RoleDTO[];
-	active: boolean;
+	group?: GroupDTO;
+	userInfo?: UserInfoDTO;
+	roles?: RoleDTO[];
+	active?: boolean;
 }
 
 export interface UserInfoDTO {
-	id: number;
+	id?: number;
 	firstName: string;
 	lastName: string;
 	email: string;
-	profileImage: string;
-	description: string;
+	profileImage?: string;
+	description?: string;
+	user?: UserAdminDTO;
 }
 
 export interface RoleDTO {

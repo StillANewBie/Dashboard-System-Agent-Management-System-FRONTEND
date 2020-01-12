@@ -143,6 +143,9 @@ export class UserAdminService {
         formData.append("username", username);
 		formData.append("password", password);
 		return this.http.post(`${environment.API_URL}/user-admin/register`, formData, {withCredentials: true})
-
 	}
+
+    registerUserInfo(ui: UserInfoDTO) {
+        return this.http.post(`${environment.API_URL}/user-admin/register-user-info`, ui, {withCredentials: true})
+    }
 }

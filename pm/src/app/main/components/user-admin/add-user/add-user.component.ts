@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatStepper } from '@angular/material';
 import { UserAdminService } from '../../../services/user-admin.service';
+import { UserAdminDTO, UserInfoDTO } from '../user-admin.component';
 
 @Component({
   selector: 'app-add-user',
@@ -14,6 +15,7 @@ export class AddUserComponent implements OnInit {
   userInfoForm: FormGroup;
   groupRoleForm: FormGroup;
   linearMode: boolean = true;
+  user: UserAdminDTO;
   @ViewChild('stepper', null) 
   private stepper: MatStepper;
 
@@ -44,15 +46,32 @@ export class AddUserComponent implements OnInit {
   submitUser(form: FormGroup) {
     console.log(form);
     this.uas.registerUser(form.value.username, form.value.p1).subscribe(
-      res => {
+      (res: UserAdminDTO) => {
+        this.user = res;
+        console.log(res)
         this.stepper.next();
       },
       err => console.error(err));
   }
 
   submitUserInfo(form: FormGroup) {
-    console.log(form);
-    this.stepper.next();
+    if (this.user) {
+      const ui: UserInfoDTO = {
+        firstName: form.value.firstName,
+        lastName: form.value.lastName,
+        email: form.value.email,
+        description: form.value.desc,
+        user: {userId: this.user.userId}
+      }
+      this.uas.saveUserInfo(ui).subscribe(
+        res => {
+          console.log(res);
+        },
+        err => console.error(err)
+      )
+      console.log(form);
+      this.stepper.next();
+    }
   }
 
   submitGroupRole(form: FormGroup) {
