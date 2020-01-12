@@ -2,7 +2,8 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatStepper } from '@angular/material';
 import { UserAdminService } from '../../../services/user-admin.service';
-import { UserAdminDTO, UserInfoDTO } from '../user-admin.component';
+import { UserAdminDTO, UserInfoDTO, GroupLevelDTO, RoleDTO } from '../user-admin.component';
+import { GroupDTO } from '../../dashboard/modules/module-config/module-config.component';
 
 @Component({
   selector: 'app-add-user',
@@ -18,11 +19,26 @@ export class AddUserComponent implements OnInit {
   user: UserAdminDTO;
   @ViewChild('stepper', null) 
   private stepper: MatStepper;
+	roleList: RoleDTO[];
+	groupLevelList: GroupLevelDTO[];
+  groupList: GroupDTO[];
+  groupListDisplay: GroupDTO[];
 
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddUserComponent>,
     private uas: UserAdminService,
-		@Inject(MAT_DIALOG_DATA) public data: any) { }
+		@Inject(MAT_DIALOG_DATA) public data: any) {
+      this.uas.getRoles().subscribe((res) => (this.roleList = res), (err) => console.log(err));
+      this.uas.getGroupLevels().subscribe((res) => (this.groupLevelList = res), (err) => console.log(err));
+      this.uas.getGroups().subscribe(
+        (res) => {
+          this.groupList = res;
+          this.groupList.sort((a, b) => a.groupName.localeCompare(b.groupName));
+          this.groupListDisplay = [];
+        },
+        (err) => console.log(err)
+      );
+     }
 
   get username() {return this.userForm.get('username')}
   get passwords() {return this.userForm.get('passwords')}
@@ -79,6 +95,13 @@ export class AddUserComponent implements OnInit {
     console.log(form);
   }
 
+  onGroupLevelChange(e) {
+    console.log(this.groupRoleForm)
+    this.groupListDisplay = this.groupList.filter(el => {
+      return el.groupLevelInfo.groupLevel == this.groupRoleForm.value.groupLevel;
+    } )
+  }
+
   static validatePasswords(ps: FormGroup) {
     const {p1, p2} = ps.value;
     if (p1 && p1.length < 6) return {minlength: 'Password must have a minimum length of 6!'}
@@ -106,6 +129,14 @@ export class AddUserComponent implements OnInit {
       groupLevel: ['', [Validators.required]],
       group: ['', [Validators.required]]
     });
+
+    this.groupRoleForm.controls['groupLevel'].valueChanges.subscribe(el => {
+      console.log(this.groupRoleForm)
+      this.groupListDisplay = this.groupList.filter(el => {
+        return el.groupLevelInfo.groupLevel == this.groupRoleForm.get('groupLevel').value.groupLevel;
+      });
+      console.log(this.groupListDisplay);
+    })
 
   }
 

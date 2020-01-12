@@ -17,8 +17,8 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	profileEditing: boolean = false;
 	roleList: RoleDTO[];
 	groupLevelList: GroupLevelDTO[];
-  groupList: GroupDTO[];
-  dataChanged: boolean = false;
+	groupList: GroupDTO[];
+	dataChanged: boolean = false;
 
 	constructor(
 		private uas: UserAdminService,
@@ -28,13 +28,19 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	) {
 		this.uas.getRoles().subscribe((res) => (this.roleList = res), (err) => console.log(err));
 		this.uas.getGroupLevels().subscribe((res) => (this.groupLevelList = res), (err) => console.log(err));
-		this.uas.getGroups().subscribe((res) => {this.groupList = res; this.groupList.sort((a,b) => a.groupName.localeCompare(b.groupName))}, (err) => console.log(err));
+		this.uas.getGroups().subscribe(
+			(res) => {
+				this.groupList = res;
+				this.groupList.sort((a, b) => a.groupName.localeCompare(b.groupName));
+			},
+			(err) => console.log(err)
+		);
 	}
 
 	closeDialog(): void {
 		this.profileEditing = null;
 		this.profileEditing = false;
-		this.dialogRef.close({dataChanged: this.dataChanged});
+		this.dialogRef.close({ dataChanged: this.dataChanged });
 	}
 
 	editProfile() {
@@ -65,9 +71,9 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 		) {
 			this.openSnackBar("Group Level doesn't match!", 'OK');
 			return;
-    }
-    
-    console.log(this.profileForEdit)
+		}
+
+		console.log(this.profileForEdit);
 
 		this.uas.saveUserInfo(this.profileForEdit.userInfo).subscribe(
 			(res) => {
@@ -77,18 +83,18 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 		);
 		this.uas.saveUserGroupInfo(this.profileForEdit.userId, this.profileForEdit.group.groupId).subscribe(
 			(res) => {
-        this.data.group = this.profileForEdit.group;
-        this.dataChanged = true;
+				this.data.group = this.profileForEdit.group;
+				this.dataChanged = true;
 			},
 			(err) => console.error(err)
-    );
-    this.uas.saveUserRoleInfo(this.profileForEdit.userId, this.profileForEdit.roles[0].id).subscribe(
-      (res) => {
-        this.data.roles = this.profileForEdit.roles;
-        this.dataChanged = true;
+		);
+		this.uas.saveUserRoleInfo(this.profileForEdit.userId, this.profileForEdit.roles[0].id).subscribe(
+			(res) => {
+				this.data.roles = this.profileForEdit.roles;
+				this.dataChanged = true;
 			},
 			(err) => console.error(err)
-    )
+		);
 
 		this.profileEditing = false;
 		this.profileEditing = null;
@@ -104,26 +110,23 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 		this.uas.openImageCropDialog(this.data).subscribe(
 			(res) => {
 				this.imgSrc = res;
-        this.uas.uploadImage(res, this.data.userId);
-        this.dataChanged = true;
+				this.uas.uploadImage(res, this.data.userId);
+				this.dataChanged = true;
 			},
 			(err) => {
 				console.log(err);
 			}
 		);
-  }
-  
-  activeOnChange(e) {
-    console.log(e);
-    this.uas.setUserActiveStatus(this.data.userId, e.checked).subscribe(
-      res => {},
-      err => console.log(err)
-    );
-    this.dataChanged = true;
-  }
+	}
+
+	activeOnChange(e) {
+		console.log(e);
+		this.uas.setUserActiveStatus(this.data.userId, e.checked).subscribe((res) => {}, (err) => console.log(err));
+		this.dataChanged = true;
+	}
 
 	ngOnInit() {
-    console.log(this.data);
+		console.log(this.data);
 	}
 
 	ngOnDestroy() {}

@@ -59,26 +59,26 @@
         <mat-form-field>
           <mat-label>Role</mat-label>
           <mat-select formControlName="role" [placeholder]="profileForEdit">
-            <mat-option *ngFor="let el of  [1, 2]" [value]="el">{{el.roleName}}</mat-option>
+            <mat-option *ngFor="let el of roleList" [value]="el">{{el.roleName}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Group Level</mat-label>
-          <mat-select formControlName="groupLevel" [placeholder]="profileForEdit">
-            <mat-option *ngFor="let el of [1, 2]" [value]="el">{{el.groupLevel}}</mat-option>
+          <mat-select formControlName="groupLevel" (change)="onGroupLevelChange($event)" [placeholder]="profileForEdit">
+            <mat-option *ngFor="let el of groupLevelList" [value]="el">{{el.groupLevel}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Group</mat-label>
           <mat-select formControlName="group" [placeholder]="">
-            <ng-container *ngFor="let el of [1, 2]">
+            <ng-container *ngFor="let el of groupListDisplay">
               <mat-option [value]="el">{{el.groupName}}</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>
         <div class="d-flex flex-row">
           <button class="reset_btn" (click)="groupRoleForm($event)" mat-button color="primary">Reset</button>
-          <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
+          <button class="submit_btn" type="submit" [disabled]="groupRoleForm.invalid" mat-raised-button
             color="primary">Submit</button>
         </div>
       </form>
