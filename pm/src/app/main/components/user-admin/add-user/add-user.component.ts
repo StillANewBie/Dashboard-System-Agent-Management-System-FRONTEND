@@ -92,7 +92,14 @@ export class AddUserComponent implements OnInit {
   }
 
   submitGroupRole(form: FormGroup) {
-    console.log(form);
+   this.uas.saveUserRoleInfo(this.user.userId, this.groupRoleForm.get('role').value.id).subscribe(
+     res => console.log(res),
+     err => console.error(err)
+   );
+   this.uas.saveUserGroupInfo(this.user.userId, this.groupRoleForm.get('group').value.groupId).subscribe(
+     res => console.log(res),
+     err => console.error(err)
+   )
   }
 
   onGroupLevelChange(e) {

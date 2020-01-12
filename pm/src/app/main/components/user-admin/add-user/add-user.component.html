@@ -3,7 +3,7 @@
     <span class="dialog_title">Add User</span>
     <mat-icon class="exit_icon" (click)="closeDialog()">close</mat-icon>
   </div>
-  <mat-horizontal-stepper class="w-100 h-100" linear="false" #stepper>
+  <mat-horizontal-stepper class="w-100 h-100" linear="true" #stepper>
     <mat-step [stepControl]="userForm" class="d-flex flex-column w-100 h-100">
       <form [formGroup]="userForm" class="d-flex flex-column w-100 h-100" (ngSubmit)="submitUser(userForm)">
         <ng-template matStepLabel>User Info</ng-template>
@@ -78,7 +78,7 @@
         </mat-form-field>
         <div class="d-flex flex-row">
           <button class="reset_btn" (click)="groupRoleForm($event)" mat-button color="primary">Reset</button>
-          <button class="submit_btn" type="submit" [disabled]="groupRoleForm.invalid" mat-raised-button
+          <button class="submit_btn" type="submit" [disabled]="groupRoleForm.invalid && user" mat-raised-button
             color="primary">Submit</button>
         </div>
       </form>
