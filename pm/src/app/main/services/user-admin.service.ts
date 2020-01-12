@@ -105,7 +105,7 @@ export class UserAdminService {
 
     getGroups(): Observable<any> {
         return this.http.get(`${environment.API_URL}/user-admin/groups`);
-    }
+	}
 
     saveUser(u: UserAdminDTO) {
         return this.http.post(`${environment.API_URL}/user-admin/user`, u, {withCredentials: true})
@@ -136,5 +136,13 @@ export class UserAdminService {
         formData.append("userId", userId.toString());
 		formData.append("active", active? 'true': 'false');
 		return this.http.post(`${environment.API_URL}/user-admin/active`, formData, {withCredentials: true})
+	}
+
+	registerUser(username: string, password: string) {
+        let formData: FormData = new FormData();
+        formData.append("username", username);
+		formData.append("password", password);
+		return this.http.post(`${environment.API_URL}/user-admin/register`, formData, {withCredentials: true})
+
 	}
 }

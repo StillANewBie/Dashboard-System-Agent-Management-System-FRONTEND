@@ -5,31 +5,34 @@
     </div>
     <mat-horizontal-stepper class="w-100 h-100" linear="true" #stepper>
         <mat-step [stepControl]="userForm" class="d-flex flex-column w-100 h-100">
-            <form [formGroup]="userForm" class="d-flex flex-column w-100 h-100">
+            <form [formGroup]="userForm" class="d-flex flex-column w-100 h-100" (ngSubmit)="submitUser(userForm)">
                 <ng-template matStepLabel>User Info</ng-template>
                 <div class="profile_display_div">
                     <div>
                         Username:
                     </div>
                     <div>
-                        <input formControlName="username" type="text" class="form-control" required/>
+                        <input matInput formControlName="username" type="text" required />
                     </div>
                 </div>
-                <div class="profile_display_div">
-                    <div>
-                        Password:
+                <div fxLayout="column" formGroupName="passwords">
+                    <div class="profile_display_div">
+                        <div>
+                            Password:
+                        </div>
+                        <div>
+                            <input matInput formControlName="p1" type="password" required />
+                        </div>
                     </div>
-                    <div>
-                        <input formControlName="p1" type="text" class="form-control" required/>
+                    <div class="profile_display_div">
+                        <div>
+                            Password:
+                        </div>
+                        <div>
+                            <input matInput formControlName="p2" type="password" required />
+                        </div>
                     </div>
-                </div>
-                <div class="profile_display_div">
-                    <div>
-                        Password:
-                    </div>
-                    <div>
-                        <input formControlName="p2" type="text" class="form-control" required/>
-                    </div>
+                    <mat-error>{{userForm.get('passwords').getError('passwordsNotMatch')}}</mat-error>
                 </div>
                 <div class="d-flex flex-row">
                     <button class="reset_btn" (click)="resetUser($event)" mat-button color="primary">Reset</button>
@@ -40,7 +43,8 @@
         </mat-step>
         <mat-step [stepControl]="userInfoForm" class="d-flex flex-column w-100 h-100">
             <ng-template matStepLabel>User Details</ng-template>
-            <form [formGroup]="userInfoForm" class="d-flex flex-column w-100 h-100">
+            <form [formGroup]="userInfoForm" class="d-flex flex-column w-100 h-100"
+                (ngSubmit)="submitUserInfo(userInfoForm)">
                 <div class="profile_display_div">
                     <div>
                         First Name:
@@ -65,7 +69,7 @@
                         <input formControlName="email" type="email" class="form-control" />
                     </div>
                 </div>
-                <div class="profile_display_div h-auto" >
+                <div class="profile_display_div h-auto">
                     <div>
                         <b>Description:</b>
                     </div>
@@ -81,7 +85,8 @@
             </form>
         </mat-step>
         <mat-step [stepControl]="groupRoleForm" class="d-flex flex-column w-100 h-100">
-            <form [formGroup]="groupRoleForm" class="d-flex flex-column w-100 h-100">
+            <form [formGroup]="groupRoleForm" class="d-flex flex-column w-100 h-100"
+                (ngSubmit)="submitGroupRole(groupRoleForm)">
                 <ng-template matStepLabel>Role & Group</ng-template>
                 <div class="profile_display_div">
                     <div>
