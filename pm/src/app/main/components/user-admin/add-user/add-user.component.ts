@@ -22,6 +22,9 @@ export class AddUserComponent implements OnInit {
     private uas: UserAdminService,
 		@Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  get username() {return this.userForm.get('username')}
+  get passwords() {return this.userForm.get('passwords')}
+
   resetUser(e) {
     this.userForm.reset();
   }
@@ -58,8 +61,7 @@ export class AddUserComponent implements OnInit {
 
   static validatePasswords(ps: FormGroup) {
     const {p1, p2} = ps.value;
-    console.log(p1);
-    console.log(p2);
+    if (p1 && p1.length < 6) return {minlength: 'Password must have a minimum length of 6!'}
     return p1 === p2? null: {passwordsNotMatch: 'passwords has to match!'}
   }
 
@@ -74,15 +76,15 @@ export class AddUserComponent implements OnInit {
       }, {validator: [AddUserComponent.validatePasswords]}) 
     });
     this.userInfoForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       desc: ['']
     });
     this.groupRoleForm = this.fb.group({
-      role: [''],
-      groupLevel: [''],
-      group: ['']
+      role: ['', [Validators.required]],
+      groupLevel: ['', [Validators.required]],
+      group: ['', [Validators.required]]
     });
 
   }

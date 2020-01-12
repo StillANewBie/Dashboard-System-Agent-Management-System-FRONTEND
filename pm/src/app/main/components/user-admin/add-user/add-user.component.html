@@ -1,134 +1,87 @@
 <div class="w-100 h-100 d-flex flex-column">
-    <div class="w-100 d-flex align-items-center justify-content-between">
-        <span class="dialog_title">Add User</span>
-        <mat-icon class="exit_icon" (click)="closeDialog()">close</mat-icon>
-    </div>
-    <mat-horizontal-stepper class="w-100 h-100" linear="true" #stepper>
-        <mat-step [stepControl]="userForm" class="d-flex flex-column w-100 h-100">
-            <form [formGroup]="userForm" class="d-flex flex-column w-100 h-100" (ngSubmit)="submitUser(userForm)">
-                <ng-template matStepLabel>User Info</ng-template>
-                <div class="profile_display_div">
-                    <div>
-                        Username:
-                    </div>
-                    <div>
-                        <input matInput formControlName="username" type="text" required />
-                    </div>
-                </div>
-                <div fxLayout="column" formGroupName="passwords">
-                    <div class="profile_display_div">
-                        <div>
-                            Password:
-                        </div>
-                        <div>
-                            <input matInput formControlName="p1" type="password" required />
-                        </div>
-                    </div>
-                    <div class="profile_display_div">
-                        <div>
-                            Password:
-                        </div>
-                        <div>
-                            <input matInput formControlName="p2" type="password" required />
-                        </div>
-                    </div>
-                    <mat-error>{{userForm.get('passwords').getError('passwordsNotMatch')}}</mat-error>
-                </div>
-                <div class="d-flex flex-row">
-                    <button class="reset_btn" (click)="resetUser($event)" mat-button color="primary">Reset</button>
-                    <button class="submit_btn" type="submit" [disabled]="userForm.invalid" mat-raised-button
-                        color="primary">Submit</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="userInfoForm" class="d-flex flex-column w-100 h-100">
-            <ng-template matStepLabel>User Details</ng-template>
-            <form [formGroup]="userInfoForm" class="d-flex flex-column w-100 h-100"
-                (ngSubmit)="submitUserInfo(userInfoForm)">
-                <div class="profile_display_div">
-                    <div>
-                        First Name:
-                    </div>
-                    <div>
-                        <input formControlName="firstName" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="profile_display_div">
-                    <div>
-                        Last Name:
-                    </div>
-                    <div>
-                        <input formControlName="lastName" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="profile_display_div">
-                    <div>
-                        Email:
-                    </div>
-                    <div>
-                        <input formControlName="email" type="email" class="form-control" />
-                    </div>
-                </div>
-                <div class="profile_display_div h-auto">
-                    <div>
-                        <b>Description:</b>
-                    </div>
-                    <div>
-                        <textarea formControlName="desc" class="description_div"></textarea>
-                    </div>
-                </div>
-                <div class="d-flex flex-row">
-                    <button class="reset_btn" (click)="userInfoForm($event)" mat-button color="primary">Reset</button>
-                    <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
-                        color="primary">Submit</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="groupRoleForm" class="d-flex flex-column w-100 h-100">
-            <form [formGroup]="groupRoleForm" class="d-flex flex-column w-100 h-100"
-                (ngSubmit)="submitGroupRole(groupRoleForm)">
-                <ng-template matStepLabel>Role & Group</ng-template>
-                <div class="profile_display_div">
-                    <div>
-                        Role:
-                    </div>
-                    <div>
-                        <mat-select matNativeControl class="form-control" formControlName="role"
-                            [placeholder]="profileForEdit" required>
-                            <mat-option *ngFor="let el of roleList" [value]="el">{{el.roleName}}</mat-option>
-                        </mat-select>
-                    </div>
-                </div>
-                <div class="profile_display_div">
-                    <div>
-                        Group Level:
-                    </div>
-                    <div>
-                        <mat-select matNativeControl class="form-control" formControlName="groupLevel"
-                            [placeholder]="profileForEdit" required>
-                            <mat-option *ngFor="let el of groupLevelList" [value]="el">{{el.groupLevel}}</mat-option>
-                        </mat-select>
-                    </div>
-                </div>
-                <div class="profile_display_div">
-                    <div>
-                        Group:
-                    </div>
-                    <div>
-                        <mat-select matNativeControl class="form-control" formControlName="group" [placeholder]=""
-                            required>
-                            <ng-container *ngFor="let el of groupList">
-                                <mat-option *ngIf=" " [value]="el">{{el.groupName}}</mat-option>
-                            </ng-container>
-                        </mat-select>
-                    </div>
-                </div>
-                <div class="d-flex flex-row">
-                    <button class="reset_btn" (click)="groupRoleForm($event)" mat-button color="primary">Reset</button>
-                    <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
-                        color="primary">Submit</button>
-                </div>
-            </form>
-        </mat-step>
-    </mat-horizontal-stepper>
+  <div class="w-100 d-flex align-items-center justify-content-between">
+    <span class="dialog_title">Add User</span>
+    <mat-icon class="exit_icon" (click)="closeDialog()">close</mat-icon>
+  </div>
+  <mat-horizontal-stepper class="w-100 h-100" linear="false" #stepper>
+    <mat-step [stepControl]="userForm" class="d-flex flex-column w-100 h-100">
+      <form [formGroup]="userForm" class="d-flex flex-column w-100 h-100" (ngSubmit)="submitUser(userForm)">
+        <ng-template matStepLabel>User Info</ng-template>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Username" formControlName="username" type="text" />
+        </mat-form-field>
+        <mat-error *ngIf="userForm.get('username').hasError('minlength')">Username must have a minimum length of 6.</mat-error>
+
+        <div fxLayout="column" formGroupName="passwords">
+          <mat-form-field class="w-100">
+            <input placeholder="Password" matInput formControlName="p1" type="password" />
+          </mat-form-field>
+          <mat-error *ngIf="!passwords.pristine && passwords.hasError('minlength')">Password must have a minimum length of 6!</mat-error>
+          <mat-form-field class="w-100">
+            <input placeholder="Confirm Password" matInput formControlName="p2" type="password" />
+          </mat-form-field>
+          <mat-error>{{userForm.get('passwords').getError('passwordsNotMatch')}}</mat-error>
+          <div class="d-flex flex-row">
+            <button class="reset_btn" type="button" (click)="resetUser($event)" mat-button color="primary">Reset</button>
+            <button class="submit_btn" type="submit" [disabled]="userForm.invalid" mat-raised-button
+              color="primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userInfoForm" class="d-flex flex-column w-100 h-100">
+      <ng-template matStepLabel>User Details</ng-template>
+      <form [formGroup]="userInfoForm" class="d-flex flex-column w-100 h-100" (ngSubmit)="submitUserInfo(userInfoForm)">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="First Name" formControlName="firstName" type="text" />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Last Name" formControlName="lastName" type="text" />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Email" formControlName="email" type="email" />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <textarea matInput placeholder="Description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="desc"></textarea>
+        </mat-form-field>
+        <div class="d-flex flex-row">
+          <button class="reset_btn" type="button" (click)="resetUserInfo($event)" mat-button color="primary">Reset</button>
+          <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
+            color="primary">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="groupRoleForm" class="d-flex flex-column w-100 h-100">
+      <form [formGroup]="groupRoleForm" class="d-flex flex-column w-100 h-100"
+        (ngSubmit)="submitGroupRole(groupRoleForm)">
+        <ng-template matStepLabel>Role & Group</ng-template>
+        <mat-form-field>
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" [placeholder]="profileForEdit">
+            <mat-option *ngFor="let el of  [1, 2]" [value]="el">{{el.roleName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Group Level</mat-label>
+          <mat-select formControlName="groupLevel" [placeholder]="profileForEdit">
+            <mat-option *ngFor="let el of [1, 2]" [value]="el">{{el.groupLevel}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Group</mat-label>
+          <mat-select formControlName="group" [placeholder]="">
+            <ng-container *ngFor="let el of [1, 2]">
+              <mat-option [value]="el">{{el.groupName}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <div class="d-flex flex-row">
+          <button class="reset_btn" (click)="groupRoleForm($event)" mat-button color="primary">Reset</button>
+          <button class="submit_btn" type="submit" [disabled]="userInfoForm.invalid" mat-raised-button
+            color="primary">Submit</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

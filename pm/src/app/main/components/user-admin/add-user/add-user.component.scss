@@ -4,25 +4,6 @@
   font-weight: 900;
   text-shadow: 1px 1px 1px #aaa;
 }
-.profile_display_div {
-  display: flex;
-  height: 3.5rem;
-  min-width: 80%;
-  flex-direction: row;
-  padding: 0.5rem;
-
-  div:first-child {
-    flex: 2 2 0;
-    min-width: 8rem;
-    font-weight: bold;
-  }
-
-  div:nth-child(2) {
-    flex: 3 3 0;
-    min-width: 10rem;
-  }
-}
-
 .exit_icon {
     cursor: pointer;
 }
@@ -31,13 +12,6 @@
     text-shadow: 1px 1px 1px grey;
 }
 
-::ng-deep mat-select {
-  width: 50% !important;
-  padding-left: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: -2px -2px 2px grey;
-}
 ::ng-deep div {
   ::-webkit-scrollbar {
     width: 5px;
@@ -78,29 +52,6 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #000;
   }
-}
-
-.form-control {
-  box-shadow: -2px -2px 2px grey;
-}
-
-.form-control:hover,
-.form-control:focus {
-  box-shadow: -3px -3px 3px black;
-}
-
-.description_div {
-    border: 1px #DDD solid;
-    box-shadow: -2px -2px 2px grey;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    padding: 1rem;
-    resize: none;
-    width: 100%;
-    min-height: 11rem;
-}
-textarea.description_div:hover, textarea.description_div:focus {
-    box-shadow: -2px -2px 3px black;
 }
 
 button {
