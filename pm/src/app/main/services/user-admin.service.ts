@@ -112,7 +112,7 @@ export class UserAdminService {
     }
 
     saveUserInfo(ui: UserInfoDTO) {
-        return this.http.post(`${environment.API_URL}/user-admin/user-info`, ui, {withCredentials: true})
+        return this.http.post(`${environment.API_URL}/user-admin/user-info/0`, ui, {withCredentials: true})
     }
 
     saveUserGroupInfo(userId: number, groupId: number) {
@@ -145,7 +145,7 @@ export class UserAdminService {
 		return this.http.post(`${environment.API_URL}/user-admin/register`, formData, {withCredentials: true})
 	}
 
-    registerUserInfo(ui: UserInfoDTO) {
-        return this.http.post(`${environment.API_URL}/user-admin/register-user-info`, ui, {withCredentials: true})
+    registerUserInfo(ui: UserInfoDTO, uid: number) {
+        return this.http.post(`${environment.API_URL}/user-admin/user-info/${uid}`, ui, {withCredentials: true})
     }
 }

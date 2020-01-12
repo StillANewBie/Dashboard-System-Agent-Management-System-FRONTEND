@@ -11,7 +11,7 @@ import * as $ from 'jquery';
 	styleUrls: [ './user-admin.component.scss' ]
 })
 export class UserAdminComponent implements OnInit, OnDestroy {
-	@ViewChild('agGrid', null)
+	@ViewChild('agGrid', undefined)
 	agGrid: AgGridAngular;
 	agApi: GridApi = null;
 	columnDefs;
@@ -36,7 +36,14 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 						</div>
 					`;
 				},
-				sort: 'asc'
+				sort: 'asc',
+				comparator: function(a,b) {
+				if (typeof a === 'string') {
+					 return a.toLowerCase().localeCompare(b.toLowerCase());
+				} else {
+					 return (a > b ? 1 : (a < b ? -1 : 0));
+				}
+			}
 			},
 			{
 				headerName: 'Role',

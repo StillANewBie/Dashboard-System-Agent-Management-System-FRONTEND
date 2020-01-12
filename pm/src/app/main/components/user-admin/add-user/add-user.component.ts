@@ -60,10 +60,11 @@ export class AddUserComponent implements OnInit {
         firstName: form.value.firstName,
         lastName: form.value.lastName,
         email: form.value.email,
-        description: form.value.desc,
-        user: {userId: this.user.userId}
+        description: form.value.desc
       }
-      this.uas.saveUserInfo(ui).subscribe(
+      console.log(ui);
+      
+      this.uas.registerUserInfo(ui, this.user.userId).subscribe(
         res => {
           console.log(res);
         },
