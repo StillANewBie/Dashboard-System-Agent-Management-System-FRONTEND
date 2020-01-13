@@ -99,7 +99,19 @@ export class AddUserComponent implements OnInit {
    );
    this.uas.saveUserGroupInfo(this.user.userId, this.groupRoleForm.get('group').value.groupId).subscribe(
      res => console.log(res),
-     err => console.error(err)
+     err => console.error(err),
+     () => {
+
+		this.uas.openImageCropDialog(this.user).subscribe(
+			(res) => {
+        this.uas.uploadImage(res, this.user.userId);
+        this.closeDialog(true);
+			},
+			(err) => {
+				console.log(err);
+			}
+		);
+     }
    )
   }
 

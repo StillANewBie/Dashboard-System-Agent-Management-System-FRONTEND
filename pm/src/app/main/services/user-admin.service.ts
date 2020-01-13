@@ -55,7 +55,7 @@ export class UserAdminService {
 		dialogConfig.height = '50vh';
 		dialogConfig.minHeight = '300px';
 		dialogConfig.minWidth = '300px';
-		dialogConfig.data = { src: param.userInfo.profileImage };
+		dialogConfig.data = { src: `https://mercury-pm-images.s3.amazonaws.com/images/${param.userId}.jpg` };
 
 		const dialogRef = this.dialog.open(ImageCropComponent, dialogConfig);
 		return dialogRef.afterClosed();
