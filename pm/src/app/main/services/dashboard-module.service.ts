@@ -74,6 +74,7 @@ export class DashboardModuleService {
 		const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
 		dialogRef.afterClosed().subscribe((result) => {
 			// TODO add cancel function
+			console.log(result)
 			if (result) {
 				this.layout.push({
 					cols: 4,

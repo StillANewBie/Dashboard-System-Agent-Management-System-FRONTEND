@@ -15,7 +15,6 @@ export class ModuleConfigComponent implements OnInit {
 	selectedGroupLevel3: GroupDTO = null;
 	selectedGroupLevel: number = 1;
 	selectedGroup: GroupDTO;
-	result: ModuleConfigDTO;
 
 	constructor(
 		private ms: ModulesService,
@@ -67,12 +66,12 @@ export class ModuleConfigComponent implements OnInit {
 				break;
 		}
 
-		// this.result = { group: this.selectedGroup, uuid: this.data.id };
 		this.data.option = { group: this.selectedGroup, uuid: this.data.id };
 		if (!Array.isArray(this.ds.components)) {
-      this.ds.components = [];
-    }
-    this.ds.components.push(this.data);
+			this.ds.components = [];
+		}
+		this.ds.components.push(this.data);
+		this.dialogRef.close(this.data.option);
 	}
 
 	ngOnInit() {}
