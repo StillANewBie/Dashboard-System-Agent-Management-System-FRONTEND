@@ -19,7 +19,7 @@
 </mat-toolbar>
 <div class="below-toolbar">
     <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
-        <div class="sidenav-item"  *ngIf="!dashboardMode">
+        <div class="sidenav-item"  *ngIf="!dashboardMode"  routerLink="home">
             <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
                 home</mat-icon>
             <span *ngIf="showWideSpan" class="sidebar_home">Home</span>

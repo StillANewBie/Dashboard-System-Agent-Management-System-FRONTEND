@@ -47,12 +47,18 @@ import { ImageCropComponent } from './components/shared-components/image-crop/im
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ImageCropperComponent } from 'ngx-img-cropper';
 import { AddUserComponent } from './components/user-admin/add-user/add-user.component';
+import { FrontPageComponent } from './components/front-page/front-page.component';
+import { OutcomeComponent } from './components/front-page/outcome/outcome.component';
 
 const routes: Routes = [
 	{
 		path: 'main',
 		component: MainComponent,
 		children: [
+			{
+				path: 'home',
+				component: FrontPageComponent
+			},
 			{
 				path: 'dashboard',
 				component: DashboardComponent
@@ -77,7 +83,9 @@ const routes: Routes = [
 		UserDetailsDialogComponent,
 		ImageCropComponent,
 		ImageCropperComponent,
-		AddUserComponent
+		AddUserComponent,
+		FrontPageComponent,
+		OutcomeComponent
 	],
 	imports: [
 		FormsModule,
