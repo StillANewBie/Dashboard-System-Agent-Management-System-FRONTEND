@@ -1,0 +1,20 @@
+.module_container {
+
+    .card {
+        flex: 1 1 auto;
+        height: 100%;
+        box-shadow: 2px 2px 2px grey;
+        border-radius: 0.5rem;
+    }
+
+    .card:hover {
+        box-shadow: 3px 3px 3px black;
+    }
+    
+    .first_level, .second_level {
+        flex: 1 1 auto;
+        height: 40vh;
+        padding: 1rem 3rem 1rem 3rem;
+    }
+}
+

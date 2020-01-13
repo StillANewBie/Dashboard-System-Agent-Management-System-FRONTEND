@@ -49,6 +49,8 @@ import { ImageCropperComponent } from 'ngx-img-cropper';
 import { AddUserComponent } from './components/user-admin/add-user/add-user.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { OutcomeComponent } from './components/front-page/outcome/outcome.component';
+import { AvgTimeComponent } from './components/front-page/avg-time/avg-time.component';
+import { TotalTimeComponent } from './components/front-page/total-time/total-time.component';
 
 const routes: Routes = [
 	{
@@ -85,7 +87,9 @@ const routes: Routes = [
 		ImageCropperComponent,
 		AddUserComponent,
 		FrontPageComponent,
-		OutcomeComponent
+		OutcomeComponent,
+		AvgTimeComponent,
+		TotalTimeComponent
 	],
 	imports: [
 		FormsModule,

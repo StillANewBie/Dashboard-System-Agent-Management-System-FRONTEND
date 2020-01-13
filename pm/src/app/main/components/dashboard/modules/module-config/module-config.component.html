@@ -13,14 +13,16 @@
             Manager
         </mat-radio-button>
         <mat-select [(value)]="selectedGroupLevel2">
-            <mat-option [value]="el" *ngFor="let el of selectedGroupLevel1.childGroups" (onSelectionChange)="optionOnChange($event)">
+            <mat-option [value]="el" *ngFor="let el of selectedGroupLevel1.childGroups"
+                (onSelectionChange)="optionOnChange($event)">
                 {{el.groupName}}</mat-option>
         </mat-select>
         <mat-radio-button name="selectLevel" id="level3" value="3" (change)="radioOnChange($event)">
             Agent
         </mat-radio-button>
         <mat-select [(value)]="selectedGroupLevel3">
-            <mat-option [value]="el"  *ngFor="let el of selectedGroupLevel2.childGroups" (onSelectionChange)="optionOnChange($event)">
+            <mat-option [value]="el" *ngFor="let el of selectedGroupLevel2.childGroups"
+                (onSelectionChange)="optionOnChange($event)">
                 {{el.groupName}}
             </mat-option>
         </mat-select>
@@ -28,6 +30,7 @@
 </div>
 <div class="d-flex flex-row justify-content-end">
 
-<button class="confirm_btn mr-2" type="button" mat-raised-button color="primary" (click)="submit($event)"  >Confirm</button>
-<button type="button"  mat-button color="primary"  [mat-dialog-close]="null" >Cancel</button>
+    <button class="confirm_btn mr-2" type="button" mat-raised-button color="primary"
+        (click)="submit($event)">Confirm</button>
+    <button type="button" mat-button color="primary" [mat-dialog-close]="null">Cancel</button>
 </div>
