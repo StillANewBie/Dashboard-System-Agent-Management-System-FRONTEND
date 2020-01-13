@@ -26,7 +26,15 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 		@Inject(MAT_DIALOG_DATA) public data: UserAdminDTO,
 		private snackBar: MatSnackBar
 	) {
-		this.uas.getRoles().subscribe((res) => (this.roleList = res), (err) => console.log(err));
+		this.uas.getRoles().subscribe(
+			(res) => {
+				this.roleList = res;
+				if (!this.profileForEdit) {
+					this.profileForEdit = { roles: [ this.roleList[0] ] };
+				}
+			},
+			(err) => console.log(err)
+		);
 		this.uas.getGroupLevels().subscribe((res) => (this.groupLevelList = res), (err) => console.log(err));
 		this.uas.getGroups().subscribe(
 			(res) => {
@@ -44,8 +52,16 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	}
 
 	editProfile() {
+		console.log(this.data);
 		this.profileForEdit = JSON.parse(JSON.stringify(this.data));
+		if (this.data.roles.length < 1) {
+			this.profileForEdit = {...this.profileForEdit, roles: this.roleList}
+		} 
+		if (!this.data.group) {
+			this.profileForEdit = {...this.profileForEdit, group: this.groupList[0]}
+		}
 		this.profileEditing = true;
+		console.log(this.profileForEdit);
 	}
 
 	cancelEditing() {
@@ -75,7 +91,7 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 
 		console.log(this.profileForEdit);
 
-		this.uas.saveUserInfo(this.profileForEdit.userInfo).subscribe(
+		this.uas.saveUserInfo(this.profileForEdit.userInfo, this.data.userId, false).subscribe(
 			(res) => {
 				this.data.userInfo = this.profileForEdit.userInfo;
 			},

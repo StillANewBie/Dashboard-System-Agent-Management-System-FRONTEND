@@ -111,8 +111,9 @@ export class UserAdminService {
         return this.http.post(`${environment.API_URL}/user-admin/user`, u, {withCredentials: true})
     }
 
-    saveUserInfo(ui: UserInfoDTO) {
-        return this.http.post(`${environment.API_URL}/user-admin/user-info/0`, ui, {withCredentials: true})
+    saveUserInfo(ui: UserInfoDTO, uid: number, register: boolean) {
+		ui.profileImage = `https://mercury-pm-images.s3.amazonaws.com/images/${uid}.jpg`
+        return this.http.post(`${environment.API_URL}/user-admin/user-info/${uid}/${register}`, ui, {withCredentials: true})
     }
 
     saveUserGroupInfo(userId: number, groupId: number) {
@@ -144,8 +145,4 @@ export class UserAdminService {
 		formData.append("password", password);
 		return this.http.post(`${environment.API_URL}/user-admin/register`, formData, {withCredentials: true})
 	}
-
-    registerUserInfo(ui: UserInfoDTO, uid: number) {
-        return this.http.post(`${environment.API_URL}/user-admin/user-info/${uid}`, ui, {withCredentials: true})
-    }
 }

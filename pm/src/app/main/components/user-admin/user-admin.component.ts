@@ -31,7 +31,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 						<div style="cursor: pointer;" class="d-flex align-items-center name_cell">
 							<img src="${e.data.profileImage}" 
 								class="profile_image" 
-								onerror="this.src='https://mercury-pm-images.s3.amazonaws.com/images/profile.png'"/>
+								onerror="this.src='assets/img/profile.png'" />
 							<div class="ml-3"> ${e.data.name} </div>
 						</div>
 					`;
@@ -227,9 +227,9 @@ export interface UserInfoDTO {
 }
 
 export interface RoleDTO {
-	id: number;
-	roleName: string;
-	authority: string;
+	id?: number;
+	roleName?: string;
+	authority?: string;
 }
 
 export interface GroupLevelDTO {

@@ -76,11 +76,12 @@ export class AddUserComponent implements OnInit {
         firstName: form.value.firstName,
         lastName: form.value.lastName,
         email: form.value.email,
-        description: form.value.desc
+        description: form.value.desc,
+        profileImage: `https://mercury-pm-images.s3.amazonaws.com/images/${this.user.userId}.jpg`
       }
       console.log(ui);
       
-      this.uas.registerUserInfo(ui, this.user.userId).subscribe(
+      this.uas.saveUserInfo(ui, this.user.userId, true).subscribe(
         res => {
           console.log(res);
         },
