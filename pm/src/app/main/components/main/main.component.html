@@ -50,10 +50,10 @@
 
         <!-- dashboard items -->
         <ng-container *ngIf="dashboardMode && showWideSpan">
-            <div class="draggable mt-3" draggable="true" (dragend)="dmService.dropItem('heatmap')">
+            <div class="draggable mt-3" (click)="dmService.dropItem('heatmap')" draggable="true" (dragend)="dmService.dropItem('heatmap')">
                 Heat Map
             </div>
-            <div class="draggable" draggable="true" (dragend)="dmService.dropItem('agentState')">
+            <div class="draggable" (click)="dmService.dropItem('agentState')" draggable="true" (dragend)="dmService.dropItem('agentState')">
                 Current Agent State
             </div>
         </ng-container>

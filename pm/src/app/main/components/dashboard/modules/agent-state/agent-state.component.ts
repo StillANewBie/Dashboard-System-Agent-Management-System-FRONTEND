@@ -3,6 +3,8 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
 import { CurrentAgentStateDTO, ModulesService } from '../../../../services/modules.service';
 import { GroupDTO } from '../module-config/module-config.component';
+import { UserAdminDTO } from '../../../user-admin/user-admin.component';
+import { UserAdminService } from '../../../../services/user-admin.service';
 
 @Component({
 	selector: 'app-agent-state',
@@ -33,7 +35,9 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	constructor(private ms: ModulesService, public injector: Injector) {
+	constructor(private ms: ModulesService, 
+		public injector: Injector,
+		private uas: UserAdminService) {
 		this.columnDefs = [
 			{ headerName: 'Call Id', field: 'callId', sortable: true, filter: 'agNumberColumnFilter' },
 			{
@@ -94,6 +98,22 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 				console.log(error);
 			}
 		);
+	}
+	
+	onCellClicked(e) {
+		if (e.column && e.column.colDef && e.column.colDef.field === "name") {
+			
+			this.uas.getUserById(e.data.agentId).subscribe(
+				res => {
+					this.uas.openUserAdminDialog(res).afterClosed().subscribe(result => {
+						
+					});
+				},
+				err => {
+					console.error(err);
+				}
+			)
+		}
 	}
 
 	ngOnInit() {

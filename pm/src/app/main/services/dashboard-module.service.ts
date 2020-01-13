@@ -74,19 +74,20 @@ export class DashboardModuleService {
 		const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
 		dialogRef.afterClosed().subscribe((result) => {
 			// TODO add cancel function
-
-			this.layout.push({
-				cols: 4,
-				rows: 3,
-				id: newContainerId,
-				x: 0,
-				y: 0
-			});
-
-			const { components } = this;
-			setTimeout(() => {
-				this.postDashboardInfo();
-			}, 100);
+			if (result) {
+				this.layout.push({
+					cols: 4,
+					rows: 3,
+					id: newContainerId,
+					x: 0,
+					y: 0
+				});
+	
+				const { components } = this;
+				setTimeout(() => {
+					this.postDashboardInfo();
+				}, 100);
+			}
 		});
 	}
 

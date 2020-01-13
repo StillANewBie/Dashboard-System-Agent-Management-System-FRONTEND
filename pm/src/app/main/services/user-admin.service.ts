@@ -95,6 +95,10 @@ export class UserAdminService {
 			.subscribe((res) => console.log(res), (err) => console.log(err));
     }
     
+    getUserById(uid: number): Observable<any> {
+        return this.http.get(`${environment.API_URL}/user-admin/user/${uid}`);
+    }
+    
     getRoles(): Observable<any> {
         return this.http.get(`${environment.API_URL}/user-admin/roles`);
     }

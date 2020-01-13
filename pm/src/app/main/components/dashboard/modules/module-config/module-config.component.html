@@ -26,4 +26,8 @@
         </mat-select>
     </mat-radio-group>
 </div>
-<button type="button" (click)="submit($event)" [mat-dialog-close]="result" >Confirm</button>
+<div class="d-flex flex-row justify-content-end">
+
+<button class="confirm_btn mr-2" type="button" mat-raised-button color="primary" (click)="submit($event)" [mat-dialog-close]="result" >Confirm</button>
+<button type="button"  mat-button color="primary"  [mat-dialog-close]="null" >Cancel</button>
+</div>
