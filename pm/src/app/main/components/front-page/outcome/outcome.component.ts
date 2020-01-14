@@ -72,25 +72,25 @@ export class OutcomeComponent implements OnInit {
 				options: {
 					legend: {
 						display: true,
-						position: 'right'
+						position: 'top'
           },
-          title: {
-            display: true,
-            text: 'Call Outcomes',
-            position: 'top',
-            padding: 20
+          // title: {
+          //   display: true,
+          //   text: 'Call Outcomes',
+          //   position: 'top',
+          //   padding: 20
             
-          },
+          // },
 					tooltips: {
 						enabled: true
 					},
 					layout: {
-						padding: {
-							left: 20,
-							right: 10,
-							top: 10,
-							bottom: 10
-						}
+						// padding: {
+						// 	left: 20,
+						// 	right: 10,
+						// 	top: 10,
+						// 	bottom: 10
+						// }
           },
           plugins: {
             datalabels: {
@@ -101,7 +101,7 @@ export class OutcomeComponent implements OnInit {
             }
           }
         },
-        plugins: [ChartDataLabels]
+        // plugins: [ChartDataLabels]
 			});
 		// }
 	}

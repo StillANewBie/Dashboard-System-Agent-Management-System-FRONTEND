@@ -1,6 +1,6 @@
-<div class="w-100 h-100 p-4 d-flex flex-row">
+<div class="w-100 h-100 p-2 d-flex flex-column">
   <div class="config_container">
-    <mat-button-toggle-group name="days" (change)="onSelectChange($event)" value="7" vertical="true" aria-label="days">
+    <mat-button-toggle-group name="days" (change)="onSelectChange($event)" value="7" vertical="false" aria-label="days">
       <mat-button-toggle value="1">Yesterday</mat-button-toggle>
       <mat-button-toggle value="7">Last 7 days</mat-button-toggle>
       <mat-button-toggle value="14" selected="true">Last 14 days</mat-button-toggle>
