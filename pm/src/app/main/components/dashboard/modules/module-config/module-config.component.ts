@@ -86,7 +86,7 @@ export interface GroupDTO {
 }
 
 export interface ModuleConfigDTO {
-	group: GroupDTO;
-	uuid: string;
+	group?: GroupDTO;
+	uuid?: string;
 	type?: any;
 }

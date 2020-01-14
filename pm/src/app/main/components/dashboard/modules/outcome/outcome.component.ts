@@ -10,26 +10,18 @@ import { ModulesService } from '../../../../services/modules.service';
 export class OutcomeComponent implements OnInit {
 	chart: any;
 	moduleData: OutcomeDTO[];
-	days: number = 7;
+	type: number = 7;
 	getRequest;
   uuid: string;
   canvasId: string = 'canvas-avg';
 
 	constructor(private fps: ModulesService) {
-		this.fps.getOutcomes(this.days).subscribe(
-			(res) => {
-				this.updateChart(res);
-			},
-			(err) => {
-				console.error(err);
-			}
-    );
 	}
 
 	updateChart(res) {
 		this.moduleData = res;
 		// if (Array.isArray(this.data)) {
-			this.chart = new Chart('canvas-avg', {
+			this.chart = new Chart(this.canvasId || 'canvas-avg', {
 				type: 'doughnut',
 				data: {
 					labels: this.moduleData.map((el) => el.outcomeType),
@@ -127,6 +119,15 @@ export class OutcomeComponent implements OnInit {
     //     console.log(res)
 		// 		// this.updateChart(res);
 		// 	});
+    this.canvasId = 'canvas' + this.uuid; 
+		this.fps.getOutcomes(this.type).subscribe(
+			(res) => {
+				this.updateChart(res);
+			},
+			(err) => {
+				console.error(err);
+			}
+    );
 	}
 }
 

@@ -64,33 +64,51 @@ export class DashboardModuleService {
 			componentRef: dragId
 		};
 
-		// open dialog
-		const dialogConfig = new MatDialogConfig();
+		if (dragId !== 'outcomes') {
+			// open dialog
+			const dialogConfig = new MatDialogConfig();
 
-		dialogConfig.disableClose = true;
-		dialogConfig.autoFocus = true;
-		dialogConfig.width = '400px';
-		dialogConfig.height = '300px';
-		dialogConfig.data = newContainerRef;
+			dialogConfig.disableClose = true;
+			dialogConfig.autoFocus = true;
+			dialogConfig.width = '400px';
+			dialogConfig.height = '300px';
+			dialogConfig.data = newContainerRef;
 
-		const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
-		dialogRef.afterClosed().subscribe((result) => {
-			// TODO add cancel function
-			if (result) {
-				this.layout.push({
-					cols: 4,
-					rows: 3,
-					id: newContainerId,
-					x: 0,
-					y: 0
-				});
+			const dialogRef = this.dialog.open(ModuleConfigComponent, dialogConfig);
+			dialogRef.afterClosed().subscribe((result) => {
+				// TODO add cancel function
+				if (result) {
+					this.layout.push({
+						cols: 4,
+						rows: 3,
+						id: newContainerId,
+						x: 0,
+						y: 0
+					});
 
-				const { components } = this;
-				setTimeout(() => {
-					this.postDashboardInfo();
-				}, 100);
+					const { components } = this;
+					setTimeout(() => {
+						this.postDashboardInfo();
+					}, 100);
+				}
+			});
+		} else {
+			this.layout.push({
+				cols: 4,
+				rows: 4,
+				id: newContainerId,
+				x: 0,
+				y: 0
+			});
+			if (!Array.isArray(this.components)) {
+				this.components = [];
 			}
-		});
+			this.components.push({...newContainerRef, option: {type: 7, uuid: newContainerId}});
+			const { components } = this;
+			setTimeout(() => {
+				this.postDashboardInfo();
+			}, 100);
+		}
 	}
 
 	deleteItem(id: string): void {
