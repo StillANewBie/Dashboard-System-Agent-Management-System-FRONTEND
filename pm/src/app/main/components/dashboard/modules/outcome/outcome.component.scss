@@ -2,15 +2,25 @@ mat-button-toggle {
   font-size: 0.8rem;
 }
 
+mat-button-toggle-group:hover {
+  border: none;
+  box-shadow: 2px 2px 2px #CCC;
+}
+
 .config_container {
   // flex: 1 1 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  padding: 2px 1rem 0 2rem;
+  text-shadow: 1px 1px 2px white;
+  font-size: 1.2rem;
 }
 
 .canvas_container {
   // flex: 5 5 0;
   display: flex;
+  padding:3px;
 }

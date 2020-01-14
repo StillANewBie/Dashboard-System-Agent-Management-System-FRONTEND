@@ -12,96 +12,96 @@ export class OutcomeComponent implements OnInit {
 	moduleData: OutcomeDTO[];
 	type: number = 7;
 	getRequest;
-  uuid: string;
-  canvasId: string = 'canvas-avg';
+	uuid: string;
+	canvasId: string = 'canvas-avg';
 
-	constructor(private fps: ModulesService) {
-	}
+	constructor(private fps: ModulesService) {}
 
 	updateChart(res) {
 		this.moduleData = res;
 		// if (Array.isArray(this.data)) {
-			this.chart = new Chart(this.canvasId || 'canvas-avg', {
-				type: 'doughnut',
-				data: {
-					labels: this.moduleData.map((el) => el.outcomeType),
-					datasets: [
-						{
-							data: this.moduleData.map((el) => el.count),
-							backgroundColor: this.moduleData.map((el) => {
-								switch (el.outcomeType) {
-									case 'PHANTOM':
-										return 'orange';
-									case 'HANG':
-										return 'red';
-									case 'AGENT':
-										return 'green';
-									default:
-										return 'grey';
-								}
-							}),
-							hoverBorderColor: this.moduleData.map((el) => {
-								switch (el.outcomeType) {
-									case 'PHANTOM':
-										return 'orange';
-									case 'HANG':
-										return 'red';
-									case 'AGENT':
-										return 'green';
-									default:
-										return 'grey';
-								}
-							}),
-							// fille: true,
-							responsive: true,
-							maintainAspectRatio: true
-						}
-					]
+		this.chart = new Chart(this.canvasId || 'canvas-avg', {
+			type: 'doughnut',
+			data: {
+				labels: this.moduleData.map((el) => el.outcomeType),
+				datasets: [
+					{
+						data: this.moduleData.map((el) => el.count),
+						backgroundColor: this.moduleData.map((el) => {
+							switch (el.outcomeType) {
+								case 'PHANTOM':
+									return 'orange';
+								case 'HANG':
+									return 'red';
+								case 'AGENT':
+									return 'green';
+								default:
+									return 'grey';
+							}
+						}),
+						hoverBorderColor: this.moduleData.map((el) => {
+							switch (el.outcomeType) {
+								case 'PHANTOM':
+									return 'orange';
+								case 'HANG':
+									return 'red';
+								case 'AGENT':
+									return 'green';
+								default:
+									return 'grey';
+							}
+						}),
+						// fille: true,
+						responsive: true,
+						maintainAspectRatio: true
+					}
+				]
+			},
+			options: {
+				legend: {
+					display: true,
+					position: 'right',
+					labels: {
+						fontColor: '#FFF'
+					}
 				},
-				options: {
-					legend: {
-						display: true,
-						position: 'top'
-          },
-          // title: {
-          //   display: true,
-          //   text: 'Call Outcomes',
-          //   position: 'top',
-          //   padding: 20
-            
-          // },
-					tooltips: {
-						enabled: true
-					},
-					layout: {
-						// padding: {
-						// 	left: 20,
-						// 	right: 10,
-						// 	top: 10,
-						// 	bottom: 10
-						// }
-          },
-          plugins: {
-            datalabels: {
-              color: '#000',
-              anchor: 'end',
-              clamp: false,
-              align: 'end'
-            }
-          }
-        },
-        // plugins: [ChartDataLabels]
-			});
+				// title: {
+				// 	display: true,
+				// 	text: 'Call Outcomes',
+				// 	position: 'left',
+				// 	padding: 5,
+				// 	fontColor: '#FFF'
+				// },
+				tooltips: {
+					enabled: true
+				},
+				layout: {
+					padding: {
+						left: 0,
+						right: 0,
+						top: 0,
+						bottom: 5
+					}
+				},
+				plugins: {
+					datalabels: {
+						color: '#000',
+						anchor: 'end',
+						clamp: false,
+						align: 'end'
+					}
+				}
+			}
+			// plugins: [ChartDataLabels]
+		});
 		// }
 	}
 
 	onSelectChange(e) {
-		this.fps.getOutcomes(e.value).subscribe(
-		  res => {
-        this.chart.destroy();
-		    this.updateChart(res);
-		  }
-    )
+		this.fps.getOutcomes(e.value).subscribe((res) => {
+			this.chart.destroy();
+			this.updateChart(res);
+		});
 
 		// this.getRequest.next(e.value);
 	}
@@ -111,15 +111,15 @@ export class OutcomeComponent implements OnInit {
 		// this.getRequest = makeRequest
 		// 	.pipe(
 		// 		switchMap((value: number) => {
-    //       console.log(value)
+		//       console.log(value)
 		// 			return this.fps.getOutcomes(value);
 		// 		})
 		// 	)
 		// 	.subscribe((res) => {
-    //     console.log(res)
+		//     console.log(res)
 		// 		// this.updateChart(res);
 		// 	});
-    this.canvasId = 'canvas' + this.uuid; 
+		this.canvasId = 'canvas' + this.uuid;
 		this.fps.getOutcomes(this.type).subscribe(
 			(res) => {
 				this.updateChart(res);
@@ -127,7 +127,7 @@ export class OutcomeComponent implements OnInit {
 			(err) => {
 				console.error(err);
 			}
-    );
+		);
 	}
 }
 
