@@ -3,10 +3,12 @@ import { AgentStateComponent } from '../components/dashboard/modules/agent-state
 import { Directive, OnChanges, Input, ComponentRef, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ModulesService } from '../services/modules.service';
 import { IComponent } from '../services/dashboard-module.service';
+import { OutcomeComponent } from '../components/dashboard/modules/outcome/outcome.component';
 
 export const moduleComponents = {
 	heatmap: HeatmapComponent,
-	agentState: AgentStateComponent
+	agentState: AgentStateComponent,
+	outcomes: OutcomeComponent
 };
 
 @Directive({
@@ -24,16 +26,16 @@ export class DashboardModuleDirective implements OnChanges {
 	) {}
 
 	ngOnChanges(e): void {
-        const component = moduleComponents[this.componentInfo.componentRef];
-        
+		const component = moduleComponents[this.componentInfo.componentRef];
+
 		if (component) {
 			const factory = this.resolver.resolveComponentFactory<any>(component);
-            this.component = this.container.createComponent(factory);
-            if (this.componentInfo.option) {
-                this.component.instance.selectedGroup = this.componentInfo.option.group;
-                this.component.instance.uuid = this.componentInfo.option.uuid;
-                this.component.instance.type = this.componentInfo.option.type;
-            }
+			this.component = this.container.createComponent(factory);
+			if (this.componentInfo.option) {
+				this.component.instance.selectedGroup = this.componentInfo.option.group;
+				this.component.instance.uuid = this.componentInfo.option.uuid;
+				this.component.instance.type = this.componentInfo.option.type;
+			}
 			// TODO config injection
 		}
 	}

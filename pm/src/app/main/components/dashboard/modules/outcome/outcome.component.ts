@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FrontPageService } from '../../../services/front-page.service';
 import { Chart } from 'chart.js';
-import { DisplayGrid } from 'angular-gridster2';
-import { Subject, Observable } from 'rxjs';
-import Rx from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { ModulesService } from '../../../../services/modules.service';
 
 @Component({
 	selector: 'app-outcome',
@@ -14,11 +9,13 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 })
 export class OutcomeComponent implements OnInit {
 	chart: any;
-	data: OutcomeDTO[];
+	moduleData: OutcomeDTO[];
 	days: number = 7;
 	getRequest;
+  uuid: string;
+  canvasId: string = 'canvas-avg';
 
-	constructor(private fps: FrontPageService) {
+	constructor(private fps: ModulesService) {
 		this.fps.getOutcomes(this.days).subscribe(
 			(res) => {
 				this.updateChart(res);
@@ -30,16 +27,16 @@ export class OutcomeComponent implements OnInit {
 	}
 
 	updateChart(res) {
-		this.data = res;
+		this.moduleData = res;
 		// if (Array.isArray(this.data)) {
 			this.chart = new Chart('canvas-avg', {
 				type: 'doughnut',
 				data: {
-					labels: this.data.map((el) => el.outcomeType),
+					labels: this.moduleData.map((el) => el.outcomeType),
 					datasets: [
 						{
-							data: this.data.map((el) => el.count),
-							backgroundColor: this.data.map((el) => {
+							data: this.moduleData.map((el) => el.count),
+							backgroundColor: this.moduleData.map((el) => {
 								switch (el.outcomeType) {
 									case 'PHANTOM':
 										return 'orange';
@@ -51,7 +48,7 @@ export class OutcomeComponent implements OnInit {
 										return 'grey';
 								}
 							}),
-							hoverBorderColor: this.data.map((el) => {
+							hoverBorderColor: this.moduleData.map((el) => {
 								switch (el.outcomeType) {
 									case 'PHANTOM':
 										return 'orange';

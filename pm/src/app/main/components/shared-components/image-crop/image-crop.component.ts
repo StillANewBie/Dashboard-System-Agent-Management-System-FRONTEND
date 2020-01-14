@@ -51,14 +51,6 @@ export class ImageCropComponent implements OnInit {
 		};
 
 		myReader.readAsDataURL(file);
-    console.log("image");
-    console.log(image);
-    console.log("file");
-    console.log(file);
-    console.log("img");
-    console.log(this.img);
-    console.log("myReader");
-    console.log(myReader);
   }
   
 	ngOnInit() {}

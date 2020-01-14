@@ -47,10 +47,8 @@ import { ImageCropComponent } from './components/shared-components/image-crop/im
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ImageCropperComponent } from 'ngx-img-cropper';
 import { AddUserComponent } from './components/user-admin/add-user/add-user.component';
+import { OutcomeComponent } from './components/dashboard/modules/outcome/outcome.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
-import { OutcomeComponent } from './components/front-page/outcome/outcome.component';
-import { AvgTimeComponent } from './components/front-page/avg-time/avg-time.component';
-import { TotalTimeComponent } from './components/front-page/total-time/total-time.component';
 
 const routes: Routes = [
 	{
@@ -78,6 +76,7 @@ const routes: Routes = [
 		MainComponent,
 		DashboardComponent,
 		HeatmapComponent,
+		OutcomeComponent,
 		AgentStateComponent,
 		DashboardModuleDirective,
 		ModuleConfigComponent,
@@ -86,10 +85,7 @@ const routes: Routes = [
 		ImageCropComponent,
 		ImageCropperComponent,
 		AddUserComponent,
-		FrontPageComponent,
-		OutcomeComponent,
-		AvgTimeComponent,
-		TotalTimeComponent
+		FrontPageComponent
 	],
 	imports: [
 		FormsModule,
@@ -135,7 +131,7 @@ const routes: Routes = [
 		MatDividerModule,
 		NgxDropzoneModule
 	],
-	entryComponents: [ HeatmapComponent, 
+	entryComponents: [ HeatmapComponent, OutcomeComponent,
 		AgentStateComponent, ModuleConfigComponent, 
 		UserAdminComponent, UserDetailsDialogComponent,
 		ImageCropComponent, AddUserComponent ]
