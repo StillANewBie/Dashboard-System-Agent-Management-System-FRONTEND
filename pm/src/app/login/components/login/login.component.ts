@@ -3,7 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { first } from 'rxjs/operators';
-import { element } from 'protractor';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../ngrx/app.state';
+import { LOGIN_INFO } from '../../../ngrx/reducers/login.reducer';
+import { UserAdminDTO } from 'src/app/main/components/user-admin/user-admin.component';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +25,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -50,7 +54,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.store.dispatch({
+            type: LOGIN_INFO,
+            payload: data.user
+          });
           this.router.navigate([this.returnUrl]);
+
         },
         err => {
           console.log(err)

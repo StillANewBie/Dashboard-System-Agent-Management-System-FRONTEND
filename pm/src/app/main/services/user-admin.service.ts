@@ -7,12 +7,17 @@ import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { UserDetailsDialogComponent } from '../components/shared-components/user-details-dialog/user-details-dialog.component';
 import { ImageCropComponent } from '../components/shared-components/image-crop/image-crop.component';
 import { AddUserComponent } from '../components/user-admin/add-user/add-user.component';
+import { AuthenticationService } from '../../login/services/authentication.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserAdminService {
-	constructor(private http: HttpClient, private dialog: MatDialog) {}
+	constructor(
+		private http: HttpClient,
+		private dialog: MatDialog,
+		private authenticationService: AuthenticationService
+	) {}
 
 	getAllUsers(): Observable<any> {
 		return this.http.get(`${environment.API_URL}/user-admin/users`, { withCredentials: true });
@@ -29,8 +34,8 @@ export class UserAdminService {
 		dialogConfig.data = param;
 
 		const dialogRef = this.dialog.open(UserDetailsDialogComponent, dialogConfig);
-        return dialogRef;
-    }
+		return dialogRef;
+	}
 
 	openAddUserDialog() {
 		// open dialog
@@ -43,8 +48,8 @@ export class UserAdminService {
 		dialogConfig.data = {} as UserAdminDTO;
 
 		const dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
-        return dialogRef;
-    }
+		return dialogRef;
+	}
 
 	openImageCropDialog(param: UserAdminDTO): Observable<any> {
 		const dialogConfig = new MatDialogConfig();
@@ -59,8 +64,8 @@ export class UserAdminService {
 
 		const dialogRef = this.dialog.open(ImageCropComponent, dialogConfig);
 		return dialogRef.afterClosed();
-    }
-    
+	}
+
 	b64toBlob(dataURI) {
 		var byteString = atob(dataURI.split(',')[1]);
 		var ab = new ArrayBuffer(byteString.length);
@@ -70,8 +75,8 @@ export class UserAdminService {
 			ia[i] = byteString.charCodeAt(i);
 		}
 		return new Blob([ ab ], { type: 'image/jpeg' });
-    }
-    
+	}
+
 	uploadImage(data, userId) {
 		const config = {
 			reportProgress: true,
@@ -93,60 +98,68 @@ export class UserAdminService {
 		this.http
 			.post(`${environment.API_URL}/user-admin/upload-image`, formData, { withCredentials: true })
 			.subscribe((res) => console.log(res), (err) => console.log(err));
-    }
-    
-    getUserById(uid: number): Observable<any> {
-        return this.http.get(`${environment.API_URL}/user-admin/user/${uid}`);
-    }
-    
-    getRoles(): Observable<any> {
-        return this.http.get(`${environment.API_URL}/user-admin/roles`);
-    }
-
-    getGroupLevels(): Observable<any> {
-        return this.http.get(`${environment.API_URL}/user-admin/group-level`);
-    }
-
-    getGroups(): Observable<any> {
-        return this.http.get(`${environment.API_URL}/user-admin/groups`);
 	}
 
-    saveUser(u: UserAdminDTO) {
-        return this.http.post(`${environment.API_URL}/user-admin/user`, u, {withCredentials: true})
-    }
-
-    saveUserInfo(ui: UserInfoDTO, uid: number, register: boolean) {
-		ui.profileImage = `https://mercury-pm-images.s3.amazonaws.com/images/${uid}.jpg`
-        return this.http.post(`${environment.API_URL}/user-admin/user-info/${uid}/${register}`, ui, {withCredentials: true})
-    }
-
-    saveUserGroupInfo(userId: number, groupId: number) {
-        let formData: FormData = new FormData();
-        formData.append("userId", userId.toString());
-        formData.append("groupId", groupId.toString());
-
-        return this.http.post(`${environment.API_URL}/user-admin/user-group`, formData, {withCredentials: true})
-    }
-
-    saveUserRoleInfo(userId: number, roleId: number) {
-        let formData: FormData = new FormData();
-        formData.append("userId", userId.toString());
-        formData.append("roleId", roleId.toString());
-
-        return this.http.post(`${environment.API_URL}/user-admin/user-role`, formData, {withCredentials: true})
+	getUserById(uid: number): Observable<any> {
+		return this.http.get(`${environment.API_URL}/user-admin/user/${uid}`);
 	}
-	
-	setUserActiveStatus(userId:number, active: boolean) {
-        let formData: FormData = new FormData();
-        formData.append("userId", userId.toString());
-		formData.append("active", active? 'true': 'false');
-		return this.http.post(`${environment.API_URL}/user-admin/active`, formData, {withCredentials: true})
+
+	getRoles(): Observable<any> {
+		return this.http.get(`${environment.API_URL}/user-admin/roles`);
+	}
+
+	getGroupLevels(): Observable<any> {
+		return this.http.get(`${environment.API_URL}/user-admin/group-level`);
+	}
+
+	getGroups(): Observable<any> {
+		return this.http.get(`${environment.API_URL}/user-admin/groups`);
+	}
+
+	saveUser(u: UserAdminDTO) {
+		return this.http.post(`${environment.API_URL}/user-admin/user`, u, { withCredentials: true });
+	}
+
+	saveUserInfo(ui: UserInfoDTO, uid: number, register: boolean) {
+		ui.profileImage = `https://mercury-pm-images.s3.amazonaws.com/images/${uid}.jpg`;
+		return this.http.post(`${environment.API_URL}/user-admin/user-info/${uid}/${register}`, ui, {
+			withCredentials: true
+		});
+	}
+
+	saveUserGroupInfo(userId: number, groupId: number) {
+		let formData: FormData = new FormData();
+		formData.append('userId', userId.toString());
+		formData.append('groupId', groupId.toString());
+
+		return this.http.post(`${environment.API_URL}/user-admin/user-group`, formData, { withCredentials: true });
+	}
+
+	saveUserRoleInfo(userId: number, roleId: number) {
+		let formData: FormData = new FormData();
+		formData.append('userId', userId.toString());
+		formData.append('roleId', roleId.toString());
+
+		return this.http.post(`${environment.API_URL}/user-admin/user-role`, formData, { withCredentials: true });
+	}
+
+	setUserActiveStatus(userId: number, active: boolean) {
+		let formData: FormData = new FormData();
+		formData.append('userId', userId.toString());
+		formData.append('active', active ? 'true' : 'false');
+		return this.http.post(`${environment.API_URL}/user-admin/active`, formData, { withCredentials: true });
 	}
 
 	registerUser(username: string, password: string) {
-        let formData: FormData = new FormData();
-        formData.append("username", username);
-		formData.append("password", password);
-		return this.http.post(`${environment.API_URL}/user-admin/register`, formData, {withCredentials: true})
+		let formData: FormData = new FormData();
+		formData.append('username', username);
+		formData.append('password', password);
+		return this.http.post(`${environment.API_URL}/user-admin/register`, formData, { withCredentials: true });
+	}
+
+	getCurrentUser(token: string): Observable<UserAdminDTO> {
+		return this.http.get(`${environment.API_URL}/user-admin/current-user`, {
+			headers: { Authorization: `Bearer ${token}` }
+		});
 	}
 }

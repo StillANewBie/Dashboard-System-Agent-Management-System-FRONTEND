@@ -35,12 +35,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginModule } from './login/login.module';
+import { StoreModule } from '@ngrx/store';
+import { loginInfoReducer } from './ngrx/reducers/login.reducer';
+
 
 @NgModule({
 	declarations: [ AppComponent ],
 	imports: [
 		LoginModule,
 		BrowserModule,
+		StoreModule.forRoot({loginInfo: loginInfoReducer }),
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MainModule,
