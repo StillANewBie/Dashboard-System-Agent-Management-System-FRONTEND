@@ -1,0 +1,11 @@
+.second_container {
+  margin-bottom: 6rem;
+
+  .card {
+    box-shadow: 2px 2px 2px grey;
+  }
+
+  .card:hover {
+    box-shadow: 3px 3px 3px black;
+  }
+}
