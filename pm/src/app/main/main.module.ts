@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatBadgeModule, MatButtonModule, MatCheckboxModule, MatDividerModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -49,6 +49,8 @@ import { ImageCropperComponent } from 'ngx-img-cropper';
 import { AddUserComponent } from './components/user-admin/add-user/add-user.component';
 import { OutcomeComponent } from './components/dashboard/modules/outcome/outcome.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
+import { JwtInterceptor } from '../login/intercepters/jwt.interceptor';
+import { ErrorInterceptor } from '../login/intercepters/error.interceptor';
 
 const routes: Routes = [
 	{
@@ -131,9 +133,19 @@ const routes: Routes = [
 		MatDividerModule,
 		NgxDropzoneModule
 	],
-	entryComponents: [ HeatmapComponent, OutcomeComponent,
-		AgentStateComponent, ModuleConfigComponent, 
-		UserAdminComponent, UserDetailsDialogComponent,
-		ImageCropComponent, AddUserComponent ]
+	entryComponents: [
+		HeatmapComponent,
+		OutcomeComponent,
+		AgentStateComponent,
+		ModuleConfigComponent,
+		UserAdminComponent,
+		UserDetailsDialogComponent,
+		ImageCropComponent,
+		AddUserComponent
+	],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+	]
 })
 export class MainModule {}
