@@ -51,23 +51,28 @@ import { OutcomeComponent } from './components/dashboard/modules/outcome/outcome
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { JwtInterceptor } from '../login/intercepters/jwt.interceptor';
 import { ErrorInterceptor } from '../login/intercepters/error.interceptor';
+import { AuthGuard } from '../login/auth.guard';
 
 const routes: Routes = [
 	{
 		path: 'main',
 		component: MainComponent,
+		canActivate: [AuthGuard],
 		children: [
 			{
 				path: 'home',
-				component: FrontPageComponent
+				component: FrontPageComponent,
+				canActivate: [AuthGuard],
 			},
 			{
 				path: 'dashboard',
-				component: DashboardComponent
+				component: DashboardComponent,
+				canActivate: [AuthGuard],
 			},
 			{
 				path: 'user-admin',
-				component: UserAdminComponent
+				component: UserAdminComponent,
+				canActivate: [AuthGuard],
 			}
 		]
 	}

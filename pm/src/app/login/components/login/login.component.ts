@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { first } from 'rxjs/operators';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
 
   get f() {return this.loginForm.controls;}
 
-  onSubmit() {
+  onSubmit(f, e) {
+    e.preventDefault();
     this.submitted = true;
 
     if (this.loginForm.invalid) {
@@ -44,17 +46,20 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.router.navigate([this.returnUrl]);
-            },
-            error => {
-              this.error = error;
-              this.loading = false;
-            }
-          );
-  }
+      this.authenticationService.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        err => {
+          console.log(err)
+          this.loading = false;
+          if (err == 'Unauthorized') {
+            // TODO
+          }
+        }
+      );
+  } 
 
 }
