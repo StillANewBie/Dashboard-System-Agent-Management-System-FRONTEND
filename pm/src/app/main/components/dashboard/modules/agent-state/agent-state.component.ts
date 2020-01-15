@@ -86,6 +86,7 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 	updateData() {
 		this.ms.getCurrentAgentState(this.selectedGroup.groupId || this.gid).subscribe(
 			(res: CurrentAgentStateDTO[]) => {
+				console.log(res)
 				this.data = res.map((el) => {
 					return { ...el, name: el.firstName + ' ' + el.lastName };
 				});
@@ -102,11 +103,10 @@ export class AgentStateComponent implements OnInit, OnDestroy {
 	
 	onCellClicked(e) {
 		if (e.column && e.column.colDef && e.column.colDef.field === "name") {
-			
+			console.log(e.data)
 			this.uas.getUserById(e.data.agentId).subscribe(
 				res => {
 					this.uas.openUserAdminDialog(res).afterClosed().subscribe(result => {
-						
 					});
 				},
 				err => {
