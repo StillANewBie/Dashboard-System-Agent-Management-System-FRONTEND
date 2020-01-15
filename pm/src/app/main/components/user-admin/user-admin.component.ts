@@ -215,6 +215,7 @@ export class UserAdminDTO {
 	roles?: RoleDTO[];
 	active?: boolean;
 	password?: string;
+	token?: string;
 }
 
 export interface UserInfoDTO {
