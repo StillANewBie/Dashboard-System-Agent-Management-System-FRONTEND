@@ -206,7 +206,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	}
 }
 
-export interface UserAdminDTO {
+export class UserAdminDTO {
 	userId?: number;
 	username?: string;
 	name?: string;
@@ -214,6 +214,7 @@ export interface UserAdminDTO {
 	userInfo?: UserInfoDTO;
 	roles?: RoleDTO[];
 	active?: boolean;
+	password?: string;
 }
 
 export interface UserInfoDTO {
