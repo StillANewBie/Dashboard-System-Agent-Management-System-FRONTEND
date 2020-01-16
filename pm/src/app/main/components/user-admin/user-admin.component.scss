@@ -4,6 +4,10 @@
   // border-radius: 1rem;
 }
 
+.ag-table:hover {
+  box-shadow: 3px 3px 3px black;
+}
+
 .active_filter_container {
   position: fixed;
   top: 28%;
