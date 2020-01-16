@@ -43,6 +43,41 @@ export class FrontPageService {
 			withCredentials: true
 		});
 	}
+
+	saveMeetingInvitee(meetingId: number, inviteeId: number): Observable<any> {
+    const fd = new FormData();
+    fd.append('meetingId', meetingId.toString());
+    fd.append('inviteeId', inviteeId.toString());
+    
+    return this.http.post(`${environment.API_URL}/${this.meeting}/invite`,
+    fd,    
+    {
+			withCredentials: true
+		});
+	}
+
+	alterMeetingDecision(meetingInviteesId: number, decision: number): Observable<any> {
+    const fd = new FormData();
+    fd.append('meetingInviteesId', decision.toString());
+    fd.append('meetingInviteesId', decision.toString());
+    
+    return this.http.post(`${environment.API_URL}/${this.meeting}/decision`,
+    fd,    
+    {
+			withCredentials: true
+		});
+	}
+
+	cancelMeeting(meetingId: number): Observable<any> {
+    const fd = new FormData();
+    fd.append('meetingId', meetingId.toString());
+    
+    return this.http.post(`${environment.API_URL}/${this.meeting}/cancel`,
+    fd,    
+    {
+			withCredentials: true
+		});
+	}
 }
 
 export class MeetingDTO {
