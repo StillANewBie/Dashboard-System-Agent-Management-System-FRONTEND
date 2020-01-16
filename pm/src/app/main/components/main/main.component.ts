@@ -53,7 +53,7 @@ export class MainComponent implements OnInit {
 					this.store.dispatch({
             type: LOGIN_INFO,
             payload: this.currentUser
-          });
+					});
         },
 				(err) => console.error(err)
 			);
