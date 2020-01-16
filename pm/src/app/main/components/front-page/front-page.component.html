@@ -1,0 +1,13 @@
+<div class="w-100 first_container d-flex flex-row">
+  <div class="second_container">
+    <mwl-calendar-month-view 
+    [viewDate]="viewDate" 
+    [events]="events"
+    (dayClicked)="dayClicked($event.day)"  
+    >
+  </mwl-calendar-month-view>
+  </div>
+  <!-- <div>
+    <button>Add Event</button>
+  </div> -->
+</div>

@@ -1,0 +1,17 @@
+.first_container {
+  padding: 3rem;
+
+  .second_container {
+    border: 2px #555 solid;
+    box-shadow: 2px 2px 2px grey;
+    width: 70vw;
+
+    .cal-month-view {
+      border-radius: 1rem;
+    }
+  }
+
+  .second_container:hover {
+    box-shadow: 3px 3px 3px black;
+  }
+}

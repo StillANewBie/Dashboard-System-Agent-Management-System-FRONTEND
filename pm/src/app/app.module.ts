@@ -37,11 +37,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginModule } from './login/login.module';
 import { StoreModule } from '@ngrx/store';
 import { loginInfoReducer } from './ngrx/reducers/login.reducer';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DateAdapter, CalendarModule } from 'angular-calendar';
 
 
 @NgModule({
 	declarations: [ AppComponent ],
 	imports: [
+		BrowserAnimationsModule,
+		CalendarModule.forRoot({provide: DateAdapter, useFactory:adapterFactory}),
 		LoginModule,
 		BrowserModule,
 		StoreModule.forRoot({loginInfo: loginInfoReducer }),

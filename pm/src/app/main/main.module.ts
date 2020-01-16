@@ -52,6 +52,10 @@ import { FrontPageComponent } from './components/front-page/front-page.component
 import { JwtInterceptor } from '../login/intercepters/jwt.interceptor';
 import { ErrorInterceptor } from '../login/intercepters/error.interceptor';
 import { AuthGuard } from '../login/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DayDialogComponent } from './components/front-page/day-dialog/day-dialog.component';
 
 const routes: Routes = [
 	{
@@ -92,9 +96,12 @@ const routes: Routes = [
 		ImageCropComponent,
 		ImageCropperComponent,
 		AddUserComponent,
-		FrontPageComponent
+		FrontPageComponent,
+		DayDialogComponent
 	],
 	imports: [
+		BrowserAnimationsModule,
+		CalendarModule.forRoot({provide: DateAdapter, useFactory:adapterFactory}),
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule.forChild(routes),
@@ -146,7 +153,8 @@ const routes: Routes = [
 		UserAdminComponent,
 		UserDetailsDialogComponent,
 		ImageCropComponent,
-		AddUserComponent
+		AddUserComponent,
+		DayDialogComponent
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
