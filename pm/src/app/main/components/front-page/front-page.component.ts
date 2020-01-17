@@ -56,13 +56,13 @@ export class FrontPageComponent implements OnInit {
 					if (!set.has(el.meetingId) && !el.meetingCancelled) {
 						this.events.push({
 							id: el.meetingId,
-							start: new Date(el.date),
+							start: new Date(new Date(el.date).setDate(new Date(el.date).getDate() + 1)),
 							title: el.meetingTitle,
 							color: colors.red
 						});
 						set.add(el.meetingId);
 					}
-				}
+        }
 				this.fps.findMeetingsByInviteeId(this.currentUser.userId).subscribe(
 					(res) => {
 						const temp: CalendarEvent[] = [];
@@ -72,15 +72,17 @@ export class FrontPageComponent implements OnInit {
 							if (!set.has(el.meetingId) && !el.meetingCancelled && el.result != 2) {
 								temp.push({
 									id: el.meetingId,
-									start: new Date(el.date),
+									start: new Date(new Date(el.date).setDate(new Date(el.date).getDate() + 1)),
 									title: el.meetingTitle,
-									color: colors.red
+									color: colors.yellow
 								});
 								set.add(el.meetingId);
 							}
 						}
 						this.events = [ ...this.events, ...temp ];
-					},
+            console.log("---------------------");
+            console.log(this.events);
+          },
 					(err) => console.error(err)
 				);
 			},
