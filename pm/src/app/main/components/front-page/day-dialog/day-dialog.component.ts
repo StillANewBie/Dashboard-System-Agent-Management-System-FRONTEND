@@ -9,7 +9,8 @@ import { DialogData } from '../../shared-components/image-crop/image-crop.compon
 })
 export class DayDialogComponent implements OnInit {
 
-  dataTree: DayDialogData[] = [];
+  owned: DayDialogData[] = [];
+  attending: DayDialogData[] = [];
 
   constructor(private dialogRef: MatDialogRef<DayDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -20,7 +21,7 @@ export class DayDialogComponent implements OnInit {
     this.data.owned.forEach(el => {
       if (!set.has(el.meetingId)) {
         set.add(el.meetingId);
-        this.dataTree.push({
+        this.owned.push({
           meetingId: el.meetingId, 
           meetingTitle: el.meetingTitle, 
           meetingMemo: el.meetingMemo,
@@ -37,7 +38,7 @@ export class DayDialogComponent implements OnInit {
           ]
         })
       } else {
-        for (let at of this.dataTree) {
+        for (let at of this.owned) {
           if (at.meetingId === el.meetingId) {
             at.attendees.push({
               firstName: el.inviteeFirstName,
@@ -50,7 +51,7 @@ export class DayDialogComponent implements OnInit {
       }
     });
     this.data.attending.forEach(el => {
-        this.dataTree.push({
+        this.attending.push({
           meetingId: el.meetingId, 
           meetingTitle: el.meetingTitle, 
           meetingMemo: el.meetingMemo,
@@ -68,7 +69,6 @@ export class DayDialogComponent implements OnInit {
         })
     });
 
-    console.log(this.dataTree);
 
     let a = new Date();
   }

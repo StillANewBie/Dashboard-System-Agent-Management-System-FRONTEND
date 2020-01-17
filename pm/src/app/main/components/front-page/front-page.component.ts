@@ -116,8 +116,8 @@ export class FrontPageComponent implements OnInit {
 
   openDialog(data): void {
     const dialogRef = this.dialog.open(DayDialogComponent, {
-      width: '50vw',
-      height: '50vh',
+      width: '70vw',
+      height: '80vh',
       data
     });
 
