@@ -65,8 +65,8 @@
         </div>
         <div>
           <div *ngIf="el.result == 0">
-            <button class="decision_btn" mat-raised-button color="primary">Going</button>
-            <button class="decision_btn ml-2" mat-raised-button color="warn">Not Going</button>
+            <button class="decision_btn" (click)="going($event, el)" mat-raised-button color="primary">Going</button>
+            <button class="decision_btn ml-2" (click)="notGoing($event, el)"  mat-raised-button color="warn">Not Going</button>
           </div>
           <div *ngIf="el.result != 0">
             <span>{{el.decision}}</span>

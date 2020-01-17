@@ -41,14 +41,45 @@ export class DayDialogComponent implements OnInit {
   }
   
   cancelMeeting($event, data: DayDialogData) {
-    console.log($event);
-    console.log(data)
     this.fps.cancelMeeting(data.meetingId).subscribe(
       res => {
         if (res.success) {
           this.owned.map(el => {
             if (el.meetingId == data.meetingId) {
               el.active = false;
+            }
+          })
+        }
+      }
+    );
+  }
+
+  going($event, data: DayDialogData) {
+    console.log(data)
+    this.fps.alterMeetingDecision(data.meetingInviteesId, 1).subscribe(
+      res => {
+        console.log(res)
+        if (res.success) {
+          this.attending.map(el => {
+            if (el.meetingId == data.meetingId) {
+              el.result = 1;
+              el.decision = this.convertResult(1);
+            }
+          })
+        }
+      }
+    );
+  }
+
+  notGoing($event, data) {
+    this.fps.alterMeetingDecision(data.meetingInviteesId, 2).subscribe(
+      res => {
+        console.log(res)
+        if (res.success) {
+          this.attending.map(el => {
+            if (el.meetingId == data.meetingId) {
+              el.result = 2;
+              el.decision = this.convertResult(2);
             }
           })
         }
@@ -64,7 +95,8 @@ export class DayDialogComponent implements OnInit {
 				set.add(el.meetingId);
 				this.owned.push({
 					meetingId: el.meetingId,
-					meetingTitle: el.meetingTitle,
+          meetingTitle: el.meetingTitle,
+          meetingInviteesId: el.meetingInviteesId,
 					meetingMemo: el.meetingMemo || 'N/A',
 					date: el.date,
 					time: el.time,
@@ -99,6 +131,7 @@ export class DayDialogComponent implements OnInit {
 			this.attending.push({
 				meetingId: el.meetingId,
 				meetingTitle: el.meetingTitle,
+        meetingInviteesId: el.meetingInviteesId,
 				meetingMemo: el.meetingMemo || 'N/A',
 				date: el.date,
 				time: el.time,
@@ -121,7 +154,8 @@ export class DayDialogComponent implements OnInit {
 export interface DayDialogData {
 	meetingId?: number;
 	meetingTitle?: string;
-	meetingMemo?: string;
+  meetingMemo?: string;
+  meetingInviteesId?: number;
 	date?: string;
 	time?: string;
 	active?: boolean;

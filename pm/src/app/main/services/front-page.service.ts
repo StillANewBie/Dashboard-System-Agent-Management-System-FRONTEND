@@ -58,8 +58,8 @@ export class FrontPageService {
 
 	alterMeetingDecision(meetingInviteesId: number, decision: number): Observable<any> {
     const fd = new FormData();
-    fd.append('meetingInviteesId', decision.toString());
-    fd.append('meetingInviteesId', decision.toString());
+    fd.append('meetingInviteesId', meetingInviteesId.toString());
+    fd.append('decision', decision.toString());
     
     return this.http.post(`${environment.API_URL}/${this.meeting}/decision`,
     fd,    
