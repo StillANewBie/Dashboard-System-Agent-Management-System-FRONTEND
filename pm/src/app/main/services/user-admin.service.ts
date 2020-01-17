@@ -20,7 +20,7 @@ export class UserAdminService {
 	) {}
 
 	getAllUsers(): Observable<any> {
-		return this.http.get(`${environment.API_URL}/user-admin/users`, { withCredentials: true });
+		return this.http.get(`${environment.API_URL}/user-admin/users`, { withCredentials: true, headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}` } });
 	}
 
 	openUserAdminDialog(param) {

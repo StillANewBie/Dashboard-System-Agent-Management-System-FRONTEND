@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogData } from '../../shared-components/image-crop/image-crop.component';
+import { FrontPageService } from '../../../services/front-page.service';
 
 @Component({
 	selector: 'app-day-dialog',
@@ -13,7 +14,10 @@ export class DayDialogComponent implements OnInit {
 	showAttendees: number;
 	showInitiator: number;
 
-	constructor(private dialogRef: MatDialogRef<DayDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(
+    private dialogRef: MatDialogRef<DayDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fps: FrontPageService) {}
 
 	toggleAttendees(i: number) {
 		this.showAttendees = this.showAttendees === i ? -1 : i;
@@ -26,15 +30,31 @@ export class DayDialogComponent implements OnInit {
 	convertResult(n: number): string {
 		switch (n) {
 			case 0:
-				return 'undecided';
+				return 'Undecided';
 			case 1:
-				return 'attend';
+				return 'Going';
 			case 2:
-				return 'not going';
+				return 'Not going';
 			default:
-				return 'undecided';
+				return 'Undecided';
 		}
-	}
+  }
+  
+  cancelMeeting($event, data: DayDialogData) {
+    console.log($event);
+    console.log(data)
+    this.fps.cancelMeeting(data.meetingId).subscribe(
+      res => {
+        if (res.success) {
+          this.owned.map(el => {
+            if (el.meetingId == data.meetingId) {
+              el.active = false;
+            }
+          })
+        }
+      }
+    );
+  }
 
 	ngOnInit() {
 		console.log(this.data);
@@ -55,7 +75,8 @@ export class DayDialogComponent implements OnInit {
 							lastName: el.inviteeLastName,
 							email: el.inviteeEmail,
 							image: el.inviteeImage,
-							decision: this.convertResult(el.result)
+              decision: this.convertResult(el.result),
+              result: el.result
 						}
 					]
 				});
@@ -67,7 +88,8 @@ export class DayDialogComponent implements OnInit {
 							lastName: el.inviteeLastName,
 							email: el.inviteeEmail,
 							image: el.inviteeImage,
-							decision: this.convertResult(el.result)
+							decision: this.convertResult(el.result),
+              result: el.result
 						});
 					}
 				}
@@ -82,6 +104,7 @@ export class DayDialogComponent implements OnInit {
 				time: el.time,
 				active: !el.meetingCancelled,
 				decision: this.convertResult(el.result),
+        result: el.result,
 				attendees: [
 					{
 						firstName: el.initiatorFirstName,
@@ -92,10 +115,6 @@ export class DayDialogComponent implements OnInit {
 				]
 			});
 		});
-
-		console.log(this.attending);
-		console.log(this.owned);
-		let a = new Date();
 	}
 }
 
@@ -107,7 +126,8 @@ export interface DayDialogData {
 	time?: string;
 	active?: boolean;
 	attendees?: Attendee[];
-	decision?: number | string;
+  decision?: number | string;
+  result?: number;
 }
 
 export interface Attendee {
@@ -115,5 +135,6 @@ export interface Attendee {
 	lastName?: string;
 	email?: string;
 	image?: string;
-	decision?: number | string;
+  decision?: number | string;
+  result?: number;
 }

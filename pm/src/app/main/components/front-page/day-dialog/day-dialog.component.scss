@@ -63,8 +63,13 @@
   .meeting_container:hover {
     box-shadow: 3px 3px 3px black;
   }
+}
 
-  .profile_image:hover {
-    box-shadow: 1px 1px 2px black;
-  }
+::ng-deep .decision_btn {
+  width: 6rem;
+  box-shadow: 2px 2px 2px grey;
+}
+
+::ng-deep .decision_btn:hover {
+  box-shadow: 2px 2px 3px black;
 }
