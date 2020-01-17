@@ -61,10 +61,10 @@ export class FrontPageComponent implements OnInit {
         this.meetingsInitiator = res;
         this.events = [];
         const set = new Set();
-        console.log(res)
         for (let el of res) {
           if (!set.has(el.meetingId)) {
             this.events.push({
+              id: el.meetingId,
               start: new Date(el.date),
               title: el.meetingTitle,
               color: colors.red
@@ -74,11 +74,12 @@ export class FrontPageComponent implements OnInit {
         }
         this.fps.findMeetingsByInviteeId(this.currentUser.userId).subscribe (
           res => {
-          console.log(res)
           const temp: CalendarEvent[] = [];
+          this.meetingsInvitee = res;
           for (let el of res) {
             if (!set.has(el.meetingId)) {
               temp.push({
+                id: el.meetingId,
                 start: new Date(el.date),
                 title: el.meetingTitle,
                 color: colors.red
@@ -87,6 +88,7 @@ export class FrontPageComponent implements OnInit {
             } 
           }
           this.events = [...this.events, ...temp];
+          console.log(this.events);
         },
         err => console.error(err))
       },
@@ -98,16 +100,25 @@ export class FrontPageComponent implements OnInit {
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      console.log(this.viewDate)
+      console.log(events)
+      console.log(this.meetingsInitiator );
+      console.log(this.meetingsInvitee );
+      const data = {owned: [], date, attending: []};
+      data.owned = this.meetingsInitiator && this.meetingsInitiator.filter(el => {
+        return events.filter(at => at.id == el.meetingId).length >= 1;
+      });
+      data.attending = this.meetingsInvitee && this.meetingsInvitee.filter(el => {
+        return events.filter(at => at.id == el.meetingId).length >= 1;
+      });
+      this.openDialog(data);
     }
-    this.openDialog(date);
   }
 
-  openDialog(date): void {
+  openDialog(data): void {
     const dialogRef = this.dialog.open(DayDialogComponent, {
       width: '50vw',
       height: '50vh',
-      data: {date}
+      data
     });
 
     dialogRef.afterClosed().subscribe(result => {
