@@ -56,6 +56,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DayDialogComponent } from './components/front-page/day-dialog/day-dialog.component';
+import { OrganizeMeetingComponent } from './components/front-page/organize-meeting/organize-meeting.component';
 
 const routes: Routes = [
 	{
@@ -97,7 +98,8 @@ const routes: Routes = [
 		ImageCropperComponent,
 		AddUserComponent,
 		FrontPageComponent,
-		DayDialogComponent
+		DayDialogComponent,
+		OrganizeMeetingComponent
 	],
 	imports: [
 		BrowserAnimationsModule,
@@ -154,7 +156,8 @@ const routes: Routes = [
 		UserDetailsDialogComponent,
 		ImageCropComponent,
 		AddUserComponent,
-		DayDialogComponent
+		DayDialogComponent,
+		OrganizeMeetingComponent
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

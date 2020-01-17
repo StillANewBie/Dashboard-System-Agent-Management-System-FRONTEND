@@ -1,10 +1,11 @@
 import { UserAdminDTO } from '../../main/components/user-admin/user-admin.component';
 
-export const LOGIN_INFO = 'LOGIN_INFO';
+export const USER_LIST = 'USER_LIST';
 
-export function loginInfoReducer(state: UserAdminDTO = new UserAdminDTO(), action) {
+export function userListReducer(state: UserAdminDTO[] = [], action) {
+  console.log(action)
   switch(action.type) {
-    case LOGIN_INFO: 
+    case USER_LIST:
       return action.payload;
     default:
       return state;

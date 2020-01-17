@@ -1,9 +1,13 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
+import * as $ from 'jquery';
+import { AppState } from 'src/app/ngrx/app.state';
 import { UserAdminService } from '../../services/user-admin.service';
 import { GroupDTO } from '../dashboard/modules/module-config/module-config.component';
-import * as $ from 'jquery';
+import { USER_LIST } from '../../../ngrx/reducers/user-list.reducer';
+import { loginInfo, userList } from '../../../ngrx/actions/actions';
 
 @Component({
 	selector: 'app-user-admin',
@@ -19,7 +23,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	userList: UserAdminDTO[];
 	res: any[];
 
-	constructor(private uas: UserAdminService) {
+	constructor(private uas: UserAdminService, private store: Store<AppState>) {
 		this.columnDefs = [
 			{
 				headerName: 'Name',
@@ -133,7 +137,15 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 						rowHeight: 100
 					};
 				});
-				
+
+				////////////////////////////////////////////////
+				this.store.dispatch({
+					type: USER_LIST,
+					payload: this.userList
+				});
+				/////////////////////////////////////////////////
+
+
 				if (this.agApi) {
 					this.agApi.setRowData(this.userList);
 					this.agApi.redrawRows();

@@ -39,6 +39,7 @@ import { StoreModule } from '@ngrx/store';
 import { loginInfoReducer } from './ngrx/reducers/login.reducer';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DateAdapter, CalendarModule } from 'angular-calendar';
+import { userListReducer } from './ngrx/reducers/user-list.reducer';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { DateAdapter, CalendarModule } from 'angular-calendar';
 		CalendarModule.forRoot({provide: DateAdapter, useFactory:adapterFactory}),
 		LoginModule,
 		BrowserModule,
-		StoreModule.forRoot({loginInfo: loginInfoReducer }),
+		StoreModule.forRoot({loginInfo: loginInfoReducer, userList: userListReducer }),
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MainModule,
