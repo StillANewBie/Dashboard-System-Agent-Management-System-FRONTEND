@@ -37,12 +37,10 @@ export class FrontPageComponent implements OnInit {
 	meetingsInvitee: MeetingDTO[];
 
 	constructor(public dialog: MatDialog, private fps: FrontPageService, private store: Store<AppState>) {
-		this.store.subscribe((el) => {
-			if (el.loginInfo && el.loginInfo.userId) {
-				this.currentUser = el.loginInfo;
+		this.store.select(el => el.loginInfo).subscribe((res) => {
+				this.currentUser = res;
 				this.getInitiatorEvents();
-			}
-		});
+			});
 	}
 
 	getInitiatorEvents() {

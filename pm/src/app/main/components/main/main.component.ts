@@ -21,11 +21,9 @@ export class MainComponent implements OnInit {
 		private store: Store<AppState>,
 		private uas: UserAdminService
 	) {
-		this.store.subscribe((el) => {
-      if (el.loginInfo instanceof UserAdminDTO) {
-        this.currentUser = el.loginInfo;
-      }
-		});
+		this.store.select(el => el.loginInfo).subscribe((res) => {
+        this.currentUser = res;
+      });
 	}
 
 	showWideEvent() {
