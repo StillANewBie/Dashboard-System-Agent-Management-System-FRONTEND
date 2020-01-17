@@ -69,7 +69,7 @@ export class FrontPageComponent implements OnInit {
 						this.meetingsInvitee = res;
 						console.log(res);
 						for (let el of res) {
-							if (!set.has(el.meetingId) && !el.meetingCancelled) {
+							if (!set.has(el.meetingId) && !el.meetingCancelled && el.result != 2) {
 								temp.push({
 									id: el.meetingId,
 									start: new Date(el.date),
