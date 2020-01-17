@@ -22,7 +22,8 @@
           {{el.meetingMemo}}
         </div>
         <div>
-          <button class="decision_btn" mat-raised-button color="warn" (click)="cancelMeeting($event, el)" type="button">Cancel</button>
+          <button *ngIf="el.active" class="decision_btn" mat-raised-button color="warn" (click)="cancelMeeting($event, el)" type="button">Cancel</button>
+          <span *ngIf="!el.active">Cancelled</span>
         </div>
       </div>
       <ng-container *ngIf="showAttendees === i">
