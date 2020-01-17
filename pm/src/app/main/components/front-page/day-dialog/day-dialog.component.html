@@ -4,9 +4,13 @@
 <div class="d-flex flex-column w-100 container_container">
   <div class="meeting_container">
     <div class="d-flex flex-column" *ngFor="let el of owned; let i = index">
-      <div class="d-flex flex-row" (click)="toggleAttendees(i)">
+      <div class="d-flex flex-row justify-content-between meeting_entry" (click)="toggleAttendees(i)">
         <div>
-          {{el.meetingTitle}}
+          <img *ngIf="showAttendees !== i" class="arrow_icon" src="assets/img/arrow_next.png">
+          <img *ngIf="showAttendees === i" class="arrow_icon" src="assets/img/arrow_down.png">
+          <span>
+            {{el.meetingTitle}}
+          </span>
         </div>
         <div>
           {{el.date}}
@@ -22,15 +26,18 @@
         </div>
       </div>
       <ng-container *ngIf="showAttendees === i">
-        <div *ngFor="let at of el.attendees" class="d-flex flex-row">
-          <div>
+        <div *ngFor="let at of el.attendees" class="d-flex align-items-center flex-row meeting_attendee">
+          <div  style="flex: 1 0 0">
             <img class="profile_image" [src]="at.image">
+            <span>
+              {{at.firstName + " " + at.lastName}}
+            </span>
           </div>
-          <div>
-            {{at.firstName + at.lastName}}
-          </div>
-          <div>
+          <div  style="flex: 1 0 0">
             {{at.email}}
+          </div>
+          <div  style="flex: 1 0 0">
+            {{at.decision}}
           </div>
         </div>
       </ng-container>
@@ -38,9 +45,13 @@
   </div>
   <div class="meeting_container">
     <div class="d-flex flex-column" *ngFor="let el of attending; let i = index">
-      <div class="d-flex flex-row" (click)="toggleInitiator(i)">
+      <div class="d-flex flex-row justify-content-between meeting_entry" (click)="toggleInitiator(i)">
         <div>
-          {{el.meetingTitle}}
+          <img *ngIf="showAttendees !== i" class="arrow_icon" src="assets/img/arrow_next.png">
+          <img *ngIf="showAttendees === i" class="arrow_icon" src="assets/img/arrow_down.png">
+          <span>
+            {{el.meetingTitle}}
+          </span>
         </div>
         <div>
           {{el.date}}
@@ -52,18 +63,18 @@
           {{el.meetingMemo}}
         </div>
         <div>
-          <button type="button">Cancel</button>
+          {{el.decision}}
         </div>
       </div>
       <ng-container *ngIf="showInitiator === i">
-        <div *ngFor="let at of el.attendees" class="d-flex flex-row">
-          <div>
+        <div *ngFor="let at of el.attendees" class="d-flex flex-row align-items-center meeting_attendee">
+          <div style="flex: 1 0 0">
             <img class="profile_image" [src]="at.image">
+            <span>
+              {{at.firstName + " " + at.lastName}}
+            </span>
           </div>
-          <div>
-            {{at.firstName + at.lastName}}
-          </div>
-          <div>
+          <div style="flex: 1 0 0">
             {{at.email}}
           </div>
         </div>
