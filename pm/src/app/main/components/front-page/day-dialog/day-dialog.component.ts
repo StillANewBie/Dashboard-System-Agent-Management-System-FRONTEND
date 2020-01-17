@@ -11,9 +11,19 @@ export class DayDialogComponent implements OnInit {
 
   owned: DayDialogData[] = [];
   attending: DayDialogData[] = [];
+  showAttendees: number;
+  showInitiator: number;
 
   constructor(private dialogRef: MatDialogRef<DayDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  toggleAttendees(i: number) {
+    this.showAttendees = this.showAttendees === i? -1: i;
+  }
+
+  toggleInitiator(i: number) {
+    this.showInitiator = this.showInitiator === i? -1: i;
+  }
 
   ngOnInit() {
     console.log(this.data)

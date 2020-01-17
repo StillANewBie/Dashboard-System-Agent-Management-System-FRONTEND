@@ -11,7 +11,7 @@
   height: 90%;
 
   .meeting_container {
-    flex: 1 1 auto;
+    flex: 1 0 0;
     border: 1px grey solid;
     border-radius: 0.5rem;
     box-shadow: 2px 2px 2px grey;
@@ -19,7 +19,6 @@
   }
   
   .meeting_container:hover {
-    flex: 1 1 auto;
     box-shadow: 3px 3px 3px black;
   }
 
@@ -30,7 +29,7 @@
     border: 1px solid #DDD;
     box-shadow: 1px 1px 1px grey;
   }
-  
+
   .profile_image:hover {
     box-shadow: 1px 1px 2px black;
   }

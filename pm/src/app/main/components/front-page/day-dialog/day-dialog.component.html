@@ -4,7 +4,7 @@
 <div class="d-flex flex-column w-100 container_container">
   <div class="meeting_container">
     <div class="d-flex flex-column" *ngFor="let el of owned; let i = index">
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row" (click)="toggleAttendees(i)">
         <div>
           {{el.meetingTitle}}
         </div>
@@ -21,20 +21,54 @@
           <button type="button">Cancel</button>
         </div>
       </div>
-      <div *ngFor="let at of el.attendees" class="d-flex flex-row">
-        <div>
-          {{at.firstName + at.lastName}}
+      <ng-container *ngIf="showAttendees === i">
+        <div *ngFor="let at of el.attendees" class="d-flex flex-row">
+          <div>
+            <img class="profile_image" [src]="at.image">
+          </div>
+          <div>
+            {{at.firstName + at.lastName}}
+          </div>
+          <div>
+            {{at.email}}
+          </div>
         </div>
-        <div>
-          {{at.email}}
-        </div>
-        <div>
-          <img class="profile_image" [src]="at.image">
-        </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div class="meeting_container">
+    <div class="d-flex flex-column" *ngFor="let el of attending; let i = index">
+      <div class="d-flex flex-row" (click)="toggleInitiator(i)">
+        <div>
+          {{el.meetingTitle}}
+        </div>
+        <div>
+          {{el.date}}
+        </div>
+        <div>
+          {{el.time}}
+        </div>
+        <div>
+          {{el.meetingMemo}}
+        </div>
+        <div>
+          <button type="button">Cancel</button>
+        </div>
+      </div>
+      <ng-container *ngIf="showInitiator === i">
+        <div *ngFor="let at of el.attendees" class="d-flex flex-row">
+          <div>
+            <img class="profile_image" [src]="at.image">
+          </div>
+          <div>
+            {{at.firstName + at.lastName}}
+          </div>
+          <div>
+            {{at.email}}
+          </div>
+        </div>
+      </ng-container>
+    </div>
 
   </div>
 </div>
