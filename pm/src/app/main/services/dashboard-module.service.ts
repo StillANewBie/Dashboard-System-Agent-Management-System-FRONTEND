@@ -5,6 +5,9 @@ import { DisplayGrid, GridsterConfig, GridsterItem, GridType } from 'angular-gri
 import { UUID } from 'angular2-uuid';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AppState } from 'src/app/ngrx/app.state';
+import { Store } from '@ngrx/store';
+import { UserAdminDTO } from '../components/user-admin/user-admin.component';
 import {
 	ModuleConfigComponent,
 	ModuleConfigDTO
@@ -54,8 +57,18 @@ export class DashboardModuleService {
 	dashboardFromDb: any = null;
 	moduleConfig: any = {};
 	dashboardLoaded: boolean = false;
+	currentUser: UserAdminDTO;
 
-	constructor(private http: HttpClient, private dialog: MatDialog) {}
+	constructor(private http: HttpClient, private dialog: MatDialog, private store: Store<AppState>) {
+		this.store.select(el => el.loginInfo).subscribe(
+			res => {
+				this.currentUser = res;
+			},
+			err => {
+				console.error(err);
+			}
+		)
+	}
 
 	dropItem(dragId: string): void {
 		const newContainerId = UUID.UUID();
@@ -103,7 +116,7 @@ export class DashboardModuleService {
 			if (!Array.isArray(this.components)) {
 				this.components = [];
 			}
-			this.components.push({...newContainerRef, option: {type: 7, uuid: newContainerId}});
+			this.components.push({ ...newContainerRef, option: { type: 7, uuid: newContainerId } });
 			const { components } = this;
 			setTimeout(() => {
 				this.postDashboardInfo();
@@ -129,30 +142,34 @@ export class DashboardModuleService {
 	}
 
 	postDashboardInfo() {
-		const httpOptions = {
-			headers: new HttpHeaders({
-				'Content-type': 'text/plain'
-			}),
-			withCredentials: true
-		};
+		// const httpOptions = {
+		// 	headers: new HttpHeaders({
+		// 		'Content-type': 'text/plain'
+		// 	}),
+		// 	withCredentials: true
+		// };
+
+		const formData: FormData = new FormData();
+		formData.append('userId', this.currentUser.userId.toString());
+		formData.append('dashboardState', JSON.stringify({ layout: this.layout, components: this.components }));
 		this.http
 			.post(
 				`${environment.API_URL}/dashboard/state`,
-				{ layout: this.layout, components: this.components },
-				httpOptions
-				// {withCredentials: true}
+				formData,
+				{ withCredentials: true, headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}` } }
 			)
 			.subscribe((res) => {}, (err) => console.log(err));
 	}
 
 	getDashboardInfo(): Observable<any> {
-		return this.http.get(`${environment.API_URL}/dashboard/state`, { withCredentials: true });
+		return this.http.get(`${environment.API_URL}/dashboard/state`, 
+		{ withCredentials: true, headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}` } });
 	}
 
 	initModules() {
 		this.getDashboardInfo().subscribe(
 			(res) => {
-				this.dashboardFromDb = res;
+				this.dashboardFromDb = res? JSON.parse(res.dashboardState): null;
 				if (this.dashboardFromDb) {
 					this.dashboardFromDb.layout && this.dashboardFromDb.layout.forEach((el) => this.layout.push(el));
 					this.components = this.dashboardFromDb.components;

@@ -19,12 +19,19 @@ export class MainComponent implements OnInit {
 	
 	constructor(
 		private dmService: DashboardModuleService,
+		
 		private store: Store<AppState>,
 		private uas: UserAdminService
 	) {
 		this.store.select(el => el.loginInfo).subscribe((res) => {
         this.currentUser = res;
       });
+	}
+
+	openMyProfile() {
+		this.uas.openUserAdminDialog(this.currentUser).afterClosed().subscribe(result => {
+
+		});
 	}
 
 	showWideEvent() {

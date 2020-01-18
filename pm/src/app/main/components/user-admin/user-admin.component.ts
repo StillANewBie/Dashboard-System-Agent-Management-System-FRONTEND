@@ -7,7 +7,6 @@ import { AppState } from 'src/app/ngrx/app.state';
 import { UserAdminService } from '../../services/user-admin.service';
 import { GroupDTO } from '../dashboard/modules/module-config/module-config.component';
 import { USER_LIST } from '../../../ngrx/reducers/user-list.reducer';
-import { loginInfo, userList } from '../../../ngrx/actions/actions';
 
 @Component({
 	selector: 'app-user-admin',
