@@ -5,6 +5,8 @@ import { AppState } from '../../../ngrx/app.state';
 import { Store } from '@ngrx/store';
 import { UserAdminService } from '../../services/user-admin.service';
 import { LOGIN_INFO } from '../../../ngrx/reducers/login.reducer';
+import { AuthenticationService } from '../../../login/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-main',
@@ -17,11 +19,11 @@ export class MainComponent implements OnInit {
 	dashboardMode: boolean = false;
 	currentUser: UserAdminDTO;
 	
-	constructor(
-		private dmService: DashboardModuleService,
-		
+	constructor(		
 		private store: Store<AppState>,
-		private uas: UserAdminService
+		private uas: UserAdminService,
+		private as: AuthenticationService,
+		private router: Router
 	) {
 		this.store.select(el => el.loginInfo).subscribe((res) => {
         this.currentUser = res;
@@ -48,6 +50,11 @@ export class MainComponent implements OnInit {
 		this.showWide = true;
 		setTimeout(() => (this.showWideSpan = this.showWide), 300);
 		this.dashboardMode = true;
+	}
+
+	logout() {
+		this.as.logout();
+		this.router.navigate(['login']).catch();
 	}
 
 	ngOnInit() {
