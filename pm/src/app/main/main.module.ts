@@ -145,7 +145,7 @@ const routes: Routes = [
 		MatPaginatorModule,
 		MatBadgeModule,
 		MatDividerModule,
-		NgxDropzoneModule
+		NgxDropzoneModule,
 	],
 	entryComponents: [
 		HeatmapComponent,

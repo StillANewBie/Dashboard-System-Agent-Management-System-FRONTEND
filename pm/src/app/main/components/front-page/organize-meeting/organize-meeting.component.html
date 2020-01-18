@@ -1,12 +1,22 @@
 <div class="w-100 h-100">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+  <button mat-fab color="primary" (click)="addAttendee()">Add Attendee</button>
+  <mat-form-field class="w-100" *ngFor="let su of selectedUsers">
+    <input class="attendee_input" matInput placeholder="Name" aria-label="Name" 
+        [matAutocomplete]="auto"
+        [formControl]="stateCtrl"
+        [value]="su">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-        <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
-        <span>{{state.name}}</span> |
-        <small>Population: {{state.population}}</small>
+      <mat-option *ngFor="let user of filteredStates | async" 
+      [value]="user.username"
+      >
+          <img class="option-img" aria-hidden [src]="user.userInfo.profileImage" height="25">
+          <span>{{user.username}}</span> |
+          <small>Group Level: {{user.group.groupLevelInfo.groupLevelName}}</small>
+          <small>Group: {{user.group.groupName}}</small>
+          <small>email: {{user.email}}</small>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+
+  <button mat-fab color="primary" (click)="submit()">Submit</button>
 </div>

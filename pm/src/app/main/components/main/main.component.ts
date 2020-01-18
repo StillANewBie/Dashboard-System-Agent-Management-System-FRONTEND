@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
 	showWideSpan: boolean = false;
 	dashboardMode: boolean = false;
 	currentUser: UserAdminDTO;
+	
 	constructor(
 		private dmService: DashboardModuleService,
 		private store: Store<AppState>,
