@@ -6,21 +6,27 @@
       <button mat-raised-button (click)="cancel()">Cancel</button>
     </div>
     <div class="input_container">
-      
-      <mat-form-field class="w-100 mt-3" *ngFor="let su of selectedUsers">
-        <input class="attendee_input" matInput placeholder="Name" aria-label="Name" 
-            [matAutocomplete]="auto"
-            [formControl]="stateCtrl"
-            [value]="su">
+      <div class="d-flex flex-column">
+        <mat-form-field>
+          <input class="other_input" matInput placeholder="Meeting Title" aria-label="Meeting Title"
+            [(ngModel)]="meetingTitle" required></mat-form-field>
+        <mat-form-field>
+          <input class="other_input" type="time" min="09:00" max="18:00" matInput placeholder="Meeting Start Time"
+            aria-label="Meeting Start Time" [(ngModel)]="meetingTime" required></mat-form-field>
+        <mat-form-field>
+          <input class="other_input" matInput placeholder="Meeting Memo" aria-label="Meeting Memo"
+            [(ngModel)]="meetingMemo"></mat-form-field>
+      </div>
+      <mat-form-field class="w-100" *ngFor="let su of selectedUsers">
+        <input class="attendee_input" matInput placeholder="Name" aria-label="Name" [matAutocomplete]="auto"
+          [formControl]="stateCtrl" [value]="su">
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let user of filteredStates | async" 
-          [value]="user.username"
-          >
-              <img class="option-img" aria-hidden [src]="user.userInfo.profileImage" height="25">
-              <span>{{user.username}} | </span>
-              <small class="ml-1">Group Level: {{user.group.groupLevelInfo.groupLevelName}} | </small>
-              <small class="ml-1">Group: {{user.group.groupName}} | </small>
-              <small class="ml-1">email: {{user.userInfo.email}}</small>
+          <mat-option *ngFor="let user of filteredStates | async" [value]="user.username">
+            <img class="option-img" aria-hidden [src]="user.userInfo.profileImage" height="25">
+            <span>{{user.username}} | </span>
+            <small class="ml-1">Group Level: {{user.group.groupLevelInfo.groupLevelName}} | </small>
+            <small class="ml-1">Group: {{user.group.groupName}} | </small>
+            <small class="ml-1">email: {{user.userInfo.email}}</small>
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

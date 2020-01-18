@@ -23,6 +23,9 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
     selected: new FormControl([])
   });
   valueChange: boolean = false;
+  meetingTitle: string = '';
+  meetingMemo: string = '';
+  meetingTime: any;
 
 	constructor(
     private dialogRef: MatDialogRef<OrganizeMeetingComponent>,
@@ -85,6 +88,9 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 
   submit() {
     console.log(this.er.nativeElement.getElementsByClassName('attendee_input')[0].value)
+    console.log(this.meetingTitle);
+    console.log(this.meetingMemo);
+    console.log(this.meetingTime)
   }
 
 	ngOnInit() {}
