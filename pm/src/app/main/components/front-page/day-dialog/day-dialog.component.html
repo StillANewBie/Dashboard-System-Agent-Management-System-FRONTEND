@@ -8,22 +8,22 @@
 </div>
 <div class="d-flex flex-column w-100 container_container">
   <div class="meeting_container">
-    <div class="d-flex flex-column" *ngFor="let el of owned; let i = index">
+    <div class="d-flex flex-column mb-1" *ngFor="let el of owned; let i = index">
       <div *ngIf="!el.meetingCancelled" class="d-flex flex-row justify-content-between meeting_entry">
-        <div (click)="toggleAttendees(i)">
+        <div (click)="toggleAttendees(i)"  style="flex: 1 0 0">
           <img *ngIf="showAttendees !== i" class="arrow_icon" src="assets/img/arrow_next.png">
           <img *ngIf="showAttendees === i" class="arrow_icon" src="assets/img/arrow_down.png">
           <span>
             {{el.meetingTitle}}
           </span>
         </div>
-        <div>
+        <div  style="flex: 1 0 0">
           {{el.date}}
         </div>
-        <div>
+        <div  style="flex: 1 0 0">
           {{el.time}}
         </div>
-        <div>
+        <div  style="flex: 1 0 0">
           {{el.meetingMemo}}
         </div>
         <div>
@@ -50,22 +50,22 @@
     </div>
   </div>
   <div class="meeting_container">
-    <div class="d-flex flex-column" *ngFor="let el of attending; let i = index">
+    <div class="d-flex flex-column mb-1" *ngFor="let el of attending; let i = index">
       <div class="d-flex flex-row justify-content-between meeting_entry">
-        <div (click)="toggleInitiator(i)">
+        <div (click)="toggleInitiator(i)" style="flex: 1 0 0">
           <img *ngIf="showAttendees !== i" class="arrow_icon" src="assets/img/arrow_next.png">
           <img *ngIf="showAttendees === i" class="arrow_icon" src="assets/img/arrow_down.png">
           <span>
             {{el.meetingTitle}}
           </span>
         </div>
-        <div>
+        <div  style="flex: 1 0 0">
           {{el.date}}
         </div>
-        <div>
+        <div  style="flex: 1 0 0">
           {{el.time}}
         </div>
-        <div>
+        <div  style="flex: 1 0 0">
           {{el.meetingMemo}}
         </div>
         <div>

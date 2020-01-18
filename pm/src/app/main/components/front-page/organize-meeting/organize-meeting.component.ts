@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChildren, ElementRef, AfterViewChecked } from '@angular/core';
+import {
+	Component,
+	OnInit,
+	ChangeDetectionStrategy,
+	ViewChildren,
+	ElementRef,
+	AfterViewChecked,
+	Inject
+} from '@angular/core';
 import { AppState } from '../../../../ngrx/app.state';
 import { Store } from '@ngrx/store';
 import { UserAdminDTO } from '../../user-admin/user-admin.component';
@@ -7,44 +15,49 @@ import { USER_LIST } from '../../../../ngrx/reducers/user-list.reducer';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FrontPageService } from '../../../services/front-page.service';
 
 @Component({
 	selector: 'app-organize-meeting',
 	templateUrl: './organize-meeting.component.html',
-  styleUrls: [ './organize-meeting.component.scss' ],
+	styleUrls: [ './organize-meeting.component.scss' ]
 })
 export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 	stateCtrl = new FormControl();
 	filteredStates: Observable<UserAdminDTO[]>;
-  userList: UserAdminDTO[];
-  selectedUsers = [{}];
-  attendeeForm = new FormGroup({
-    selected: new FormControl([])
-  });
-  valueChange: boolean = false;
-  meetingTitle: string = '';
-  meetingMemo: string = '';
-  meetingTime: any;
+	userList: UserAdminDTO[];
+	selectedUsers = [ {} ];
+	attendeeForm = new FormGroup({
+		selected: new FormControl([])
+	});
+	valueChange: boolean = false;
+	meetingTitle: string = '';
+	meetingMemo: string = '';
+	meetingTime: any;
+	currentUser: UserAdminDTO;
 
 	constructor(
-    private dialogRef: MatDialogRef<OrganizeMeetingComponent>,
-    private store: Store<AppState>, 
-    private uas: UserAdminService,
-    private er: ElementRef) {
+		private dialogRef: MatDialogRef<OrganizeMeetingComponent>,
+		private fps: FrontPageService,
+		private store: Store<AppState>,
+		private uas: UserAdminService,
+		private er: ElementRef,
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) {
 		this.store.select((res) => res.userList).subscribe(
 			(res: UserAdminDTO[]) => {
 				if (res && res.length >= 1) {
 					this.userList = res;
-          this.initFilter();
-        } else {
+					this.initFilter();
+				} else {
 					this.uas.getAllUsers().subscribe((res) => {
 						this.userList = res;
 						this.store.dispatch({
 							type: USER_LIST,
 							payload: res
 						});
-            this.initFilter();
+						this.initFilter();
 					});
 				}
 			},
@@ -52,6 +65,10 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 				console.error(err);
 			}
 		);
+
+		this.store.select((res) => res.loginInfo).subscribe((res) => {
+			this.currentUser = res;
+		});
 	}
 
 	private _filterStates(value: string): UserAdminDTO[] {
@@ -65,33 +82,74 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 			startWith(''),
 			map((state) => (state ? this._filterStates(state) : this.userList.slice()))
 		);
-  }
-  
-  addAttendee() {
-    this.selectedUsers.push({});
-    this.valueChange = true;
-  }
+	}
 
-  ngAfterViewChecked() {
-    if (this.valueChange) {
-      setTimeout(()=> {
-        const temp = this.er.nativeElement.getElementsByClassName('attendee_input')
-        temp[this.selectedUsers.length - 1].value = '';
-        this.valueChange = false;
-      });
-    }
-  }
+	addAttendee() {
+		this.selectedUsers.push({});
+		this.valueChange = true;
+	}
 
-  cancel() {
-    this.dialogRef.close();
-  }
+	ngAfterViewChecked() {
+		if (this.valueChange) {
+			setTimeout(() => {
+				const temp = this.er.nativeElement.getElementsByClassName('attendee_input');
+				temp[this.selectedUsers.length - 1].value = '';
+				this.valueChange = false;
+			});
+		}
+	}
 
-  submit() {
-    console.log(this.er.nativeElement.getElementsByClassName('attendee_input')[0].value)
-    console.log(this.meetingTitle);
-    console.log(this.meetingMemo);
-    console.log(this.meetingTime)
-  }
+	cancel() {
+		this.dialogRef.close();
+	}
 
-	ngOnInit() {}
+	submit() {
+		const element = this.er.nativeElement.getElementsByClassName('attendee_input');
+		if ( element.length < 1) {
+		} else {
+			const nameSet = new Set();
+
+      for (let el of element) {
+				nameSet.add(el.value);
+      }
+
+      // console.log(this.data);
+      // console.log(this.data.date.toLocaleDateString());
+      // console.log(nameSet);
+      // console.log(this.meetingTime);
+      // console.log(this.currentUser)
+
+			this.fps
+				.initiateMeeting(
+					this.meetingTitle,
+					this.currentUser.userId,
+					this.meetingMemo,
+					this.data.date.toLocaleDateString(),
+					this.meetingTime
+				)
+				.subscribe(
+					(res) => {
+						this.userList.forEach((el) => {
+							if (nameSet.has(el.username)) {
+								this.fps.saveMeetingInvitee(res, el.userId).subscribe(
+									(res1) => {
+										console.log(res1);
+									},
+									(err1) => {
+										console.error(err1);
+									}
+								);
+							}
+						});
+					},
+					(err) => {
+						console.error(err);
+					}
+				);
+		}
+	}
+
+	ngOnInit() {
+    this.er.nativeElement.getElementsByClassName("time_input")[0].defaultValue = "10:00";
+  }
 }
