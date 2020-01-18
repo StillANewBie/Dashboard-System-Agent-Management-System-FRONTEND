@@ -91,8 +91,8 @@ export class DayDialogComponent implements OnInit {
 
   initiateMeeting() {
 		const dialogRef = this.dialog.open(OrganizeMeetingComponent, {
-			width: '55vw',
-			height: '90vh',
+			width: '50vw',
+			height: '70vh',
     });
     
     dialogRef.afterClosed().subscribe(

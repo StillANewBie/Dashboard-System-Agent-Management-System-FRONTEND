@@ -7,6 +7,7 @@ import { USER_LIST } from '../../../../ngrx/reducers/user-list.reducer';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
 	selector: 'app-organize-meeting',
@@ -24,6 +25,7 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
   valueChange: boolean = false;
 
 	constructor(
+    private dialogRef: MatDialogRef<OrganizeMeetingComponent>,
     private store: Store<AppState>, 
     private uas: UserAdminService,
     private er: ElementRef) {
@@ -75,6 +77,10 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
         this.valueChange = false;
       });
     }
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 
   submit() {
