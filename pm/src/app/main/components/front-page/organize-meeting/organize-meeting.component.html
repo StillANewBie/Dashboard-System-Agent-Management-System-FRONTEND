@@ -6,6 +6,7 @@
       <button mat-raised-button (click)="cancel()">Cancel</button>
     </div>
     <div class="input_container">
+      
       <mat-form-field class="w-100 mt-3" *ngFor="let su of selectedUsers">
         <input class="attendee_input" matInput placeholder="Name" aria-label="Name" 
             [matAutocomplete]="auto"
