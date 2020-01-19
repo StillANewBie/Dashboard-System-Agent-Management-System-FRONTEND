@@ -45,29 +45,30 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 		private er: ElementRef,
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) {
-		this.store.select((res) => res.userList).subscribe(
-			(res: UserAdminDTO[]) => {
-				if (res && res.length >= 1) {
-					this.userList = res;
-					this.initFilter();
-				} else {
-					this.uas.getAllUsers().subscribe((res) => {
-						this.userList = res;
-						this.store.dispatch({
-							type: USER_LIST,
-							payload: res
-						});
-						this.initFilter();
-					});
-				}
-			},
-			(err) => {
-				console.error(err);
-			}
-		);
-
 		this.store.select((res) => res.loginInfo).subscribe((res) => {
 			this.currentUser = res;
+
+			this.store.select((res) => res.userList).subscribe(
+				(res: UserAdminDTO[]) => {
+					if (res && res.length >= 1) {
+						this.userList = res.filter(el => el.userId != this.currentUser.userId)
+																.sort((a, b) => a.username.localeCompare(b.username));
+						this.initFilter();
+					} else {
+						this.uas.getAllUsers().subscribe((res) => {
+							this.userList = res;
+							this.store.dispatch({
+								type: USER_LIST,
+								payload: res
+							});
+							this.initFilter();
+						});
+					}
+				},
+				(err) => {
+					console.error(err);
+				}
+			);
 		});
 	}
 
@@ -105,19 +106,19 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 
 	submit() {
 		const element = this.er.nativeElement.getElementsByClassName('attendee_input');
-		if ( element.length < 1) {
+		if (element.length < 1) {
 		} else {
 			const nameSet = new Set();
 
-      for (let el of element) {
+			for (let el of element) {
 				nameSet.add(el.value);
-      }
+			}
 
-      // console.log(this.data);
-      // console.log(this.data.date.toLocaleDateString());
-      // console.log(nameSet);
-      // console.log(this.meetingTime);
-      // console.log(this.currentUser)
+			// console.log(this.data);
+			// console.log(this.data.date.toLocaleDateString());
+			// console.log(nameSet);
+			// console.log(this.meetingTime);
+			// console.log(this.currentUser)
 
 			this.fps
 				.initiateMeeting(
@@ -133,7 +134,7 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 							if (nameSet.has(el.username)) {
 								this.fps.saveMeetingInvitee(res, el.userId).subscribe(
 									(res1) => {
-										console.log(res1);
+										this.dialogRef.close(true);
 									},
 									(err1) => {
 										console.error(err1);
@@ -150,6 +151,6 @@ export class OrganizeMeetingComponent implements OnInit, AfterViewChecked {
 	}
 
 	ngOnInit() {
-    this.er.nativeElement.getElementsByClassName("time_input")[0].defaultValue = "10:00";
-  }
+		this.er.nativeElement.getElementsByClassName('time_input')[0].defaultValue = '10:00';
+	}
 }

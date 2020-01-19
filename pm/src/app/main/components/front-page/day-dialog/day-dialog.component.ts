@@ -98,7 +98,9 @@ export class DayDialogComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(
       res => {
-        
+        if (res) {
+					this.dialogRef.close();
+				}
       }
     )
   }

@@ -29,13 +29,23 @@
       background: rgb(248, 248, 248);
       align-items: center;
       height: 3rem;
+    }
 
-      .arrow_icon {
-        width: 1rem;
-        height: 1rem;
-        cursor: pointer;
-        margin-right: 1rem;
-      }
+    .small_div {
+      flex: 1 0 0;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-height: 100%;
+      white-space: nowrap;
+      max-width: 80%;
+      padding-right: 1rem;
+    }
+
+    .arrow_icon {
+      width: 1rem;
+      height: 1rem;
+      cursor: pointer;
+      margin-right: 1rem;
     }
 
     .meeting_entry:hover {
@@ -47,27 +57,26 @@
       padding-right: 2rem;
       height: 4rem;
       border-bottom: 1px solid #eee;
-
-      .profile_image {
-        height: 3rem;
-        width: 3rem;
-        border-radius: 50%;
-        border: 1px solid #ddd;
-        box-shadow: 1px 1px 1px grey;
-        margin-right: 1rem;
-      }
-
-      .profile_image:hover {
-        box-shadow: 1px 1px 2px black;
-      }
     }
   }
 
   .meeting_container:hover {
     box-shadow: 3px 3px 3px black;
   }
-}
 
+  .profile_image {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    box-shadow: 1px 1px 1px grey;
+    margin-right: 1rem;
+  }
+
+  .profile_image:hover {
+    box-shadow: 1px 1px 2px black;
+  }
+}
 ::ng-deep .decision_btn {
   width: 6rem;
   box-shadow: 2px 2px 2px grey;
