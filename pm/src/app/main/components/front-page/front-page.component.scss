@@ -15,3 +15,25 @@
     box-shadow: 3px 3px 3px black;
   }
 }
+
+::ng-deep mwl-calendar-month-cell.cal-day-cell{
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 2px grey;
+  margin:3px;
+}
+
+::ng-deep mwl-calendar-month-cell.cal-day-cell:hover{
+  box-shadow: 2px 2px 3px black;
+}
+
+::ng-deep .cal-weekend {
+  color: darkred;
+}
+
+::ng-deep .cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+  color: red !important;
+}
+
+::ng-deep .cal-day-cell {
+  font-size: 1.2rem;
+}
