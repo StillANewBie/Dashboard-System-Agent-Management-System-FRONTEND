@@ -73,7 +73,7 @@
             <button class="decision_btn" (click)="going($event, el)" mat-raised-button color="primary">Going</button>
             <button class="decision_btn ml-2" (click)="notGoing($event, el)"  mat-raised-button color="warn">Not Going</button>
           </div>
-          <div *ngIf="el.result != 0">
+          <div *ngIf="el.result != 0" [ngClass]="{'not_going': el.result == 2, 'going': el.result == 1}">
             <span>{{el.decision}}</span>
           </div>
         </div>
