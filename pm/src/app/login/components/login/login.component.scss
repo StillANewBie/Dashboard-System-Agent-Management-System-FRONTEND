@@ -1,11 +1,81 @@
+$dashboard-blue: #289abe;
+
 .second_container {
   margin-bottom: 6rem;
+  color: white;
 
   .card {
-    box-shadow: 2px 2px 2px grey;
+    box-shadow: 0px 0px 10px #333;
+    transition: box-shadow 0.5s;
+    height: 60vh;
+    width: 45vw;
+    flex-direction: row;
+    display: flex;
+    border: none !important;
   }
 
   .card:hover {
-    box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 6px black;
   }
+
+  .card-body {
+    flex: 1 0 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .welcome {
+      font-size: 2rem;
+      color: white;
+      font-family: "Roboto";
+      font-weight: 500;
+      text-shadow: 2px 2px 6px black;
+    }
+
+    input {
+      border-radius: 0.7rem !important;
+      box-shadow: 1px 1px 3px black !important;
+      border: none !important;
+    }
+
+    input:hover {
+      box-shadow: 2px 2px 5px black !important;
+    }
+
+    .performance_img {
+      width: 60%;
+      height: auto;
+    }
+
+    button {
+      width: 6rem;
+      height: 3rem;
+      font-size: 1.1rem;
+      box-shadow: 2px 2px 2px black;
+      border-radius: 0.7rem;
+    }
+
+    button:hover {
+      box-shadow: 3px 3px 3px black;
+    }
+
+    button:disabled {
+      background: #333;
+      color: grey;
+    }
+  }
+
+  div:nth-of-type(2).card-body {
+    // background-image: url("src/assets/img/blue_minimalist.jpg");
+    // background-repeat: no-repeat;
+    // background-size: auto 100%;
+    background-color: $dashboard-blue;
+  }
+}
+
+.first_container {
+  // background-image: url("src/assets/img/blue_minimalist.jpg");
+  // background-repeat: no-repeat;
+  // background-size: 50vw 100vh;
+  background: linear-gradient(90deg, $dashboard-blue 50%, #fff 50%);
 }

@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../ngrx/app.state';
 import { LOGIN_INFO } from '../../../ngrx/reducers/login.reducer';
 import { UserAdminDTO } from 'src/app/main/components/user-admin/user-admin.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -50,25 +52,33 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-      this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.store.dispatch({
-            type: LOGIN_INFO,
-            payload: data.user
-          });
-          this.router.navigate([this.returnUrl]);
-
-        },
-        err => {
-          console.log(err)
-          this.loading = false;
-          if (err == 'Unauthorized') {
-            // TODO
+      try {
+        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.store.dispatch({
+              type: LOGIN_INFO,
+              payload: data.user
+            });
+            this.router.navigate([this.returnUrl]);
+  
+          },
+          err => {
+            console.log(err)
+            this.loading = false;
+            if (err == 'Unauthorized') {
+              this.snackBar.open("Invalid user name password combination", "OK", {
+                duration: 2000,
+                politeness: 'assertive',
+                verticalPosition: 'top'
+              })
+            }
           }
-        }
-      );
+        );
+      } catch(e) {
+
+      }
   } 
 
 }
