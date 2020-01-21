@@ -132,13 +132,11 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	}
 
 	activeOnChange(e) {
-		console.log(e);
 		this.uas.setUserActiveStatus(this.data.userId, e.checked).subscribe((res) => {}, (err) => console.log(err));
 		this.dataChanged = true;
 	}
 
 	ngOnInit() {
-		console.log(this.data);
 	}
 
 	ngOnDestroy() {}

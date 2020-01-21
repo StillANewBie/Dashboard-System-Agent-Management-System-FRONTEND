@@ -114,7 +114,6 @@ export class DayDialogComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.data);
 
 		let set = new Set();
 		this.data &&
