@@ -29,6 +29,11 @@
       background: rgb(248, 248, 248);
       align-items: center;
       height: 3rem;
+
+      .past_decision {
+        color: darkgrey;
+        text-decoration: line-through;
+      }
     }
 
     .small_div {

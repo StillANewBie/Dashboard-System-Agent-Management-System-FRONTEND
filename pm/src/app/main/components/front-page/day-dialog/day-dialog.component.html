@@ -3,14 +3,15 @@
     <span><b>Date: </b></span><span class="ml-2">{{data.date.toLocaleDateString()}}</span>
   </div>
   <div>
-    <button class="decision_btn w-100" mat-raised-button color="primary" (click)="initiateMeeting()" type="button">Organize a meeting</button>
+    <button class="decision_btn w-100" mat-raised-button color="primary" (click)="initiateMeeting()"
+      type="button">Organize a meeting</button>
   </div>
 </div>
 <div class="d-flex flex-column w-100 container_container">
   <div class="meeting_container">
     <div class="d-flex flex-column mb-1" *ngFor="let el of owned; let i = index">
       <div *ngIf="!el.meetingCancelled" class="d-flex flex-row justify-content-between meeting_entry">
-        <div (click)="toggleAttendees(i)"  class="small_div">
+        <div (click)="toggleAttendees(i)" class="small_div" style="flex: 2 0 0">
           <img *ngIf="showAttendees !== i" class="arrow_icon" src="assets/img/arrow_next.png">
           <img *ngIf="showAttendees === i" class="arrow_icon" src="assets/img/arrow_down.png">
           <span>
@@ -26,8 +27,12 @@
         <div class="small_div" [title]="el.meetingMemo">
           {{el.meetingMemo}}
         </div>
-        <div>
-          <button *ngIf="el.active" class="decision_btn" mat-raised-button color="warn" (click)="cancelMeeting($event, el)" type="button">Cancel</button>
+        <div class="small_div">
+          <button *ngIf="el.active && compareTime(el.time.toString())" class="decision_btn" mat-raised-button
+            color="warn" (click)="cancelMeeting($event, el)" type="button">Cancel</button>
+          <div class="past_decision" *ngIf="el.active && !compareTime(el.time.toString())">
+            Past
+          </div>
           <span *ngIf="!el.active">Cancelled</span>
         </div>
       </div>
@@ -52,26 +57,32 @@
   <div class="meeting_container">
     <div class="d-flex flex-column mb-1" *ngFor="let el of attending; let i = index">
       <div class="d-flex flex-row justify-content-between meeting_entry">
-        <div (click)="toggleInitiator(i)" class="small_div">
+        <div (click)="toggleInitiator(i)" class="small_div" style="flex: 2 0 0">
           <img *ngIf="showAttendees !== i" class="arrow_icon" src="assets/img/arrow_next.png">
           <img *ngIf="showAttendees === i" class="arrow_icon" src="assets/img/arrow_down.png">
           <span>
             {{el.meetingTitle}}
           </span>
         </div>
-        <div  class="small_div">
+        <div class="small_div">
           {{el.date}}
         </div>
         <div class="small_div">
           {{el.time}}
         </div>
-        <div class="small_div" >
+        <div class="small_div">
           {{el.meetingMemo}}
         </div>
         <div>
           <div *ngIf="el.result == 0">
-            <button class="decision_btn" (click)="going($event, el)" mat-raised-button color="primary">Going</button>
-            <button class="decision_btn ml-2" (click)="notGoing($event, el)"  mat-raised-button color="warn">Not Going</button>
+            <div *ngIf="compareTime(el.time.toString())">
+              <button class="decision_btn" (click)="going($event, el)" mat-raised-button color="primary">Going</button>
+              <button class="decision_btn ml-2" (click)="notGoing($event, el)" mat-raised-button color="warn">Not
+                Going</button>
+            </div>
+            <div class="past_decision" *ngIf="!compareTime(el.time.toString())">
+              Undecided
+            </div>
           </div>
           <div *ngIf="el.result != 0" [ngClass]="{'not_going': el.result == 2, 'going': el.result == 1}">
             <span>{{el.decision}}</span>

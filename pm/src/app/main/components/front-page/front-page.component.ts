@@ -8,7 +8,7 @@ import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMo
 import { AppState } from 'src/app/ngrx/app.state';
 import { UserAdminDTO } from '../user-admin/user-admin.component';
 
-const colors: any = {
+export const colors: any = {
 	red: {
 		primary: '#ad2121',
 		secondary: '#FAE3E3'
@@ -20,6 +20,10 @@ const colors: any = {
 	yellow: {
 		primary: '#e3bc08',
 		secondary: '#FDF1BA'
+	},
+	grey: {
+		primary: 'grey',
+		secondary: '#555'
 	}
 };
 
@@ -37,10 +41,10 @@ export class FrontPageComponent implements OnInit {
 	meetingsInvitee: MeetingDTO[];
 
 	constructor(public dialog: MatDialog, private fps: FrontPageService, private store: Store<AppState>) {
-		this.store.select(el => el.loginInfo).subscribe((res) => {
-				this.currentUser = res;
-				this.getInitiatorEvents();
-			});
+		this.store.select((el) => el.loginInfo).subscribe((res) => {
+			this.currentUser = res;
+			this.getInitiatorEvents();
+		});
 	}
 
 	getInitiatorEvents() {
@@ -49,38 +53,34 @@ export class FrontPageComponent implements OnInit {
 				this.meetingsInitiator = res;
 				this.events = [];
 				const set = new Set();
-				console.log(res);
 				for (let el of res) {
 					if (!set.has(el.meetingId) && !el.meetingCancelled) {
 						this.events.push({
 							id: el.meetingId,
 							start: new Date(new Date(el.date).setDate(new Date(el.date).getDate() + 1)),
 							title: el.meetingTitle,
-							color: colors.red
+							color: this.compareTime(el.time.toString(), el.date) ? colors.red : colors.grey
 						});
 						set.add(el.meetingId);
 					}
-        }
+				}
 				this.fps.findMeetingsByInviteeId(this.currentUser.userId).subscribe(
 					(res) => {
 						const temp: CalendarEvent[] = [];
 						this.meetingsInvitee = res;
-						console.log(res);
 						for (let el of res) {
 							if (!set.has(el.meetingId) && !el.meetingCancelled && el.result != 2) {
 								temp.push({
 									id: el.meetingId,
 									start: new Date(new Date(el.date).setDate(new Date(el.date).getDate() + 1)),
 									title: el.meetingTitle,
-									color: colors.yellow
+									color: this.compareTime(el.time.toString(), el.date) ? colors.yellow : colors.grey
 								});
 								set.add(el.meetingId);
 							}
 						}
 						this.events = [ ...this.events, ...temp ];
-            console.log("---------------------");
-            console.log(this.events);
-          },
+					},
 					(err) => console.error(err)
 				);
 			},
@@ -88,6 +88,33 @@ export class FrontPageComponent implements OnInit {
 				console.error(err);
 			}
 		);
+	}
+
+	compareTime(time: string, date: Date): boolean {
+		const now = new Date();
+		const tmpDate = new Date(new Date(date).setDate(new Date(date).getDate() + 1));
+		const c1 = tmpDate >= new Date(new Date().setHours(0, 0, 0, 0));
+		if (!c1) {
+			console.log('c1');
+			return false;
+		}
+
+		const arr = time.split(':');
+
+		if (new Date(tmpDate.setHours(0, 0, 0, 0)).toString() == new Date(new Date().setHours(0, 0, 0, 0)).toString()) {
+
+			if (
+				Number.parseInt(arr[0]) < now.getHours() ||
+				(Number.parseInt(arr[0]) == now.getHours() && Number.parseInt(arr[1]) < now.getMinutes()) ||
+				(Number.parseInt(arr[0]) == now.getHours() &&
+					Number.parseInt(arr[1]) == now.getMinutes() &&
+					Number.parseInt(arr[2]) < now.getSeconds())
+			) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
