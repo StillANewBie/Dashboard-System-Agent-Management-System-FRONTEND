@@ -95,7 +95,6 @@ export class FrontPageComponent implements OnInit {
 		const tmpDate = new Date(new Date(date).setDate(new Date(date).getDate() + 1));
 		const c1 = tmpDate >= new Date(new Date().setHours(0, 0, 0, 0));
 		if (!c1) {
-			console.log('c1');
 			return false;
 		}
 

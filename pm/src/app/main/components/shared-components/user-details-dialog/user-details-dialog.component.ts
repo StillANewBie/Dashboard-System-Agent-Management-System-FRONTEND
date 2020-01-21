@@ -52,7 +52,6 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	}
 
 	editProfile() {
-		console.log(this.data);
 		this.profileForEdit = JSON.parse(JSON.stringify(this.data));
 		if (this.data.roles.length < 1) {
 			this.profileForEdit = {...this.profileForEdit, roles: this.roleList}
@@ -61,7 +60,6 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 			this.profileForEdit = {...this.profileForEdit, group: this.groupList[0]}
 		}
 		this.profileEditing = true;
-		console.log(this.profileForEdit);
 	}
 
 	cancelEditing() {
@@ -88,8 +86,6 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 			this.openSnackBar("Group Level doesn't match!", 'OK');
 			return;
 		}
-
-		console.log(this.profileForEdit);
 
 		this.uas.saveUserInfo(this.profileForEdit.userInfo, this.data.userId, false).subscribe(
 			(res) => {

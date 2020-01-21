@@ -3,7 +3,6 @@ import { UserAdminDTO } from '../../main/components/user-admin/user-admin.compon
 export const USER_LIST = 'USER_LIST';
 
 export function userListReducer(state: UserAdminDTO[] = [], action) {
-  console.log(action)
   switch(action.type) {
     case USER_LIST:
       return action.payload;

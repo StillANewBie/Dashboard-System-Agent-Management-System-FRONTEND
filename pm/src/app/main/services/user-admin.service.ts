@@ -97,7 +97,7 @@ export class UserAdminService {
 
 		this.http
 			.post(`${environment.API_URL}/user-admin/upload-image`, formData, { withCredentials: true })
-			.subscribe((res) => console.log(res), (err) => console.log(err));
+			.subscribe((res) => {}, (err) => console.log(err));
 	}
 
 	getUserById(uid: number): Observable<any> {

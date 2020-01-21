@@ -56,9 +56,7 @@ export class DayDialogComponent implements OnInit {
 	}
 
 	going($event, data: DayDialogData) {
-		console.log(data);
 		this.fps.alterMeetingDecision(data.meetingInviteesId, 1).subscribe((res) => {
-			console.log(res);
 			if (res.success) {
 				this.attending.map((el) => {
 					if (el.meetingId == data.meetingId) {
@@ -72,7 +70,6 @@ export class DayDialogComponent implements OnInit {
 
 	notGoing($event, data) {
 		this.fps.alterMeetingDecision(data.meetingInviteesId, 2).subscribe((res) => {
-			console.log(res);
 			if (res.success) {
 				this.attending.map((el) => {
 					if (el.meetingId == data.meetingId) {

@@ -24,10 +24,11 @@ export class MainComponent implements OnInit {
 		private uas: UserAdminService,
 		private as: AuthenticationService,
 		private router: Router,
-		private dmService: DashboardModuleService // for html
+		private dmService: DashboardModuleService // for html!
 	) {
 		this.store.select(el => el.loginInfo).subscribe((res) => {
-        this.currentUser = res;
+				this.currentUser = res;
+				console.log(res)
       });
 	}
 
