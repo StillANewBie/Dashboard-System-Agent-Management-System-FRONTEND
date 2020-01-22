@@ -166,6 +166,10 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 		)
 	}
 
+	exportCSV() {
+		this.agApi && this.agApi.exportDataAsCsv();
+	}
+
 	onActiveFilterChange(e) {
 		console.log(e);
 		

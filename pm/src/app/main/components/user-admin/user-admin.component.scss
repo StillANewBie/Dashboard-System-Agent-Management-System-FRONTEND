@@ -10,7 +10,7 @@
 
 .active_filter_container {
   position: fixed;
-  top: 28%;
+  top: 38%;
   right: 3%;
   z-index: 10;
   width: 10rem;
@@ -27,6 +27,26 @@
 .active_filter_container:hover {
   // box-shadow: 3px 3px 3px black;
   text-shadow: 1px 1px 1px grey;
+}
+
+.export_container {
+  position: fixed;
+  top: 28%;
+  right: 5%;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+
+  button {
+    opacity: 0.7;
+    box-shadow: 2px 2px 2px grey;
+    transition: box-shadow 0.5;
+  }
+
+  button:hover {
+    opacity: 0.9;
+    box-shadow: 2px 2px 3px black;
+  }
 }
 
 button.add_user_btn {

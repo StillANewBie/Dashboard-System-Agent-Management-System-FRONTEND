@@ -2,6 +2,9 @@
     <button class="add_user_btn" (click)="addUserDialog($event)">
         <img class="w-75" src="https://mercury-pm-images.s3.amazonaws.com/icons/add-user-256x256.png"/>
     </button>
+    <div class="export_container">
+        <button mat-fab (click)="exportCSV()" color="warn">CSV</button>
+    </div>
     <div class="active_filter_container">
         <mat-checkbox color="primary" (change)="onActiveFilterChange($event)">Include Inactive</mat-checkbox>
     </div>
