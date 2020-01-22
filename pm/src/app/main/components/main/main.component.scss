@@ -48,6 +48,10 @@ mat-toolbar {
   margin-right: 1rem;
 }
 
+mat-icon {
+  cursor: pointer;
+}
+
 .sidenav-container {
   //   border: 1px solid rgba(0, 0, 0, 0.5);
   background-color: #001933;
@@ -80,7 +84,6 @@ mat-toolbar {
     color: $sidenav-item-color;
     font-size: 2rem;
     margin-right: 0.5rem;
-    cursor: pointer;
   }
 
   .sidenav-item > span {

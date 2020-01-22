@@ -6,7 +6,7 @@
     <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
     <div class="user-items">
 
-        <mat-icon matBadge="15" matBadgeSize="medium" matBadgeColor="warn" color="black" class="notification-icon">
+        <mat-icon [matBadge]="uas.notificationCount" [matBadgeHidden]="notificationCount == 0" matBadgeSize="medium" matBadgeColor="warn" color="black" class="notification-icon">
             notifications_none</mat-icon>
 
         <img class="user-img" [src]="currentUser && currentUser.userInfo && currentUser.userInfo.profileImage" onerror="this.src='assets/img/profile.png'" mat-button

@@ -60,7 +60,6 @@ export class AddUserComponent implements OnInit {
   }
 
   submitUser(form: FormGroup) {
-    console.log(form);
     this.uas.registerUser(form.value.username, form.value.p1).subscribe(
       (res: UserAdminDTO) => {
         this.user = res;
@@ -79,7 +78,6 @@ export class AddUserComponent implements OnInit {
         description: form.value.desc,
         profileImage: `https://mercury-pm-images.s3.amazonaws.com/images/${this.user.userId}.jpg`
       }
-      console.log(ui);
       
       this.uas.saveUserInfo(ui, this.user.userId, true).subscribe(
         res => {
@@ -87,7 +85,6 @@ export class AddUserComponent implements OnInit {
         },
         err => console.error(err)
       )
-      console.log(form);
       this.stepper.next();
     }
   }

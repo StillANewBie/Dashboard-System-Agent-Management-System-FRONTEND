@@ -60,7 +60,11 @@ export class MainComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    
+		this.uas.getUndecidedEventCountByToken(JSON.parse(localStorage.getItem('currentUser')).token)
+						.subscribe(
+							res => this.uas.notificationCount = res,
+							err => console.error(err)
+						);
     if (!this.currentUser || !this.currentUser.username) {
 			this.uas.getCurrentUser(JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
 				(res) => {
@@ -72,6 +76,6 @@ export class MainComponent implements OnInit {
         },
 				(err) => console.error(err)
 			);
-		}
+		} 
 	}
 }

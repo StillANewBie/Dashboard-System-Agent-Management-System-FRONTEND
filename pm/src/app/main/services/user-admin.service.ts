@@ -13,6 +13,8 @@ import { AuthenticationService } from '../../login/services/authentication.servi
 	providedIn: 'root'
 })
 export class UserAdminService {
+	notificationCount: number = 0;
+	
 	constructor(
 		private http: HttpClient,
 		private dialog: MatDialog,
@@ -159,6 +161,12 @@ export class UserAdminService {
 
 	getCurrentUser(token: string): Observable<UserAdminDTO> {
 		return this.http.get(`${environment.API_URL}/user-admin/current-user`, {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+	}
+
+	getUndecidedEventCountByToken(token: string): Observable<number> {
+		return this.http.get<number>(`${environment.API_URL}/user-admin/undecided-count`, {
 			headers: { Authorization: `Bearer ${token}` }
 		});
 	}
