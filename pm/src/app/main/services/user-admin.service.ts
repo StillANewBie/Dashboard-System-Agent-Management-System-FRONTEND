@@ -14,7 +14,7 @@ import { AuthenticationService } from '../../login/services/authentication.servi
 })
 export class UserAdminService {
 	notificationCount: number = 0;
-	
+
 	constructor(
 		private http: HttpClient,
 		private dialog: MatDialog,
@@ -23,6 +23,10 @@ export class UserAdminService {
 
 	getAllUsers(): Observable<any> {
 		return this.http.get(`${environment.API_URL}/user-admin/users`, { withCredentials: true, headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}` } });
+	}
+
+	getAllUsersByGroup(): Observable<any> {
+		return this.http.get(`${environment.API_URL}/user-admin/users/group`, { withCredentials: true, headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}` } });
 	}
 
 	openUserAdminDialog(param) {

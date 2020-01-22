@@ -120,7 +120,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	}
 
 	updateUserList() {
-		this.uas.getAllUsers().subscribe(
+		this.uas.getAllUsersByGroup().subscribe(
 			(res) => {
 				this.res = res;
 

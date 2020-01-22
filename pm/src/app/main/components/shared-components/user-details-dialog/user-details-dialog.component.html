@@ -32,7 +32,7 @@
       <mat-tab label="Profile">
         <div class="w-100 h-100 p-2">
           <div class="content_profile_container">
-            <button *ngIf="!profileEditing" class="edit_btn" (click)="editProfile($event)" mat-fab
+            <button *ngIf="!profileEditing && (currentUser.roles[0].roleName === 'ADMIN' || data.userId == currentUser.userId)" class="edit_btn" (click)="editProfile($event)" mat-fab
               color="primary">Edit</button>
             <div class="profile_display_div">
               <div>

@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { UserAdminDTO, RoleDTO, GroupLevelDTO, UserInfoDTO } from '../../user-admin/user-admin.component';
 import { UserAdminService } from '../../../services/user-admin.service';
 import { GroupDTO } from '../../dashboard/modules/module-config/module-config.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../ngrx/app.state';
 
 @Component({
 	selector: 'app-user-details-dialog',
@@ -19,12 +21,14 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	groupLevelList: GroupLevelDTO[];
 	groupList: GroupDTO[];
 	dataChanged: boolean = false;
+	currentUser: UserAdminDTO;
 
 	constructor(
 		private uas: UserAdminService,
 		public dialogRef: MatDialogRef<UserDetailsDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: UserAdminDTO,
-		private snackBar: MatSnackBar
+		private snackBar: MatSnackBar,
+		private store: Store<AppState>
 	) {
 		this.uas.getRoles().subscribe(
 			(res) => {
@@ -137,6 +141,9 @@ export class UserDetailsDialogComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		this.store.select(el => el.loginInfo).subscribe((res) => {
+				this.currentUser = res;
+      });
 	}
 
 	ngOnDestroy() {}
