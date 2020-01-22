@@ -95,8 +95,6 @@ export class DayDialogComponent implements OnInit {
 		});
 	}
 
-
-
 	compareTime(time: string, date: Date): boolean {
 		const now = new Date();
 		const tmpDate = new Date(new Date(date).setDate(new Date(date).getDate() + 1));

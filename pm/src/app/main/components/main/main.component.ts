@@ -57,6 +57,7 @@ export class MainComponent implements OnInit {
 	logout() {
 		this.as.logout();
 		this.router.navigate(['login']).catch();
+		window.location.reload();
 	}
 
 	ngOnInit() {

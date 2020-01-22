@@ -6,11 +6,17 @@
     <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
     <div class="user-items">
 
-        <mat-icon [matBadge]="uas.notificationCount" [matBadgeHidden]="notificationCount == 0" matBadgeSize="medium" matBadgeColor="warn" color="black" class="notification-icon">
+        <mat-icon [matBadge]="uas.notificationCount" [matBadgeHidden]="notificationCount == 0" matBadgeSize="medium"
+            matBadgeColor="warn" color="black" [matMenuTriggerFor]="notification" class="notification-icon">
             notifications_none</mat-icon>
+        <mat-menu #notification="matMenu">
+            <button mat-menu-item routerLink="home">
+                <span class="text-danger">{{uas.notificationCount}}</span> undecided future events
+            </button>
+        </mat-menu>
 
-        <img class="user-img" [src]="currentUser && currentUser.userInfo && currentUser.userInfo.profileImage" onerror="this.src='assets/img/profile.png'" mat-button
-            [matMenuTriggerFor]="menu">
+        <img class="user-img" [src]="currentUser && currentUser.userInfo && currentUser.userInfo.profileImage"
+            onerror="this.src='assets/img/profile.png'" [matMenuTriggerFor]="menu" mat-button notification>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="openMyProfile()">Edit Profile</button>
             <button mat-menu-item (click)="logout()">Log Out</button>
@@ -19,12 +25,12 @@
 </mat-toolbar>
 <div class="below-toolbar">
     <div class="sidenav-container" [ngClass]="{'sidenav-wide': showWide}">
-        <div class="sidenav-item"  *ngIf="!dashboardMode"  routerLink="home">
+        <div class="sidenav-item" *ngIf="!dashboardMode" routerLink="home">
             <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}">
                 home</mat-icon>
             <span *ngIf="showWideSpan" class="sidebar_home">Home</span>
         </div>
-        <div class="sidenav-item"  *ngIf="dashboardMode">
+        <div class="sidenav-item" *ngIf="dashboardMode">
             <mat-icon class="mat-icon-sidenav" [ngClass]="{'sidenav-wide-item': showWide}"
                 (click)="dashboardMode = false">
                 arrow_back</mat-icon>
@@ -50,13 +56,16 @@
 
         <!-- dashboard items -->
         <ng-container *ngIf="dashboardMode && showWideSpan">
-            <div class="draggable mt-3" (click)="dmService.dropItem('heatmap')" draggable="true" (dragend)="dmService.dropItem('heatmap')">
+            <div *ngIf="currentUser.roles[0].roleName === 'ADMIN'" class="draggable mt-3" (click)="dmService.dropItem('heatmap')" draggable="true"
+                (dragend)="dmService.dropItem('heatmap')">
                 Heat Map
             </div>
-            <div class="draggable" (click)="dmService.dropItem('agentState')" draggable="true" (dragend)="dmService.dropItem('agentState')">
+            <div *ngIf="currentUser.roles[0].roleName === 'ADMIN'" class="draggable mt-3" (click)="dmService.dropItem('agentState')" draggable="true"
+                (dragend)="dmService.dropItem('agentState')">
                 Current Agent State
             </div>
-            <div class="draggable" (click)="dmService.dropItem('outcomes')" draggable="true" (dragend)="dmService.dropItem('outcomes')">
+            <div class="draggable mt-3" (click)="dmService.dropItem('outcomes')" draggable="true"
+                (dragend)="dmService.dropItem('outcomes')">
                 Outcomes
             </div>
         </ng-container>
