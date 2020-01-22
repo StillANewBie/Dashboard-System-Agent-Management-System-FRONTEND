@@ -28,9 +28,9 @@
           {{el.meetingMemo}}
         </div>
         <div class="small_div">
-          <button *ngIf="el.active && compareTime(el.time.toString())" class="decision_btn" mat-raised-button
+          <button *ngIf="el.active && compareTime(el.time.toString(), el.date)" class="decision_btn" mat-raised-button
             color="warn" (click)="cancelMeeting($event, el)" type="button">Cancel</button>
-          <div class="past_decision" *ngIf="el.active && !compareTime(el.time.toString())">
+          <div class="past_decision" *ngIf="el.active && !compareTime(el.time.toString(), el.date)">
             Past
           </div>
           <span *ngIf="!el.active">Cancelled</span>

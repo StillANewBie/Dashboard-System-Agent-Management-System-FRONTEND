@@ -95,19 +95,29 @@ export class DayDialogComponent implements OnInit {
 		});
 	}
 
-	compareTime(time: string): boolean {
+
+
+	compareTime(time: string, date: Date): boolean {
 		const now = new Date();
+		const tmpDate = new Date(new Date(date).setDate(new Date(date).getDate() + 1));
+		const c1 = tmpDate >= new Date(new Date().setHours(0, 0, 0, 0));
+		if (!c1) {
+			return false;
+		}
 
 		const arr = time.split(':');
 
-		if (
-			Number.parseInt(arr[0]) < now.getHours() ||
-			(Number.parseInt(arr[0]) == now.getHours() && Number.parseInt(arr[1]) < now.getMinutes()) ||
-			(Number.parseInt(arr[0]) == now.getHours() &&
-				Number.parseInt(arr[1]) == now.getMinutes() &&
-				Number.parseInt(arr[2]) < now.getSeconds())
-		) {
-			return false;
+		if (new Date(tmpDate.setHours(0, 0, 0, 0)).toString() == new Date(new Date().setHours(0, 0, 0, 0)).toString()) {
+
+			if (
+				Number.parseInt(arr[0]) < now.getHours() ||
+				(Number.parseInt(arr[0]) == now.getHours() && Number.parseInt(arr[1]) < now.getMinutes()) ||
+				(Number.parseInt(arr[0]) == now.getHours() &&
+					Number.parseInt(arr[1]) == now.getMinutes() &&
+					Number.parseInt(arr[2]) < now.getSeconds())
+			) {
+				return false;
+			}
 		}
 
 		return true;

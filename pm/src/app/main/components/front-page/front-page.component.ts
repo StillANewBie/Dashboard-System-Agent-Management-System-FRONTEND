@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { AppState } from 'src/app/ngrx/app.state';
 import { UserAdminDTO } from '../user-admin/user-admin.component';
+import { UserAdminService } from '../../services/user-admin.service';
 
 export const colors: any = {
 	red: {
@@ -40,7 +41,11 @@ export class FrontPageComponent implements OnInit {
 	meetingsInitiator: MeetingDTO[];
 	meetingsInvitee: MeetingDTO[];
 
-	constructor(public dialog: MatDialog, private fps: FrontPageService, private store: Store<AppState>) {
+	constructor(
+		public dialog: MatDialog, 
+		private fps: FrontPageService, 
+		private store: Store<AppState>,
+		private uas: UserAdminService) {
 		this.store.select((el) => el.loginInfo).subscribe((res) => {
 			this.currentUser = res;
 			this.getInitiatorEvents();
@@ -142,6 +147,12 @@ export class FrontPageComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe((result) => {
 			this.getInitiatorEvents();
+
+			this.uas.getUndecidedEventCountByToken(JSON.parse(localStorage.getItem('currentUser')).token)
+			.subscribe(
+				res => this.uas.notificationCount = res,
+				err => console.error(err)
+			);
 		});
 	}
 
