@@ -170,9 +170,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 		this.agApi && this.agApi.exportDataAsCsv();
 	}
 
-	onActiveFilterChange(e) {
-		console.log(e);
-		
+	onActiveFilterChange(e) {		
 		if (!e.checked) {
 			this.userList = this.res.filter(el => el.active).map((el) => {
 				return {
