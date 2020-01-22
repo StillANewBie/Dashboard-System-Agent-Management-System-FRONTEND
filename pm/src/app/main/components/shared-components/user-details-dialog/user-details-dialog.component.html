@@ -12,8 +12,8 @@
         <div class="name_tag">
           {{data.userInfo && (data.userInfo.firstName + " " + data.userInfo.lastName)}}
         </div>
-        <mat-slide-toggle [color]="'primary'" [(checked)]="this.data.active"
-          [disabled]="disabled" (change)="activeOnChange($event)">
+        <mat-slide-toggle  [color]="'primary'" [(checked)]="this.data.active"
+          [disabled]="currentUser.roles[0].roleName !== 'ADMIN'" (change)="activeOnChange($event)">
           Active
         </mat-slide-toggle>
       </div>
