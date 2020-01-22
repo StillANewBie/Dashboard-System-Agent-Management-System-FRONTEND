@@ -21,6 +21,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 	headerHeight: number;
 	userList: UserAdminDTO[];
 	res: any[];
+	currentUser: UserAdminDTO;
 
 	constructor(private uas: UserAdminService, private store: Store<AppState>) {
 		this.columnDefs = [
@@ -211,6 +212,11 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 		setInterval(() => {
 			this.agApi && this.resizeTable(null);
 		}, 1000);
+
+		this.store.select(el => el.loginInfo).subscribe(
+			res => this.currentUser = res,
+			err => console.error(err)
+		)
 	}
 
 	ngOnDestroy() {
