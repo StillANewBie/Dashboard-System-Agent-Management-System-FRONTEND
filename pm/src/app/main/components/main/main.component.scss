@@ -16,7 +16,7 @@ mat-toolbar {
   span.name_tag {
     color: #555;
     text-shadow: 1px 1px 2px #999;
-    transition: box-shadow 0.5s;
+    transition: text-shadow 0.5s;
   }
 
   span.name_tag:hover {
