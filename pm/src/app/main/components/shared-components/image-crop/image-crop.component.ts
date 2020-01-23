@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { CropperSettings, ImageCropperComponent, Bounds } from 'ngx-img-cropper';
+import { CropperSettings, Bounds, ImageCropperComponent } from 'ngx-img-cropper';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({

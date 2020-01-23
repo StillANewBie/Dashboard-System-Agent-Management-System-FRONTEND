@@ -192,7 +192,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 					name: el.userInfo && el.userInfo.firstName + ' ' + el.userInfo.lastName,
 					profileImage: el.userInfo && el.userInfo.profileImage,
 					email: el.userInfo && el.userInfo.email,
-					role: el.roles && el.roles[0].roleName,
+					role: el.roles && el.roles[0] && el.roles[0].roleName,
 					groupName: el.group && el.group.groupName,
 					groupLevelName: el.group && el.group.groupLevelInfo.groupLevelName,
 					rowHeight: 100

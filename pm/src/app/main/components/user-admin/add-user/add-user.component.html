@@ -1,7 +1,7 @@
 <div class="w-100 h-100 d-flex flex-column">
   <div class="w-100 d-flex align-items-center justify-content-between">
     <span class="dialog_title">Add User</span>
-    <mat-icon class="exit_icon" (click)="closeDialog()">close</mat-icon>
+    <mat-icon class="exit_icon" (click)="closeDialog($event)">close</mat-icon>
   </div>
   <mat-horizontal-stepper class="w-100 h-100" linear="true" #stepper>
     <mat-step [stepControl]="userForm" class="d-flex flex-column w-100 h-100">
@@ -58,13 +58,13 @@
         <ng-template matStepLabel>Role & Group</ng-template>
         <mat-form-field>
           <mat-label>Role</mat-label>
-          <mat-select formControlName="role" [placeholder]="profileForEdit">
+          <mat-select formControlName="role" [placeholder]="roleList && roleList[0] && roleList[0].roleName">
             <mat-option *ngFor="let el of roleList" [value]="el">{{el.roleName}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Group Level</mat-label>
-          <mat-select formControlName="groupLevel" (change)="onGroupLevelChange($event)" [placeholder]="profileForEdit">
+          <mat-select formControlName="groupLevel" (change)="onGroupLevelChange($event)" [placeholder]="groupLevelList && groupLevelList[0]">
             <mat-option *ngFor="let el of groupLevelList" [value]="el">{{el.groupLevel}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -77,7 +77,7 @@
           </mat-select>
         </mat-form-field>
         <div class="d-flex flex-row">
-          <button class="reset_btn" (click)="groupRoleForm($event)" mat-button color="primary">Reset</button>
+          <button class="reset_btn" type="button" (click)="groupRoleForm.reset()" mat-button color="primary">Reset</button>
           <button class="submit_btn" type="submit" [disabled]="groupRoleForm.invalid && user" mat-raised-button
             color="primary">Submit</button>
         </div>

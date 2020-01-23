@@ -45,7 +45,6 @@ import { UserAdminComponent } from './components/user-admin/user-admin.component
 import { UserDetailsDialogComponent } from './components/shared-components/user-details-dialog/user-details-dialog.component';
 import { ImageCropComponent } from './components/shared-components/image-crop/image-crop.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { ImageCropperComponent } from 'ngx-img-cropper';
 import { AddUserComponent } from './components/user-admin/add-user/add-user.component';
 import { OutcomeComponent } from './components/dashboard/modules/outcome/outcome.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
@@ -57,6 +56,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DayDialogComponent } from './components/front-page/day-dialog/day-dialog.component';
 import { OrganizeMeetingComponent } from './components/front-page/organize-meeting/organize-meeting.component';
+import { ImageCropperComponent, ImageCropperModule } from 'ngx-img-cropper';
 
 const routes: Routes = [
 	{
@@ -95,7 +95,6 @@ const routes: Routes = [
 		UserAdminComponent,
 		UserDetailsDialogComponent,
 		ImageCropComponent,
-		ImageCropperComponent,
 		AddUserComponent,
 		FrontPageComponent,
 		DayDialogComponent,
@@ -146,6 +145,7 @@ const routes: Routes = [
 		MatBadgeModule,
 		MatDividerModule,
 		NgxDropzoneModule,
+		ImageCropperModule
 	],
 	entryComponents: [
 		HeatmapComponent,
@@ -159,6 +159,9 @@ const routes: Routes = [
 		DayDialogComponent,
 		OrganizeMeetingComponent
 	],
+	exports: [
+	]
+	,
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

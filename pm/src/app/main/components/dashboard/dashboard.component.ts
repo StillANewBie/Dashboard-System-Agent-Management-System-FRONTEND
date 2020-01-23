@@ -10,7 +10,7 @@ import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 export class DashboardComponent implements OnInit {
 
 
-	constructor(private dmService: DashboardModuleService) {
+	constructor(public dmService: DashboardModuleService) {
 		this.dmService.getDashboardInfo();
 	}
 

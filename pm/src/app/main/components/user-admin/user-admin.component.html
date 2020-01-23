@@ -1,5 +1,5 @@
 <div class="w-100 h-100 p-3">
-    <button *ngIf="currentUser.roles[0].roleName == 'ADMIN'" class="add_user_btn" (click)="addUserDialog($event)">
+    <button *ngIf="currentUser.roles && currentUser.roles[0] && currentUser.roles[0].roleName == 'ADMIN'" class="add_user_btn" (click)="addUserDialog($event)">
         <img class="w-75" src="https://mercury-pm-images.s3.amazonaws.com/icons/add-user-256x256.png"/>
     </button>
     <div class="export_container">
@@ -9,7 +9,7 @@
         <mat-checkbox color="primary" (change)="onActiveFilterChange($event)">Include Inactive</mat-checkbox>
     </div>
     <div class="w-100 h-100 ag-table" >
-        <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="data"  class="ag-theme-material"
+        <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-material"
             [columnDefs]="columnDefs"
             (gridReady)="onGridReady($event)" 
             [rowData]="userList"

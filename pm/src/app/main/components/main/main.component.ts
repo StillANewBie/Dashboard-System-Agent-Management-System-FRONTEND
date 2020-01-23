@@ -21,14 +21,13 @@ export class MainComponent implements OnInit {
 	
 	constructor(		
 		private store: Store<AppState>,
-		private uas: UserAdminService,
+		public uas: UserAdminService,
 		private as: AuthenticationService,
 		private router: Router,
-		private dmService: DashboardModuleService // for html!
+		public dmService: DashboardModuleService // for html!
 	) {
 		this.store.select(el => el.loginInfo).subscribe((res) => {
 				this.currentUser = res;
-				console.log(res)
       });
 	}
 

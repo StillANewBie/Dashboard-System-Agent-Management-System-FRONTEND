@@ -1,7 +1,7 @@
 <div class="form-group">
     <mat-radio-group aria-label="Select an option">
 
-        <mat-radio-button name="selectLevel" id="level1" value="1" (change)="radioOnChange($event)" checked>
+        <mat-radio-button name="selectLevel" color="primary" id="level1" value="1" (change)="radioOnChange($event)" checked>
             Director
         </mat-radio-button>
         <mat-select [(ngModel)]="selectedGroupLevel1">
@@ -9,7 +9,7 @@
                 {{selectedGroupLevel1.groupName}}
             </mat-option>
         </mat-select>
-        <mat-radio-button name="selectLevel" id="level2" value="2" (change)="radioOnChange($event)">
+        <mat-radio-button  color="primary" name="selectLevel" id="level2" value="2" (change)="radioOnChange($event)">
             Manager
         </mat-radio-button>
         <mat-select [(value)]="selectedGroupLevel2">
@@ -17,7 +17,7 @@
                 (onSelectionChange)="optionOnChange($event)">
                 {{el.groupName}}</mat-option>
         </mat-select>
-        <mat-radio-button name="selectLevel" id="level3" value="3" (change)="radioOnChange($event)">
+        <mat-radio-button  color="primary" name="selectLevel" id="level3" value="3" (change)="radioOnChange($event)">
             Agent
         </mat-radio-button>
         <mat-select [(value)]="selectedGroupLevel3">
@@ -32,5 +32,5 @@
 
     <button class="confirm_btn mr-2" type="button" mat-raised-button color="primary"
         (click)="submit($event)">Confirm</button>
-    <button type="button" mat-button color="primary" [mat-dialog-close]="null">Cancel</button>
+    <button type="button"mat-raised-button [mat-dialog-close]="null">Cancel</button>
 </div>
