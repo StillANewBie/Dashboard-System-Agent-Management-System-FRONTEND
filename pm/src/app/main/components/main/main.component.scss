@@ -13,6 +13,16 @@ mat-toolbar {
   height: $toolbar-height !important;
   z-index: 2;
 
+  span.name_tag {
+    color: #555;
+    text-shadow: 1px 1px 2px #999;
+    transition: box-shadow 0.5s;
+  }
+
+  span.name_tag:hover {
+    text-shadow: 2px 2px 2px #777;
+  }
+
   .user-img {
     box-shadow: 2px 2px 2px grey;
   }

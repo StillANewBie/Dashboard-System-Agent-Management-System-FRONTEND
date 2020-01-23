@@ -1,11 +1,12 @@
-<!-- <button type="button" mat-button (click)="showWide = !showWide">
-    Toggle sidenav
-</button> -->
-<!-- <div class="h-100 w-100" style="overflow-y: hidden;"> -->
 <mat-toolbar color="grey" class="d-flex">
-    <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
+    <div class="d-flex">
+        <mat-icon mat-button (click)="showWideEvent();">menu</mat-icon>
+        <div class="d-flex align-items-center mr-3 float-left" style="margin-left: 5rem;">
+            <span style="cursor: pointer;"
+                class="name_tag">{{currentUser && currentUser.userInfo && ("Welcome, " + currentUser.userInfo.firstName + " " + currentUser.userInfo.lastName)}}</span>
+        </div>
+    </div>
     <div class="user-items">
-
         <mat-icon [matBadge]="uas.notificationCount" [matBadgeHidden]="uas.notificationCount == 0" matBadgeSize="medium"
             matBadgeColor="warn" color="black" [matMenuTriggerFor]="notification" class="notification-icon">
             notifications_none</mat-icon>
@@ -15,12 +16,16 @@
             </button>
         </mat-menu>
 
-        <img class="user-img" [src]="currentUser && currentUser.userInfo && currentUser.userInfo.profileImage"
+        <img class="user-img ml-2" [src]="currentUser && currentUser.userInfo && currentUser.userInfo.profileImage"
             onerror="this.src='assets/img/profile.png'" [matMenuTriggerFor]="menu" mat-button notification>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="openMyProfile()">Edit Profile</button>
             <button mat-menu-item (click)="logout()">Log Out</button>
         </mat-menu>
+        <div class="d-flex align-items-center ml-4 mr-3"[matMenuTriggerFor]="menu" mat-button  style="font-size: 1rem;">
+            <span
+                class="name_tag">{{currentUser && currentUser.userInfo && (currentUser.userInfo.firstName + ' ' + currentUser.userInfo.lastName)}}</span>
+        </div>
     </div>
 </mat-toolbar>
 <div class="below-toolbar">
@@ -56,11 +61,12 @@
 
         <!-- dashboard items -->
         <ng-container *ngIf="dashboardMode && showWideSpan">
-            <div *ngIf="currentUser.roles[0].roleName === 'ADMIN'" class="draggable mt-3" (click)="dmService.dropItem('heatmap')" draggable="true"
-                (dragend)="dmService.dropItem('heatmap')">
+            <div *ngIf="currentUser.roles[0].roleName === 'ADMIN'" class="draggable mt-3"
+                (click)="dmService.dropItem('heatmap')" draggable="true" (dragend)="dmService.dropItem('heatmap')">
                 Heat Map
             </div>
-            <div *ngIf="currentUser.roles[0].roleName === 'ADMIN'" class="draggable mt-3" (click)="dmService.dropItem('agentState')" draggable="true"
+            <div *ngIf="currentUser.roles[0].roleName === 'ADMIN'" class="draggable mt-3"
+                (click)="dmService.dropItem('agentState')" draggable="true"
                 (dragend)="dmService.dropItem('agentState')">
                 Current Agent State
             </div>
